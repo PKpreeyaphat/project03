@@ -84,11 +84,11 @@ class ImportStudent extends CI_Controller
                     echo $this->upload->display_errors();
                 } else {
                     $this->load->library('CSVReader');
-                    $roomData = $this->csvreader->parse_file('./uploads/student_data.csv');
+                    $studentData = $this->csvreader->parse_file('./uploads/student_data.csv');
 
                     $this->load->model('Student_Model');
 
-                    if (!isset($roomData[0]["name"])) {
+                    if (!isset($studentData[0]["name"])) {
                         $json = array(
                             'status' => 1,
                             'msg' => "นำเข้ารายชื่อนิสิตไม่สำเร็จ กรุณาตรวจสอบไฟล์ CSV อีกครั้ง",
@@ -97,10 +97,10 @@ class ImportStudent extends CI_Controller
                         $json = array(
                             'status' => 2,
                             'msg' => "File successfully uploaded",
-                            'data' => $roomData,
+                            'data' => $studentData,
                         );
 
-                        $this->session->set_userdata('tmp_data', $roomData);
+                        $this->session->set_userdata('tmp_data', $studentData);
                     }
                 }
             }
@@ -123,18 +123,26 @@ class ImportStudent extends CI_Controller
         foreach ($studentData as $student) {
 
             $id = str_replace(" ", "", $student["ID"]);
-
-            $pivotSpace = strpos($student["name"], " ", 0);
-            $firstname = trim(substr($student["name"], 0, $pivotSpace));
-            $lastname = trim(substr($student["name"], $pivotSpace));
+            
+            $name = trim($student["name"]);
+            
+            $pivotSpace = strpos($name, " ", 0);
+            if($pivotSpace != 0) {
+                $firstname = trim(substr($name, 0, $pivotSpace));
+                $lastname = trim(substr($name, $pivotSpace));
+            } else {
+                $pivotSpace2 = strpos($name, "  ", 0);
+                $firstname = trim(substr($name, 0, $pivotSpace2));
+                $lastname = trim(substr($name, $pivotSpace2));
+            }
+            
 
             if ($this->notInArray($id)) {
 
                 $data = array(
                     'Student_id' => $id,
                     'Student_firstname' => $firstname,
-                    'Student_lastname' => $lastname,
-                    'Student_grade' => $student["grade"],
+                    'Student_lastname' => $lastname
                 );
                 
                 $this->Student_Model->insert($data);
