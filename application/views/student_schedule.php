@@ -60,11 +60,11 @@
                                         <th><center>วัน-เวลา</th>
                                         <th><center>8.00-9.50</th>
                                         <th><center>10.00-11.50</th>
-                                        <th><center>12.00-13.50</th>
-                                        <th><center>14.00-15.50</th>
-                                        <th><center>16.00-17.50</th>
-                                        <th><center>18.00-19.50</th>
-                                        <th><center>20.00-21.50</th>
+                                        <th><center>*</th>
+                                        <th><center>13.00-14.50</th>
+                                        <th><center>15.00-16.50</th>
+                                        <th><center>17.00-18.50</th>
+                                        <th><center>*</th>
                                     </tr>
                                 </thead>
                                 <tbody>

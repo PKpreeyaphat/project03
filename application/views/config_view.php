@@ -22,6 +22,9 @@
     <!-- Animation Css -->
     <link href="<?php echo base_url() ?>/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!-- Sweet Alert Css -->
+    <link href="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">
 
@@ -54,18 +57,36 @@
                                             <div class="col-xs-12">
                                         <!-- Nav tabs -->
                                                 <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                                                    <li role="presentation" class="active"><a href="#profile_animation_2" data-toggle="tab">ระยะเวลาการสมัคร</a></li>
+                                                    <li role="presentation" class="active"><a href="#home_animation_2" data-toggle="tab">ระยะเวลาการสมัคร</a></li>
                                                     <li role="presentation"><a href="#messages_animation_2" data-toggle="tab">เอกสาร</a></li>
-                                                    <li role="presentation"><a href="#settings_animation_2" data-toggle="tab">SETTINGS</a></li>
+                                                    <li role="presentation"><a href="#settings_animation_2" data-toggle="tab">รายชื่อนิสิต</a></li>
                                                 </ul>
 
                                         <!-- Tab panes -->
                                             <div class="tab-content">
                                                 <div role="tabpanel" class="tab-pane fade in active" id="home_animation_2">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label><b>ปีการศึกษา :</b></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <select class="form-control show-tick" name="">
+                                                                    <option value="#">กรุณาเลือก</option>
+                                                                    <option value="1">1</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="3">ฤดูร้อน</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-lg-8">
                                                         <div class="switch">
+                                                        <label><b>เปิด-ปิดรับสมัคร :</b></label>
                                                             <label>
-                                                                <input type="checkbox">
+                                                                <input <?=($semester->isOpen == 1)? 'checked': ''?> name="isopen" type="checkbox">
                                                                 <span class="lever switch-col-green">
                                                                 </span>
                                                             </label>
@@ -73,19 +94,10 @@
                                                     </div>
                                                     <div class="form-group">
                                                             <div class="col-lg-12 align-right">
-                                                                <button type="submit" class="btn btn-success m-t-15 waves-effect">ตกลง</button>
-                                                                <button type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
+                                                                <button name="btnSave" type="button" class="btn btn-success m-t-15 waves-effect">ตกลง</button>
+                                                                <button name="btnReset" type="button" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
                                                             </div>
                                                         </div> 
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane fade" id="profile_animation_2">
-                                                    <b>Profile Content</b>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                                        Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent
-                                                        aliquid pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere
-                                                        gubergren sadipscing mel.
-                                                    </p>
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane fade" id="messages_animation_2">
                                                     <b>Message Content</b>
@@ -97,13 +109,9 @@
                                                     </p>
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane fade" id="settings_animation_2">
-                                                    <b>Settings Content</b>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                                        Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent
-                                                        aliquid pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere
-                                                        gubergren sadipscing mel.
-                                                    </p>
+                                                    <div class="col-xs-12 col-sm-6">
+										                <button type="button" class="btn btn-success waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">นำเข้ารายชื่อนิสิต</button>
+									                </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -118,8 +126,110 @@
     </section>
     </div>
 
+    <div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" style="display: none;">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="defaultModalLabel">นำเข้ารายชื่อนิสิต</h4>
+				</div>
+				<div class="modal-body">
+					<input type="file" id="file" name="file" class="form-control" placeholder="">
+					<p id="msg"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" id="upload" class="btn btn-success waves-effect">UPLOAD</button>
+					<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" style="display: none; overflow:scroll;">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="defaultModalLabel">ยืนยันการนำเข้านำเข้ารายชื่อนิสิต</h4>
+				</div>
+				<form action="<?php echo base_url() ?>/index.php/Config/confirmData" method="post">
+					<div class="modal-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>รหัสนิสิต</th>
+									<th>ชื่อ-นามสกุล</th>
+									<!-- <th>เกรด</th> -->
+								</tr>
+							</thead>
+							<tbody id="confirmData">
+
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success waves-effect">CONFIRM</button>
+						<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
     <!-- Jquery Core Js -->
     <script src="<?php echo base_url() ?>/plugins/jquery/jquery.min.js"></script>
+
+    <script type="text/javascript">
+		$(document).ready(function (e) {
+            $("body").css("overflow", "hidden");
+
+			$('#upload').on('click', function (e) {
+				var file_data = $('#file').prop('files')[0];
+				var form_data = new FormData();
+				form_data.append('file', file_data);
+
+				$.ajax({
+					url: '<?php echo base_url() ?>/index.php/Config/upload_file', // point to server-side controller method
+					dataType: 'json', // what to expect back from the server
+					cache: false,
+					contentType: false,
+					processData: false,
+					data: form_data,
+					type: 'post',
+					success: function (res) {
+						EMPTY_FILE = 0;
+						UPLOAD_FAIL = 1;
+						UPLOAD_SUCCESS = 2;
+
+						switch (res.status) {
+							case EMPTY_FILE:
+								alert(res.msg);
+								break;
+
+							case UPLOAD_FAIL:
+								alert(res.msg);
+								$('#file').val('');
+								break;
+
+							case UPLOAD_SUCCESS:
+								alert(res.msg);
+								$('#defaultModal').modal('toggle');
+
+								$('#file').val('');
+
+								var table = "";
+								res.data.forEach(x => {
+									table += "<tr><td>" + x.ID + "</td><td>" + x.name + "</td></tr>";
+								});
+
+								$('#confirmData').html(table);
+								$('#confirmModal').modal('show');
+								break;
+						}
+					}
+				});
+			});
+		});
+
+	</script>
 
     <!-- Bootstrap Core Js -->
     <script src="<?php echo base_url() ?>/plugins/bootstrap/js/bootstrap.js"></script>
@@ -132,6 +242,30 @@
 
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>/plugins/node-waves/waves.js"></script>
+
+    <!-- Sweet Alert Plugin Js -->
+    <script src="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script>
+        $(function(){
+            var isOpen = false;
+            $('button[name=btnSave]').click(function(){
+                var isopen = $('input[name=isopen]').prop('checked');
+                $.get("<?=base_url()?>index.php/Config/OpenRegister", { isOpen: (isopen)? 1 : 0 }, function(data){
+                    isOpen = isopen;
+                    if(isopen){
+                        swal("บันทึกสำเร็จ!", "เปิดรับสมัคร เรียบร้อย", "success");
+                    }else{
+                        swal("บันทึกสำเร็จ!", "ปิดรับสมัคร เรียบร้อย", "success");
+                    }
+                });
+            })
+
+            $('button[name=btnReset]').click(function(){
+                $('input[name=isopen]').prop('checked', isOpen);
+            })
+        })
+    </script>
 
     <!-- Custom Js -->
     <script src="<?php echo base_url() ?>/js/admin.js"></script>

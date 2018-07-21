@@ -11,6 +11,12 @@ class Page2_Model extends CI_Model
         return $insert;
     }
 
+    public function insertSemester($data)
+    {
+        $insert = $this->db->insert('Semester', $data);
+        return $insert;
+    }
+
     public function getAllSubject()
     {
         $res = $this->db->get('Subject');

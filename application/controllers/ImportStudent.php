@@ -7,9 +7,17 @@ class ImportStudent extends CI_Controller
 
     public function index()
     {
-        $this->load->model('Student_Model');
-        $data['students'] = $this->Student_Model->getAllStudent();
+        $this->load->model('AllSubject_Model');
+        $data['students'] = $this->AllSubject_Model->getRegisterStudentApprovedBySubject('88510159');
         $this->load->view('import_student', $data);
+    }
+
+    public function updateStatus($studentID, $status)
+    {
+        $data = array('status' => $status);
+        $this->load->model('AllSubject_Model');
+        $students = $this->AllSubject_Model->updateStatus($studentID, $data);
+        redirect('ImportStudent','refresh');
     }
 
     // public function uploadFile()

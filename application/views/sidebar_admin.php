@@ -60,7 +60,7 @@
             <!-- <a href="javascript:void(0);" class="menu-toggle"> -->
             <a href="<?php echo base_url(); ?>index.php/ImportStudent">
                 <i class="material-icons">layers</i>
-                <span>จัดการนิสิต</span>
+                <span>จัดการนิสิตผู้ช่วยสอน</span>
             </a>
                 <!-- <ul class="ml-menu">
                     <li>

@@ -62,6 +62,30 @@
 											<input type="text" id="" name="Subject_name" class="form-control" placeholder="รายวิชา" required>
 										</div>
 									</div>
+									<div class="form-group">
+										<div class="form-line">
+											<select type="date" id="" name="Semester_Name" class="form-control" placeholder="ชื่อภาคเรียน" required>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="ฤดูร้อน">ฤดูร้อน</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-line">
+											<input type="number" id="" name="Semester_Year" class="form-control" placeholder="ปีการศึกษา" maxlength="4" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-line">
+											<input type="date" id="" name="Semester_Start" class="form-control" placeholder="วันเปิดภาคเรียน" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-line">
+											<input type="date" id="" name="Semester_Stop" class="form-control" placeholder="วันปิดภาคเรียน" required>
+										</div>
+									</div>
 									<button type="submit" class="btn btn-success m-t-15 waves-effect">บันทึก</button>
 									<a href="<?php echo base_url();?>index.php/InputData/goBack"><button type="button" class="btn btn-danger m-t-15 waves-effect">กลับ</button></a>
 								</form>

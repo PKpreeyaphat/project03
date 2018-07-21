@@ -22,6 +22,9 @@
     <!-- Animation Css -->
     <link href="<?php echo base_url() ?>/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!-- Sweet Alert Css -->
+    <link href="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">
 
@@ -60,9 +63,11 @@
                                 </div> -->
                                 <div>
                                     <label>ชื่อ-นามสกุล</label>
+                                    <label style="display: block; padding: 6px 12px;"><?=(isset($student))? $student->Student_firstname.' '.$student->Student_lastname : ''?></label>
                                 </div>
                                 <div>
                                     <label>เกรด</label>
+                                    <label style="display: block; padding: 6px 12px;"><?=(isset($student))? $student->Student_grade : ''?></label>
                                 </div>
                                 <!-- <div class="form-group">
                                     <div class="form-line">
@@ -71,16 +76,17 @@
                                 </div> -->
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name="Subject_id" class="form-control" placeholder="E-mail">
+
+                                        <input value="<?=(isset($student))? $student->Student_email : ''?>" type="email" id="" name="email" class="form-control" placeholder="E-mail">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name=""class="form-control" placeholder="เบอร์โทรศัพท์">
+                                        <input value="<?=(isset($student))? $student->Student_tel : ''?>" type="text" id="" name="tel" class="form-control" placeholder="เบอร์โทรศัพท์">
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-success m-t-15 waves-effect">ตกลง</button>
-                                <button type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
+                                <button name="btnSave" type="button" class="btn btn-success m-t-15 waves-effect">ตกลง</button>
+                                <button name="btnReset" type="button" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
                             </form>
                         </div>
                     </div>
@@ -104,6 +110,44 @@
 
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>/plugins/node-waves/waves.js"></script>
+
+    <!-- Sweet Alert Plugin Js -->
+    <script src="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script>
+        $(function(){
+            var email = '<?=$student->Student_email?>';
+            var tel = '<?=$student->Student_tel?>';
+            $('button[name=btnSave]').click(function(){
+                swal({
+                    title: "Are you sure?",
+                    text: "ต้องการสมัคร TA",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#1f91f3",
+                    confirmButtonText: "ใช่!",
+                    confirmButtonColor: "#1f91f3",
+                    cancelButtonText: "ยกเลิก!",                    
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, function () {
+                    $.post("<?=base_url()?>index.php/Student/SaveStudent", {
+                        email: $('input[name=email]').val(),
+                        tel: $('input[name=tel]').val()
+                    }, function(data){
+                        email = $('input[name=email]').val();
+                        tel = $('input[name=tel]').val();
+                        swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");             
+                    })
+                });
+            });
+
+            $('button[name=btnReset]').click(function(){
+                $('input[name=email]').val(email);
+                $('input[name=tel]').val(tel);
+            })
+        });
+    </script>
 
     <!-- Custom Js -->
     <script src="<?php echo base_url() ?>/js/admin.js"></script>

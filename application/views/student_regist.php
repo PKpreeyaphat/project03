@@ -22,6 +22,9 @@
     <!-- Animation Css -->
     <link href="<?php echo base_url() ?>/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!-- Sweet Alert Css -->
+    <link href="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">
 
@@ -31,6 +34,11 @@
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo base_url() ?>/css/themes/all-themes.css" rel="stylesheet" />
 
+    <style>
+        #tb > tbody > tr > td {
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 
@@ -52,20 +60,21 @@
                                 แบบฟอร์มการสมัคร
                             </h2>
                         </div>
+                        <?php
+                        ?>
                         <div class="body table-responsive">
-                            <form action="<?php echo base_url()."/index.php/StudentRegist"?>" method="post">
-                            
+                            <form action="<?php echo base_url()."index.php/StudentRegist"?>" method="post">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name="Student_firstname" class="form-control" value="" placeholder="ชื่อ">
+                                        <input readonly type="text" id="" value="<?=(isset($student))? $student->Student_firstname : ''?>" name="Student_firstname" class="form-control" placeholder="ชื่อ">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name="Student_lastname" class="form-control" placeholder="นามสกุล">
+                                        <input readonly type="text" id="" value="<?=(isset($student))? $student->Student_lastname : ''?>" name="Student_lastname" class="form-control" placeholder="นามสกุล">
                                     </div>
                                 </div>
                             </div>
@@ -73,114 +82,100 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name="Student_grade" class="form-control" placeholder="เกรดเฉลี่ยรายวิชา">
+                                        <input type="text" id="" value="<?=(isset($student))? $student->Grade : ''?>" name="Student_grade" class="form-control" placeholder="เกรดเฉลี่ยรายวิชา">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name="Student_email" class="form-control" placeholder="E-mail">
+                                        <input type="text" id="" value="<?=(isset($student))? $student->Student_email : ''?>" name="Student_email" class="form-control" placeholder="E-mail">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" name="Student_tel" class="form-control" placeholder="เบอร์โทรศัพท์">
+                                        <input type="text" id="" value="<?=(isset($student))? $student->Student_tel : ''?>"  name="Student_tel" class="form-control" placeholder="เบอร์โทรศัพท์">
                                     </div>
                                 </div>
                             </div>
-                                <h5>ช่วงเวลาที่ต้องการปฏิบัติการ</h5>
-                            <table class="table table-bordered display dataTable with-check">
+                            <h5>ช่วงเวลาที่ต้องการปฏิบัติการ <?=(isset($subject))? $subject->Subject_id.' '.$subject->Subject_name : "" ?></h5>
+                            <table id="tb" class="table table-bordered display dataTable with-check">
                                 <thead>
                                     <tr>
-                                        <th><center>วัน-เวลา</th>
+                                    <th><center>วัน-เวลา</th>
                                         <th><center>8.00-9.50</th>
                                         <th><center>10.00-11.50</th>
-                                        <th><center>12.00-13.50</th>
-                                        <th><center>14.00-15.50</th>
-                                        <th><center>16.00-17.50</th>
-                                        <th><center>18.00-19.50</th>
-                                        <th><center>20.00-21.50</th>
+                                        <th><center>13.00-14.50</th>
+                                        <th><center>15.00-16.50</th>
+                                        <th><center>17.00-18.50</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    <tr data-day="1">
                                         <th>จันทร์</th>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="13.00" data-end="14.50"></td>
+                                        <td data-start="15.00" data-end="16.50"></td>
+                                        <td data-start="17.00" data-end="18.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="2">
                                         <th>อังคาร</th>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="13.00" data-end="14.50"></td>
+                                        <td data-start="15.00" data-end="16.50"></td>
+                                        <td data-start="17.00" data-end="18.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="3">
                                         <th>พุธ</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="13.00" data-end="14.50"></td>
+                                        <td data-start="15.00" data-end="16.50"></td>
+                                        <td data-start="17.00" data-end="18.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="4">
                                         <th>พฤหัสบดี</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="13.00" data-end="14.50"></td>
+                                        <td data-start="15.00" data-end="16.50"></td>
+                                        <td data-start="17.00" data-end="18.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="5">
                                         <th>ศุกร์</th>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td bgcolor="#FFCC33"></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="13.00" data-end="14.50"></td>
+                                        <td data-start="15.00" data-end="16.50"></td>
+                                        <td data-start="17.00" data-end="18.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="6">
                                         <th>เสาร์</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="13.00" data-end="14.50"></td>
+                                        <td data-start="15.00" data-end="16.50"></td>
+                                        <td data-start="17.00" data-end="18.50"></td>
                                     </tr>
-                                    <tr>
+                                    <tr data-day="0">
                                         <th>อาทิตย์</th>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td data-start="8.00" data-end="9.50"></td>
+                                        <td data-start="10.00" data-end="11.50"></td>
+                                        <td data-start="13.00" data-end="14.50"></td>
+                                        <td data-start="15.00" data-end="16.50"></td>
+                                        <td data-start="17.00" data-end="18.50"></td>
                                     </tr>
                                 </tbody>
                             </table>
-                                <center><button type="submit" class="btn btn-primary m-t-15 waves-effect">ยืนยัน</a></button>
-                                <button type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button></center>
-                                
+                                <center>
+                                    <button <?=(isset($subject) && (isset($semester) && $semester->isOpen))? '':'disabled' ?> 
+                                    type="button" name="btnsave" class="btn btn-primary m-t-15 waves-effect">ยืนยัน</button>
+                                    <button name="btnDelete" type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
+                                </center>
                             </form>
                         </div>
                     </div>
@@ -205,6 +200,100 @@
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>/plugins/node-waves/waves.js"></script>
 
+    <!-- Sweet Alert Plugin Js -->
+    <script src="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.min.js"></script>
+
+     <script>
+        $(function(){
+            var Subject_id = '<?=$subject->Subject_id?>'
+            var json = JSON.parse('<?=json_encode($register)?>')
+            var time = {
+                1:{}, 
+                2:{},
+                3:{},
+                4:{},
+                5:{},
+                6:{},
+                0:{}
+            }
+            if(json.length > 0){
+                time = json;
+            }
+            else{
+                for(var day in time){
+                    time[day] = {
+                        '8.00-9.50': false, 
+                        '10.00-11.50': false,
+                        '13.00-14.50': false, 
+                        '15.00-16.50': false, 
+                        '17.00-18.50': false
+                    }
+                }
+            }
+
+            var draw = function()
+            {
+                for(var day in time){
+                    for(var t in time[day]){
+                        var t_r = t.split('-');
+                        if(time[day][t]){
+                            $('tr[data-day='+day+']').find('td[data-start="'+t_r[0]+'"][data-end="'+t_r[1]+'"]')
+                                .css('background-color', '#ffcc33');
+                        }
+                    }
+                }
+            };
+
+            draw();
+            $('#tb').on('click', 'tbody > tr > td', function(){
+                // add
+                var day = $(this).parents('tr').data('day');
+                var t = $(this).data('start') + '-' + $(this).data('end');
+                if($(this).css('background-color') != 'rgb(255, 204, 51)'){
+                    $(this).css('background-color', '#ffcc33');
+                    time[day][t] = true
+                }
+                // remove
+                else{
+                    $(this).css('background-color', '#fff')
+                    time[day][t] = false
+                }
+                console.log(time);
+            });
+
+            <?php
+                if(isset($subject) && (isset($semester) && $semester->isOpen))
+                { ?>
+            $('button[name=btnsave]').click(function(){
+                swal({
+                    title: "Are you sure?",
+                    text: "ต้องการสมัคร TA",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#1f91f3",
+                    confirmButtonText: "ใช่!",
+                    confirmButtonColor: "#1f91f3",
+                    cancelButtonText: "ยกเลิก!",                    
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, function () {
+                    $.post("<?=base_url()?>index.php/StudentRegist/SaveRegister", {
+                        Student_grade: $('input[name=Student_grade]').val(),
+                        Student_email: $('input[name=Student_email]').val(),
+                        Student_tel: $('input[name=Student_tel]').val(),
+                        Subject_id: Subject_id,
+                        time: JSON.stringify( time )
+                    }, function(data){
+                        swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");
+                        //window.location.href = 'HomeStudent';                 
+                    })
+                });
+            });
+
+            <?php } ?>
+        });
+    </script>
+
     <!-- Custom Js -->
     <script src="<?php echo base_url() ?>/js/admin.js"></script>
     <script src="<?php echo base_url() ?>/js/pages/forms/basic-form-elements.js"></script>
@@ -216,7 +305,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 
     <!-- (Optional) Latest compiled and minified JavaScript translation files -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script> -->
 
 </body>
 

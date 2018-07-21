@@ -67,10 +67,7 @@
 							<div class="header">
 								<div class="row clearfix">
 									<div class="col-xs-12 col-sm-6">
-										<h2> รายชื่อนิสิต </h2>
-									</div>
-									<div class="col-xs-12 col-sm-6 align-right">
-										<button type="button" class="btn btn-success waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">นำเข้ารายชื่อนิสิต</button>
+										<h2> รายชื่อนิสิตผู้ช่วยสอน </h2>
 									</div>
 								</div>
 							</div>
@@ -81,9 +78,8 @@
 											<tr>
 												<th>รหัสนิสิต</th>
 												<th>ชื่อ-นามสกุล</th>
-												<!-- <th>เกรด</th>
-												<th>TA</th>
-												<th>การดำเนินการ</th> -->
+												<th>เกรด</th>
+												<th>การดำเนินการ</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -93,13 +89,17 @@
 													<?php echo $x->Student_id ?>
 												</td>
 												<td>
-													<a href="#" data-toggle="modal" data-target="#student_detail">
+											
 														<?php echo $x->Student_firstname." ".$x->Student_lastname ?>
 													</a>
 												</td>
-												<!-- <td>
-													<?php echo $x->Student_grade ?>
+												<td>
+													<?php echo $x->Grade ?>
 												</td>
+												<td>
+													<a href="<?php echo base_url() ?>/index.php/ImportStudent/updateStatus/<?php echo $x->Student_id ?>/0" class="btn btn-danger waves-effect">ยกเลิก</a>
+												</td>
+												<!--
 												<td>-</td>
 												<td>-</td> -->
 											</tr>
@@ -114,73 +114,6 @@
 			</div>
 		</section>
 	</div>
-
-	<div class="modal fade" id="defaultModal" tabindex="-1" role="dialog" style="display: none;">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="defaultModalLabel">นำเข้ารายชื่อนิสิต</h4>
-				</div>
-				<div class="modal-body">
-					<input type="file" id="file" name="file" class="form-control" placeholder="">
-					<p id="msg"></p>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" id="upload" class="btn btn-success waves-effect">UPLOAD</button>
-					<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="student_detail" tabindex="-1" role="dialog" style="display: none;">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="defaultModalLabel">หัวข้อ</h4>
-				</div>
-				<div class="modal-body">
-					รายละเอียด
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" style="display: none;">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="defaultModalLabel">ยืนยันการนำเข้านำเข้ารายชื่อนิสิต</h4>
-				</div>
-				<form action="<?php echo base_url() ?>/index.php/ImportStudent/confirmData" method="post">
-					<div class="modal-body">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>รหัสนิสิต</th>
-									<th>ชื่อ-นามสกุล</th>
-									<!-- <th>เกรด</th> -->
-								</tr>
-							</thead>
-							<tbody id="confirmData">
-
-							</tbody>
-						</table>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" id="upload" class="btn btn-success waves-effect">CONFIRM</button>
-						<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-
-
 	<!-- Jquery Core Js -->
 	<script src="<?php echo base_url() ?>/plugins/jquery/jquery.min.js"></script>
 

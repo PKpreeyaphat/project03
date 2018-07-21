@@ -40,52 +40,28 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">   
-                    <div class="card">
-                        <div class="header">
-                                <h2>รับสมัคร TA</h2>
-                        </div> 
-                        <div class="body">
-                            <form action="" method="">
-                                <div class="row clearfix">
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <select class="form-control show-tick">
-                                                        <option value="">รายวิชา</option>
-                                                        <!-- <option value="MO">MO</option>
-                                                        <option value="TU">TU</option>
-                                                        <option value="WED">WED</option>
-                                                        <option value="THU">THU</option>
-                                                        <option value="FRI">FRI</option>
-                                                        <option value="SAT">SAT</option>
-                                                        <option value="SUN">SUN</option> -->
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <center><button type="submit" class="btn btn-success m-t-15 waves-effect">ตกลง</button></center>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row clearfix">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
                             <h2> รายชื่อนิสิตผู้ช่วยสอน</h2>
                         </div>
                         <div class="body">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select name="subject" class="form-control show-tick">
+                                            <option value="">รายวิชา</option>
+                                            <?php foreach ($subject as $x) { ?>
+                                                <option value="<?=$x->Subject_id?>"><?=$x->Subject_id.' '.$x->Subject_name?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="body table-responsive">
-                                <table class="table">
+                                <table class="table table-center">
                                     <thead>
                                         <tr>
-                                            <!-- <th>
-                                                <center>
-                                                    #
-                                            </th> -->
                                             <th>
                                                 <center>
                                                     รหัสนิสิต
@@ -94,25 +70,17 @@
                                                 <center>
                                                     ชื่อ-นามสกุล
                                             </th>
+                                            <th>
+                                                <center>
+                                                    เกรด
+                                            </th>
+                                            <th>
+                                                <center>
+                                                    ดำเนินการ
+                                            </th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php foreach ($room as $x) { ?>
-                                        <tr>
-                                            <!-- <td>
-                                                <center>
-                                                    <?php echo $x->Room_id ?>
-                                            </td> -->
-                                            <td>
-                                                <center>
-                                                    <?php echo $x->Room_name ?>
-                                            </td>
-                                            <td>
-                                                <center>
-                                                    <button type="button" class="btn btn-danger btn-delete waves-effect m-r-20" data-toggle="modal" data-target="#deleteRoomModal">ลบ</button>
-                                            </td>
-                                        </tr>
-                                        <?php } ?>
+                                    <tbody id="tbody">
                                     </tbody>
                                 </table>
                             </div>
@@ -138,6 +106,32 @@
 
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>/plugins/node-waves/waves.js"></script>
+
+    <script>
+        $(function(){
+            var LoadData = function(){
+                var subject_id = $('select[name=subject]').val();
+                $.post("<?=base_url()?>index.php/HomeAdmin/Students", { subject_id: subject_id }, function(data){
+                    data = JSON.parse(data);
+                    var html = '';
+                    for(var i in data){
+                        html += 
+                            '<tr>'+
+                                '<td>'+data[i].Student_id+'</td>'+
+                                '<td>'+data[i].Student_firstname+' '+data[i].Student_lastname+'</td>'+
+                                '<td>'+data[i].Grade+'</td>'+
+                                '<td><center><a href="<?php echo base_url() ?>/index.php/HomeAdmin/updateStatus/'+data[i].Student_id+'/1" class="btn btn-success waves-effect m-r-20">อนุมัติ</a><a href="<?php echo base_url() ?>/index.php/HomeAdmin/updateStatus/'+data[i].Student_id+'/-1" class="btn btn-danger waves-effect">ยกเลิก</a></td>'+
+                            '</tr>';
+                    }
+                    $('#tbody').html(html);
+                });
+            };
+            
+            $('select[name=subject]').change(function(){
+                LoadData();
+            })
+        })
+    </script>
 
     <!-- Custom Js -->
     <script src="<?php echo base_url() ?>/js/admin.js"></script>

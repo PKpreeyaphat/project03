@@ -60,7 +60,39 @@
                                 </div>
                                 <div class="col-md-3">
                                     <p>
+                                        <b>เลือกรายวิชา :</b>
+                                    </p>
+                                    <select class="form-control show-tick" id="Room_id" oninput="loadTable();">
+                                    <option>———กรุณาเลือก———</option>
+                                    <?php 
+                                        foreach ($getRoom as $resRoom) {
+                                    ?>
+                                        <option value="<?php echo $resRoom->Room_id ?>"><?php echo $resRoom->Room_name ?></option>
+                                    <?php 
+                                    }
+                                    ?>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <p>
                                         <b>เลือกห้อง :</b>
+                                    </p>
+                                    <select class="form-control show-tick" id="Room_id" oninput="loadTable();">
+                                    <option>———กรุณาเลือก———</option>
+                                    <?php 
+                                        foreach ($getRoom as $resRoom) {
+                                    ?>
+                                        <option value="<?php echo $resRoom->Room_id ?>"><?php echo $resRoom->Room_name ?></option>
+                                    <?php 
+                                    }
+                                    ?>
+                                    </select>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <p>
+                                        <b>เลือกผู้รับผิดชอบ :</b>
                                     </p>
                                     <select class="form-control show-tick" id="Room_id" oninput="loadTable();">
                                     <option>———กรุณาเลือก———</option>
