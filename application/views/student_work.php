@@ -555,19 +555,25 @@
                 }
                 for(var stu in data){
                     var pre_stu = '', post_stu = ''
+                    var pre_subj = '', post_subj = ''
                     for(var i in data[stu]){
                         var txt_stu = ''
+                        var txt_subj = ''
                         var regis = data[stu][i]
                         pre_stu = stu;
+                        pre_subj = regis.Subject
+                        if(pre_subj != post_subj)
+                            txt_subj = regis.Subject
                         if(pre_stu != post_stu)
                             txt_stu = stu+' '+regis.Name
                         html += '<tr><td>'+txt_stu+'</td>'+
-                            '<td>'+regis.Subject+'</td>'+
+                            '<td>'+txt_subj+'</td>'+
                             '<td>'+regis.Section_id+'</td>'+
                             '<td>'+regis.Room_name+'</td>'+
                             '<td>'+regis.Day+'</td>'+
                             '<td>'+regis.Time+'</td></tr>'
                         post_stu = stu
+                        post_stu = regis.Subject
                     }
                 }
                 $('#tbody_report').html(html)
