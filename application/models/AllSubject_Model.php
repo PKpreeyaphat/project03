@@ -31,27 +31,30 @@ class AllSubject_Model extends CI_Model {
         return $query->result();
     }
 
-    public function getRegisterStudentBySubject($subject_id)
+    public function getRegisterStudentBySubject($subject_id, $semester_id)
     {
         $this->db->join('Student', 'Student.Student_id = RegisterSubject.Student_id', 'left');
         $this->db->where('Subject_id', $subject_id);
+        $this->db->where('Semester_ID', $semester_id);
         $this->db->where('Status', 0);
         $query = $this->db->get('RegisterSubject');
         return $query->result();
     }
 
-    public function getRegisterStudentApprovedBySubject($subject_id)
+    public function getRegisterStudentApprovedBySubject($subject_id, $semester_id)
     {
         $this->db->join('Student', 'Student.Student_id = RegisterSubject.Student_id', 'left');
         $this->db->where('Subject_id', $subject_id);
+        $this->db->where('Semester_ID', $semester_id);
         $this->db->where('Status', 1);
         $query = $this->db->get('RegisterSubject');
         return $query->result();
     }
 
-    public function updateStatus($studentID, $data)
+    public function updateStatus($studentID, $data, $semester_id)
     {
         $this->db->where('Student_id', $studentID);
+        $this->db->where('Semester_ID', $semester_id);
         $this->db->update('RegisterSubject', $data);
     }
 

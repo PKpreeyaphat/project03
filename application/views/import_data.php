@@ -51,37 +51,38 @@
 										<h2>รายวิชาทั้งหมด</h2>
 									</div>
 									<div class="col-xs-12 col-sm-6 align-right">
-										<a href="<?php echo base_url(); ?>index.php/InputData">
-											<button type="button" class="btn btn-success waves-effect m-r-20">เพิ่มรายวิชา</button>
-										</a>
 										<a href="<?php echo base_url(); ?>index.php/DetailData">
 											<button type="button" class="btn btn-success waves-effect m-r-20">เพิ่มรายละเอียดรายวิชา</button>
 										</a>
-										<button type="button" class="btn btn-success waves-effect m-r-20" data-toggle="modal" data-target="#import_subject">นำเข้ารายวิชา</button>
 									</div>
 								</div>
 							</div>
 							<div class="body">
 
-							<div class="col-lg-6">
-								<div class="form-group">
-									
+								<div class="col-lg-6">
+									<div class="form-group">
+
 										<label>ดูข้อมูลย้อนหลัง</label>
-									
-								</div>
-							</div>
-							<div class="col-lg-6">
-								<div class="form-group">
-									<div class="form-line">
-										<select class="form-control show-tick" name="">
-											<option value="#">ปีการศึกษา</option>
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">ฤดูร้อน</option>
-										</select>
+
 									</div>
 								</div>
-							</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="form-line">
+											<select class="form-control show-tick" name="Semester_ID">
+												<option disabled>ปีการศึกษา</option>
+												<?php foreach ($semester as $x) {
+													if($Semester_ID == $x->Semester_ID){
+														echo '<option selected value="'.$x->Semester_ID.'">ปี '.$x->Semester_Year.' ภาค '. $x->Semester_Name.'</option>';
+													}
+													else{
+														echo '<option value="'.$x->Semester_ID.'">ปี '.$x->Semester_Year.' ภาค '. $x->Semester_Name.'</option>';
+													}
+												} ?> 
+											</select>
+										</div>
+									</div>
+								</div>
 								<div class="body table-responsive">
 									<table class="table">
 										<thead>
@@ -91,7 +92,7 @@
 												<th>วัน</th>
 												<th>เวลาเรียน</th>
 												<th>ห้อง</th>
-												<th>การดำเนินการ</th>
+												<th>รายละเอียด</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -113,7 +114,7 @@
 													<?php echo $row->Room_name ?>
 												</td>
 												<td>
-													<button type="button" class="btn bg-teal btn-detail waves-effect m-r-20" data-toggle="modal" data-target="#detailModal">รายละเอียด</button>
+													<button type="button" id="<?php echo $row->Section_id ?>" class="btn bg-teal btn-detail waves-effect m-r-20" data-toggle="modal" data-target="#detailModal">เพิ่มเติม</button>
 												</td>
 											</tr>
 											<?php } ?>
@@ -138,27 +139,6 @@
 				<div class="modal-body">
 					<input type="file" id="" name="excel_file" class="form-control" placeholder="">
 					<hr>
-
-					<div class="col-lg-6">
-						<div class="form-group">
-							<div class="form-line">
-								<input type="text" id="" name="Section_name" class="form-control" placeholder="ปีการศึกษา">
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<div class="form-group">
-							<div class="form-line">
-								<select class="form-control show-tick" name="">
-									<option value="#">ภาคเรียน</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">ฤดูร้อน</option>
-								</select>
-							</div>
-						</div>
-					</div>
-
 					<div class="form-group">
 						<h5>ตัวอย่างไฟล์</h5>
 						<h6>**ต้องใช้ CSV UTF-8 (Comma delimited)(*.csv) เป็นนามสกุลไฟล์</h6>
@@ -167,49 +147,46 @@
 						</div>
 					</div>
 				</div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success waves-effect">UPLOAD</button>
-                    <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
-                </div>
-                </form>
-            </div>
-        </div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-success waves-effect">UPLOAD</button>
+					<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+				</div>
+				</form>
+			</div>
+		</div>
 	</div>
 
 	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" style="display: none;">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title" id="detailModalLabel">กลุ่มเรียน </h4>
+					<h4 class="modal-title" id="sectionIDLabel"></h4>
 				</div>
-				<?php echo form_open_multipart('ImportData/uploadFile'); ?>
 				<div class="modal-body">
-                    <div class="row clearfix">
-                        <div class="col-lg-5">
-                            <label for="">อาจารย์ผู้สอน/ผู้ประสานงาน</label>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="form-group">
-                                <div>ผู้ช่วยศาสตราจารย์วิชัย บุญเจือ</div>           
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-lg-5">
-                            <label for="">จำนวนนิสิต</label>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="form-group">
-                                <div>60 คน</div>           
-                            </div>
-                        </div>
-                    </div>
+					<div class="row clearfix">
+						<div class="col-lg-5">
+							<label for="">อาจารย์ผู้สอน/ผู้ประสานงาน</label>
+						</div>
+						<div class="col-lg-7">
+							<div class="form-group">
+								<div id="teacherLabel"></div>
+							</div>
+						</div>
+					</div>
+					<div class="row clearfix">
+						<div class="col-lg-5">
+							<label for="">จำนวนนิสิต</label>
+						</div>
+						<div class="col-lg-7">
+							<div class="form-group">
+								<div id="quantityStudentLabel"></div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-success waves-effect">SAVE</button>
 					<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
 				</div>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -223,9 +200,25 @@
 		$(document).ready(function (e) {
 			$('.btn-detail').click(function (e) {
 				e.preventDefault();
-				console.log($('td:nth-child(2)', $(this).parents('tr')).text());
-				$("#detailModalLabel").text("กลุ่มเรียน "+$.trim($('td:nth-child(2)', $(this).parents('tr')).text()));
+
+				sectionID = $.trim($('td:nth-child(2)', $(this).parents('tr')).text());
+
+				$.ajax({
+				type: "GET",
+				url: "<?php echo base_url() ?>index.php/ImportData/getSectionInfo/" + sectionID,
+				success: function (response) {
+					var data = jQuery.parseJSON(response);
+					console.log(data)
+					$("#sectionIDLabel").text("กลุ่มเรียน " + sectionID);
+					$("#teacherLabel").text(data.Teacher_fullname);
+					$("#quantityStudentLabel").text(data.Section_student_quantity);
+				}
+				});
 			});
+
+			$('select[name=Semester_ID]').change(function(){
+				window.location.href =   "<?php echo base_url() ?>index.php/ImportData/index/<?=$Subject_id?>/" + $(this).val()
+			})
 
 		});
 

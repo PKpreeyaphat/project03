@@ -258,7 +258,6 @@
                     $(this).css('background-color', '#fff')
                     time[day][t] = false
                 }
-                console.log(time);
             });
 
             <?php

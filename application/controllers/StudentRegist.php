@@ -55,11 +55,15 @@ class StudentRegist extends CI_Controller {
         $Student_email = $this->input->post('Student_email');
         $Student_tel = $this->input->post('Student_tel');
         
-        $student = $this->student_Model->getStudentByID($Student_id);
+        $student = $this->student_Model->checkStudent($Student_id);
         if(count($student) > 0){
             $student = $student[0];
             $student->Student_email = $Student_email;
             $student->Student_tel = $Student_tel;
+            unset($student->Grade);
+            unset($student->Semester_ID);
+            unset($student->Subject_id);
+            unset($student->Status);
             $this->student_Model->update($Student_id, $student);
 
             $data = array(

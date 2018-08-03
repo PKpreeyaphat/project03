@@ -71,6 +71,10 @@
 												</th>
 												<th>
 													<center>
+														จำนวนที่นั่ง
+												</th>
+												<th>
+													<center>
 														ดำเนินการ
 												</th>
 											</tr>
@@ -80,7 +84,7 @@
 											<tr>
 												<!-- <td>
 													<center>
-														<?php echo $x->Room_id ?>
+														
 												</td> -->
 												<td>
 													<center>
@@ -88,7 +92,11 @@
 												</td>
 												<td>
 													<center>
-														<button type="button" class="btn btn-danger btn-delete waves-effect m-r-20" data-toggle="modal" data-target="#deleteRoomModal">ลบ</button>
+														<?php echo $x->Room_qty ?>
+												</td>
+												<td>
+													<center>
+														<button type="button" id="<?php echo $x->Room_id ?>" class="btn btn-danger btn-delete waves-effect m-r-20" data-toggle="modal" data-target="#deleteRoomModal">ลบ</button>
 												</td>
 											</tr>
 											<?php } ?>
@@ -139,6 +147,9 @@
 					<div class="modal-body">
 						<input type="text" class="form-control" name="Room_name" placeholder="ชื่อห้อง" required>
 					</div>
+					<div class="modal-body">
+						<input type="text" class="form-control" name="Room_qty" placeholder="จำนวนที่นั่ง" required>
+					</div>
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-success waves-effect">SAVE</button>
 						<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
@@ -157,7 +168,7 @@
 				<form action="<?php echo base_url() ?>/index.php/ImportRoom/deleteRoom" method="post">
 					<div class="modal-body">
 						<input type="hidden" class="form-control" name="Room_id" id="modal_room_id" required>
-						<p>คุณต้องการลบห้อง ... ใช่หรือไม่?</p>
+						<p>คุณต้องการลบห้องนี้ใช่หรือไม่?</p>
 					</div>
 					<div class="modal-footer">
 						<button type="submit" class="btn btn-success waves-effect">CONFIRM</button>
@@ -202,8 +213,7 @@
 	<script type="text/javascript">
 		$(document).ready(function (e) {
 			$('.btn-delete').click(function (e) {
-				e.preventDefault();
-				$("#modal_room_id").val($.trim($('td:first', $(this).parents('tr')).text()));
+				$("#modal_room_id").val($(this).attr('id'));
 			});
 
 			$('#upload').on('click', function (e) {
@@ -242,7 +252,7 @@
 
 								var table = "";
 								res.data.forEach(x => {
-									table += "<tr><td>" + x.Room_name + "</td></tr>";
+									table += "<tr><td>" + x.Room_name + "</td><td>" + x.Room_qty + "</td></tr>";
 								});
 
 								$('#confirmData').html(table);

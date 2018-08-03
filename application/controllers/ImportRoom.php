@@ -16,7 +16,8 @@ class ImportRoom extends CI_Controller
     public function addRoom()
     {
         $data = array(
-            'Room_name' => $this->input->post('Room_name')
+            'Room_name' => $this->input->post('Room_name'),
+            'Room_qty' => $this->input->post('Room_qty')
         );
 
         $this->load->model('Room_Model');
@@ -92,6 +93,7 @@ class ImportRoom extends CI_Controller
             if ($this->notInArray($room["Room_name"])) {
                 $data = array(
                     'Room_name' => $room["Room_name"],
+                    'Room_qty' => $room["Room_qty"]
                 );
 
                 $this->Room_Model->insert($data);

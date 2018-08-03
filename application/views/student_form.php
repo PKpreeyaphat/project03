@@ -67,7 +67,7 @@
                                 </div>
                                 <div>
                                     <label>เกรด</label>
-                                    <label style="display: block; padding: 6px 12px;"><?=(isset($student))? $student->Student_grade : ''?></label>
+                                    <label style="display: block; padding: 6px 12px;"><?=(isset($student))? $student->Grade : ''?></label>
                                 </div>
                                 <!-- <div class="form-group">
                                     <div class="form-line">
@@ -116,8 +116,8 @@
 
     <script>
         $(function(){
-            var email = '<?=$student->Student_email?>';
-            var tel = '<?=$student->Student_tel?>';
+            var email = '<?php echo $student->Student_email?>';
+            var tel = '<?php echo $student->Student_tel?>';
             $('button[name=btnSave]').click(function(){
                 swal({
                     title: "Are you sure?",
@@ -137,7 +137,7 @@
                     }, function(data){
                         email = $('input[name=email]').val();
                         tel = $('input[name=tel]').val();
-                        swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");             
+                        swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");           
                     })
                 });
             });

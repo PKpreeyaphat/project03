@@ -4,45 +4,56 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Config extends CI_Controller {
+    public function MaxHour(){
+        return 'MaxHour';
+    }
 
     public function index()
     {
         $this->load->model('CurrentSemester_Model');
         $this->load->model('Semester_Model');
-        $semester = $this->CurrentSemester_Model->getSemester();
-        $last = $this->Semester_Model->Last();
-        if(count($last) > 0){
-            $last = $last[0];
-            if($semester->Semester_ID != $last->Semester_ID){
-                $data = array(
-                    'Semester_ID' => $last->Semester_ID,
-                    'isOpen' => 0
-                );
-                $this->CurrentSemester_Model->save($data);
-                $semester = $this->CurrentSemester_Model->getSemester();
-            }
-        }
+        $this->load->model('Config_Model');
 
+        $semester = $this->CurrentSemester_Model->getSemester();
+        // $last = $this->Semester_Model->Last();
+        // if(count($last) > 0){
+        //     $last = $last[0];
+        //     if($semester->Semester_ID != $last->Semester_ID){
+        //         $data = array(
+        //             'Semester_ID' => $last->Semester_ID,
+        //             'isOpen' => 0
+        //         );
+        //         $this->CurrentSemester_Model->save($data);
+        //         $semester = $this->CurrentSemester_Model->getSemester();
+        //     }
+        // }
+        $maxhour = $this->Config_Model->getConfig($this->MaxHour());
+        if(count($maxhour) > 0){
+            $data['maxhour'] = $maxhour[0];
+        }
         $data['semester'] = $semester;
+        $data['allsemester'] = $this->Semester_Model->getAllSemester();
         $this->load->view('config_view', $data);
     }
     
     public function OpenRegister()
     {
         $this->load->model('CurrentSemester_Model');
+        $this->load->model('Config_Model');
         $this->load->model('Semester_Model');
 
         $isOpen = $this->input->get('isOpen');
-        $last = $this->Semester_Model->Last();
-        if(count($last) > 0)
-        {
-            $last = $last[0];
-            $data = array(
-                'Semester_ID' => $last->Semester_ID,
-                'isOpen' => $isOpen
-            );
-            $this->CurrentSemester_Model->save($data);
-        }
+        $maxHour = array( 
+            'Config_name' => $this->MaxHour(),
+            'Config_value'=> $this->input->get('maxHour')
+        );
+        $data = array(
+            'Semester_ID' => $this->input->get('Semester_ID'),
+            'isOpen' => $isOpen
+        );
+
+        $this->CurrentSemester_Model->save($data);
+        $this->Config_Model->save($maxHour);
     }
 
     public function upload_file()

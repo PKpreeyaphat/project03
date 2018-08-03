@@ -31,24 +31,6 @@
 	<!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
 	<link href="<?php echo base_url() ?>/css/themes/all-themes.css" rel="stylesheet" />
 
-	<style>
-		.modal {
-			/* display: bloc k !important; */
-			/* I added this to see the modal, you don't need this */
-		}
-
-		/* Important part */
-
-		.modal-dialog {
-			overflow-y: initial !important
-		}
-
-		.modal-body {
-			height: 500px;
-			overflow-y: auto;
-		}
-
-	</style>
 </head>
 
 <body class="theme-maroon">
@@ -79,7 +61,7 @@
 												<th>รหัสนิสิต</th>
 												<th>ชื่อ-นามสกุล</th>
 												<th>เกรด</th>
-												<th>การดำเนินการ</th>
+												<th>รายละเอียด</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -97,7 +79,7 @@
 													<?php echo $x->Grade ?>
 												</td>
 												<td>
-													<a href="<?php echo base_url() ?>/index.php/ImportStudent/updateStatus/<?php echo $x->Student_id ?>/0" class="btn btn-danger waves-effect">ยกเลิก</a>
+													<button type="button" id="<?php echo $x->Student_id ?>" class="btn bg-teal btn-detail waves-effect m-r-20" data-toggle="modal" data-target="#detailModal">เพิ่มเติม</button>
 												</td>
 												<!--
 												<td>-</td>
@@ -114,11 +96,65 @@
 			</div>
 		</section>
 	</div>
+
+	<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" style="display: none;">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="nameLabel"></h4>
+				</div>
+				<div class="modal-body">
+					<div class="row clearfix">
+						<div class="col-lg-5">
+							<label for="">อีเมลล์</label>
+						</div>
+						<div class="col-lg-7">
+							<div class="form-group">
+								<div id="emailLabel"></div>
+							</div>
+						</div>
+					</div>
+					<div class="row clearfix">
+						<div class="col-lg-5">
+							<label for="">เบอร์โทรศัพท์</label>
+						</div>
+						<div class="col-lg-7">
+							<div class="form-group">
+								<div id="telLabel"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Jquery Core Js -->
 	<script src="<?php echo base_url() ?>/plugins/jquery/jquery.min.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function (e) {
+
+			$('.btn-detail').click(function (e) {
+				e.preventDefault();
+
+				studentID = $.trim($('td:nth-child(1)', $(this).parents('tr')).text());
+
+				$.ajax({
+					type: "GET",
+					url: "<?php echo base_url() ?>index.php/ImportStudent/getStudentInfo/" + studentID,
+					success: function (response) {
+						var data = jQuery.parseJSON(response);
+						console.log(data);
+						$("#nameLabel").text(data.Student_firstname + " " + data.Student_lastname);
+						$("#emailLabel").text(data.Student_email);
+						$("#telLabel").text(data.Student_tel);
+					}
+				});
+			});
 
 			$('#upload').on('click', function (e) {
 				var file_data = $('#file').prop('files')[0];

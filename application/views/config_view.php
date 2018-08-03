@@ -57,8 +57,7 @@
                                             <div class="col-xs-12">
                                         <!-- Nav tabs -->
                                                 <ul class="nav nav-tabs tab-nav-right" role="tablist">
-                                                    <li role="presentation" class="active"><a href="#home_animation_2" data-toggle="tab">ระยะเวลาการสมัคร</a></li>
-                                                    <li role="presentation"><a href="#messages_animation_2" data-toggle="tab">เอกสาร</a></li>
+                                                    <li role="presentation" class="active"><a href="#home_animation_2" data-toggle="tab">ตั้งค่าระบบ</a></li>
                                                     <li role="presentation"><a href="#settings_animation_2" data-toggle="tab">รายชื่อนิสิต</a></li>
                                                 </ul>
 
@@ -73,12 +72,30 @@
                                                     <div class="col-lg-8">
                                                         <div class="form-group">
                                                             <div class="form-line">
-                                                                <select class="form-control show-tick" name="">
-                                                                    <option value="#">กรุณาเลือก</option>
-                                                                    <option value="1">1</option>
-                                                                    <option value="2">2</option>
-                                                                    <option value="3">ฤดูร้อน</option>
+                                                                <select class="form-control show-tick" name="semester">
+                                                                <?php
+                                                                    foreach($allsemester as $row){
+                                                                        if($semester->Semester_ID == $row->Semester_ID){
+                                                                            echo '<option selected value="'.$row->Semester_ID.'">ปี '.$row->Semester_Year.' ภาค '.$row->Semester_Name.'</option>';
+                                                                        }
+                                                                        else{
+                                                                            echo '<option value="'.$row->Semester_ID.'">ปี '.$row->Semester_Year.' ภาค '.$row->Semester_Name.'</option>';
+                                                                        }
+                                                                    }
+                                                                ?>
                                                                 </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label><b>จำนวนชั่วโมงการทำงาน :</b></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input value="<?=(isset($maxhour))? $maxhour->Config_value : 0 ?>" class="form-control" min="0" type="number" name="txtMaxhour">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -98,15 +115,6 @@
                                                                 <button name="btnReset" type="button" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
                                                             </div>
                                                         </div> 
-                                                </div>
-                                                <div role="tabpanel" class="tab-pane fade" id="messages_animation_2">
-                                                    <b>Message Content</b>
-                                                    <p>
-                                                        Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                                                        Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent
-                                                        aliquid pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere
-                                                        gubergren sadipscing mel.
-                                                    </p>
                                                 </div>
                                                 <div role="tabpanel" class="tab-pane fade" id="settings_animation_2">
                                                     <div class="col-xs-12 col-sm-6">
@@ -250,8 +258,13 @@
         $(function(){
             var isOpen = false;
             $('button[name=btnSave]').click(function(){
-                var isopen = $('input[name=isopen]').prop('checked');
-                $.get("<?=base_url()?>index.php/Config/OpenRegister", { isOpen: (isopen)? 1 : 0 }, function(data){
+                var isopen = $('input[name=isopen]').prop('checked')
+                $.get("<?=base_url()?>index.php/Config/OpenRegister", { 
+                        maxHour: $('input[name=txtMaxhour]').val(),
+                        Semester_ID: $('select[name=semester]').val(),
+                        isOpen: (isopen)? 1 : 0 
+                    }, function(data){
+                    console.log(data);
                     isOpen = isopen;
                     if(isopen){
                         swal("บันทึกสำเร็จ!", "เปิดรับสมัคร เรียบร้อย", "success");

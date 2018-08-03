@@ -16,6 +16,17 @@ class Register_Model extends CI_Model
         return true;
     }
 
+    public function getFreeTime($data)
+    {
+        $this->db->from('Register');
+        $this->db->where('Student_id', $data['Student_id']);
+        $this->db->where('Subject_id', $data['Subject_id']);
+        $this->db->where('Semester_ID', $data['Semester_ID']);
+        $this->db->where('isFree', '1');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function save($data)
     {
         if(count($this->getRegister($data)) == 0){

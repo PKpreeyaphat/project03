@@ -21,6 +21,7 @@ class Semester_Model extends CI_Model
 
     public function getAllSemester()
     {
+        $this->db->order_by('Semester_Year, Semester_Name');
         return $this->db->get('Semester')->result();
     }
 

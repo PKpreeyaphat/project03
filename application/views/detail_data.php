@@ -51,7 +51,7 @@
 								</h2>
 							</div>
 							<div class="body">
-								<form action="" method="post">
+								<form action="DetailData/save" method="post">
 									<div class="row clearfix">
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 											<div class="form-group">
@@ -75,6 +75,15 @@
 											<input type="text" id="" name="Section_id" class="form-control" placeholder="กลุ่ม">
 										</div>
 									</div>
+									<div class="form-group">
+										<div class="form-line">
+											<select class="form-control show-tick" name="Semester_ID">
+												<?php foreach ($semester as $x) {
+													echo '<option value="'.$x->Semester_ID.'">ปี '.$x->Semester_Year." ภาค ". $x->Semester_Name.'</option>';
+												} ?> 
+											</select>
+										</div>
+									</div>
 									<div class="row clearfix">
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="form-group">
@@ -95,12 +104,12 @@
 											<div class="form-group">
 												<div class="form-line">
 													<select class="form-control show-tick" name="Section_time">
-														<option value="1">8.00-9.50</option>
-														<option value="2">10.00-11.50</option>
-														<option value="3">12.00-13.50</option>
-														<option value="4">14.00-15.50</option>
-														<option value="5">16.00-17.50</option>
-														<option value="6">18.00-19.50</option>
+														<option value="08:00-09:50">08:00-09:50</option>
+														<option value="10:00-11:50">10:00-11:50</option>
+														<option value="13:00-14:50">13:00-14:50</option>
+														<option value="15:00-16:50">15:00-16:50</option>
+														<option value="17:00-18:50">17:00-18:50</option>
+														<option value="19:00-20:50">19:00-20:50</option>
 													</select>
 												</div>
 											</div>
@@ -109,13 +118,22 @@
 									<div class="form-group">
 										<div class="form-line">
 										<select class="form-control show-tick" name="Room_id">
-											<option value="1">ห้อง</option>
+										<?php
+										foreach($room as $row){
+											echo '<option value="'.$row->Room_id.'">'.$row->Room_name.'</option>';
+										}
+										?>
 										</select>
 										</div>
 									</diV>
 									<div class="form-group">
 										<div class="form-line">
-											<input type="text" id="" name="" class="form-control" placeholder="อ.ผู้สอน/ผู้ประสานงาน">
+											<input type="number" min="0" id="" name="Section_student_quantity" class="form-control" placeholder="จำนวนนิสิต">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-line">
+											<input type="text" id="" name="Teacher_fullname" class="form-control" placeholder="อ.ผู้สอน/ผู้ประสานงาน">
 										</div>
 									</div>
 									<button type="submit" class="btn btn-success m-t-15 waves-effect">ตกลง</button>

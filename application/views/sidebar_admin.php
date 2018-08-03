@@ -4,11 +4,11 @@
         <!-- User Info -->
         <div class="user-info">
             <div class="image">
-                <img src="../images/user.png" width="48" height="48" alt="User" />
+                <img src="<?php echo base_url();?>images/user.png" width="48" height="48" alt="User" />
             </div>
             <div class="info-container">
-                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                <div class="email">john.doe@example.com</div>
+            <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $this->session->userdata('fullname');?></div>
+                <div class="email"><?php echo $this->session->userdata('email');?></div>
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
@@ -105,22 +105,11 @@
         </ul> -->
         </li>
         <li>
-            <a href="javascript:void(0);" class="menu-toggle">
-            <!-- <a href="index.php/page5" class="menu-toggle"> -->
-                <i class="material-icons">swap_calls</i>
-                <span>จัดการเอกสาร</span>
+            <a href="<?php echo base_url(); ?>index.php/StudentWork">
+                <i class="material-icons">work</i>
+                <span>ตารางการทำงาน</span>
             </a>
-                <ul class="ml-menu">
-                    <li>
-                        <a href="<?php echo base_url(); ?>index.php/Document_1" class="">
-                            <span>ใบบันทึกขออนุมัติ</span>
-                        </a>
-                        <a href="<?php echo base_url(); ?>index.php/Document_2" class="">
-                            <span>ใบรับรอง</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+        </li>
         <li>
             <!-- <a href="javascript:void(0);" class="menu-toggle"> -->
             <a href="<?php echo base_url(); ?>index.php/Config">

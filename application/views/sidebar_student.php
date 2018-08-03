@@ -33,12 +33,12 @@
                 <span>หน้าแรก</span>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="<?php echo base_url(); ?>index.php/StudentRegist">
                 <i class="material-icons">content_paste</i>
                 <span>แบบฟอร์มการสมัคร</span>
             </a>
-        </li>
+        </li> -->
         <li>
             <a href="javascript:void(0);" class="menu-toggle">
             <!-- <a href="<?php echo base_url(); ?>index.php/student" -->

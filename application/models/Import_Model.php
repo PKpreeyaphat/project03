@@ -11,12 +11,30 @@ class Import_Model extends CI_Model {
         $this->db->trans_complete();
     }
 
-    public function getAllSection()
+    public function getAllSection($id)
     {
         $this->db->join('Room', 'Room.Room_id = Section.Room_id', 'left');
         $this->db->order_by('Section_id', 'ASC');
+        $this->db->where('Subject_id', $id);
         $query = $this->db->get('Section');
         return $query->result();
+    }
+
+    public function getAllSectionBySemester($id, $semester_id)
+    {
+        $this->db->join('Room', 'Room.Room_id = Section.Room_id', 'left');
+        $this->db->order_by('Section_id', 'ASC');
+        $this->db->where('Subject_id', $id);
+        $this->db->where('Semester_ID', $semester_id);
+        $query = $this->db->get('Section');
+        return $query->result();
+    }
+
+    public function getSection($id)
+    {
+        $this->db->where('Section_id', $id);
+        $query = $this->db->get('Section');
+        return $query->result()[0];
     }
 
     public function deleteAllSection()

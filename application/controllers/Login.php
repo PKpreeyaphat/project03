@@ -56,13 +56,21 @@ class Login extends CI_Controller {
 				$this->session->set_userdata('employeeid',$entries[0]["employeeid"][0]);
 
 				$id = $entries[0]["cn"][0];
+
+				$retval = 1;
+
 				if(is_numeric($id)){
-					redirect('HomeStudent');
+					$this->load->model('Student_Model');
+					$result = $this->Student_Model->checkStudent($id);
+					if (sizeof($result) > 0) {
+						redirect('HomeStudent');
+					} else {
+						ldap_unbind($ad);
+						redirect('Login');
+					}
 				}else{
 					redirect('HomeAdmin');
 				}
-
-				$retval = 1;
 				#---------------End Check------------#
 
 			}
@@ -88,6 +96,7 @@ class Login extends CI_Controller {
 						redirect('Login');
 					}
 				}
+				redirect('Login');
 			}
 
 		}

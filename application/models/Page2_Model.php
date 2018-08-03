@@ -11,10 +11,27 @@ class Page2_Model extends CI_Model
         return $insert;
     }
 
+    public function getSemester($data)
+    {
+        $this->db->where('Semester_Name', $data['Semester_Name']);
+        $this->db->where('Semester_Year', $data['Semester_Year']);
+        $query = $this->db->get('Semester');
+        return $query->result();
+    }
+
     public function insertSemester($data)
     {
-        $insert = $this->db->insert('Semester', $data);
-        return $insert;
+        $sel = $this->getSemester($data);
+        if(count($sel) == 0){
+            $insert = $this->db->insert('Semester', $data);
+            return $insert;
+        }
+        else{
+            $this->db->where('Semester_Name', $data['Semester_Name']);
+            $this->db->where('Semester_Year', $data['Semester_Year']);
+            $update = $this->db->update('Semester', $data);
+            return $update;
+        }
     }
 
     public function getAllSubject()

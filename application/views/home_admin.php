@@ -22,6 +22,9 @@
     <!-- Animation Css -->
     <link href="<?php echo base_url() ?>/plugins/animate-css/animate.css" rel="stylesheet" />
 
+    <!-- Sweet Alert Css -->
+    <link href="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">
 
@@ -62,6 +65,8 @@
                                 <table class="table table-center">
                                     <thead>
                                         <tr>
+                                            <th> <center>เลือก</center>
+                                            </th>
                                             <th>
                                                 <center>
                                                     รหัสนิสิต
@@ -83,6 +88,8 @@
                                     <tbody id="tbody">
                                     </tbody>
                                 </table>
+                                <center><button name="btnapprove" type="button" class="btn btn-success m-t-15 waves-effect">อนุมัติ</button>
+                                <button name="btnreject" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button></center>
                             </div>
                         </div>
                     </div>
@@ -107,6 +114,9 @@
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>/plugins/node-waves/waves.js"></script>
 
+    <!-- Sweet Alert Plugin Js -->
+    <script src="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.min.js"></script>
+
     <script>
         $(function(){
             var LoadData = function(){
@@ -117,15 +127,75 @@
                     for(var i in data){
                         html += 
                             '<tr>'+
+                                '<td><input type="checkbox" data-student="'+data[i].Student_id+'" name="chk_approve" id="chk_approve'+i+'" class="filled-in chk-col-cyan">'+
+                                '<label for="chk_approve'+i+'"></label></td>'+
                                 '<td>'+data[i].Student_id+'</td>'+
                                 '<td>'+data[i].Student_firstname+' '+data[i].Student_lastname+'</td>'+
                                 '<td>'+data[i].Grade+'</td>'+
-                                '<td><center><a href="<?php echo base_url() ?>/index.php/HomeAdmin/updateStatus/'+data[i].Student_id+'/1" class="btn btn-success waves-effect m-r-20">อนุมัติ</a><a href="<?php echo base_url() ?>/index.php/HomeAdmin/updateStatus/'+data[i].Student_id+'/-1" class="btn btn-danger waves-effect">ยกเลิก</a></td>'+
+                                '<td><center><a href="<?php echo base_url() ?>/index.php/HomeAdmin/updateStatus/'+data[i].Student_id+'/1" class="btn btn-success waves-effect m-r-20">อนุมัติ</a>'+
+                                '<a href="<?php echo base_url() ?>/index.php/HomeAdmin/updateStatus/'+data[i].Student_id+'/-1" class="btn btn-danger waves-effect">ยกเลิก</a></td>'+
                             '</tr>';
                     }
                     $('#tbody').html(html);
                 });
             };
+
+            $('button[name=btnapprove]').click(function(){
+                var data = [], chk = $('input[name=chk_approve]')
+                for(var i = 0; i < chk.length; ++i){
+                    data.push({
+                        Student_id: $(chk[i]).data('student'),
+                        status: 1
+                    })
+                }
+                swal({
+                    title: "Are you sure?",
+                    text: "ต้องการ อนุมัติ",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#1f91f3",
+                    confirmButtonText: "ใช่!",
+                    confirmButtonColor: "#1f91f3",
+                    cancelButtonText: "ยกเลิก!",                    
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, function () {
+                    $.post("<?php echo base_url() ?>/index.php/HomeAdmin/updateStatus_r", { data: data }, function(res){
+                        swal("อนุมัติสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success")
+                        LoadData()         
+                    })
+                });
+            })
+
+            $('button[name=btnreject]').click(function(){
+                var data = [], chk = $('input[name=chk_approve]')
+                for(var i = 0; i < chk.length; ++i){
+                    if($(chk[i]).prop('checked')){
+                        data.push({
+                            Student_id: $(chk[i]).data('student'),
+                            status: -1
+                        })
+                    }
+                }
+                console.log(data);
+                swal({
+                    title: "Are you sure?",
+                    text: "ต้องการ ยกเลิก",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#1f91f3",
+                    confirmButtonText: "ใช่!",
+                    confirmButtonColor: "#1f91f3",
+                    cancelButtonText: "ยกเลิก!",                    
+                    closeOnConfirm: false,
+                    showLoaderOnConfirm: true
+                }, function () {
+                    $.post("<?php echo base_url() ?>/index.php/HomeAdmin/updateStatus_r", { data: data }, function(res){
+                        swal("อนุมัติสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success")
+                        LoadData()         
+                    })
+                });
+            })
             
             $('select[name=subject]').change(function(){
                 LoadData();
