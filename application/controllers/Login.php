@@ -48,25 +48,29 @@ class Login extends CI_Controller {
 
 				#---------------Check------------#    
 				$this->session->set_userdata('user_id',$entries[0]["cn"][0]);
-				$this->session->set_userdata('firstname',$name['firstname']);
-				$this->session->set_userdata('lastname',$name['lastname']);
 				$this->session->set_userdata('fullname', $entries[0]['displayname'][0]);
 				$this->session->set_userdata('email',$entries[0]["description"][0]);
-				$this->session->set_userdata('Login',TRUE);
-				$this->session->set_userdata('employeeid',$entries[0]["employeeid"][0]);
 
 				$id = $entries[0]["cn"][0];
 
-				$retval = 1;
+				$retval = 0;
 
 				if(is_numeric($id)){
 					$this->load->model('Student_Model');
 					$result = $this->Student_Model->checkStudent($id);
 					if (sizeof($result) > 0) {
+						$this->load->model('Login_Model');
+						$data = array(
+							'User_name' => $user,
+							'User_password' => md5($key),
+							'User_fullname' => $this->session->userdata('fullname'),
+							'User_email' => $this->session->userdata('email')
+						);
+						$this->Login_Model->insertUser($data);
 						redirect('HomeStudent');
 					} else {
-						ldap_unbind($ad);
-						redirect('Login');
+						$this->session->sess_destroy();
+						$retval = 0;
 					}
 				}else{
 					redirect('HomeAdmin');
@@ -82,9 +86,9 @@ class Login extends CI_Controller {
 				$data['query'] = $this->Login_Model->checkUser($Username, $Password);
 				foreach ($data['query'] as $row) {
 					if($row->User_name == $Username && $row->User_password == $Password){
-						// $this->session->set_userdata('user_id',$row['Staff_id']);
-						// $this->session->set_userdata('firstname',$row['Staff_name']);
-						// $this->session->set_userdata('lastname',$row['Staff_lastname']);
+						$this->session->set_userdata('user_id', $row->User_name);
+						$this->session->set_userdata('fullname', $row->User_fullname);
+						$this->session->set_userdata('email', $row->User_email);
 
 						if(is_numeric($Username)){
 							redirect('HomeStudent');

@@ -14,6 +14,11 @@ class Login_Model extends CI_Model {
         
     }
 
+    public function insertUser($data)
+    {
+        $this->db->insert('User', $data);
+    }
+
 }
 
 /* End of file Login_Model.php */
