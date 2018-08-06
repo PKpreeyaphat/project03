@@ -566,6 +566,7 @@
                             txt_subj = regis.Subject
                         if(pre_stu != post_stu)
                             txt_stu = stu+' '+regis.Name
+
                         html += '<tr><td>'+txt_stu+'</td>'+
                             '<td>'+txt_subj+'</td>'+
                             '<td>'+regis.Section_id+'</td>'+
@@ -573,7 +574,7 @@
                             '<td>'+regis.Day+'</td>'+
                             '<td>'+regis.Time+'</td></tr>'
                         post_stu = stu
-                        post_stu = regis.Subject
+                        post_subj = regis.Subject
                     }
                 }
                 $('#tbody_report').html(html)
