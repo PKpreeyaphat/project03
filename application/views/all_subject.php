@@ -54,9 +54,6 @@
 										<a href="<?php echo base_url(); ?>index.php/InputData">
 											<button type="button" class="btn btn-success waves-effect m-r-20">เพิ่มรายวิชา</button>
 										</a>
-										<a href="<?php echo base_url(); ?>index.php/InputData/Semester">
-											<button type="button" class="btn btn-success waves-effect m-r-20">เพิ่มปีการศึกษา</button>
-										</a>
 										<button type="button" class="btn btn-success waves-effect m-r-20" data-toggle="modal" data-target="#import_subject">นำเข้ารายวิชา</button>
 									</div>
 								</div>

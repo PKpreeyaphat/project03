@@ -35,6 +35,40 @@ class Config extends CI_Controller {
         $data['allsemester'] = $this->Semester_Model->getAllSemester();
         $this->load->view('config_view', $data);
     }
+
+    public function insertSemester()
+    {
+        $data = array(
+            'Semester_Name' => $this->input->post('Semester_Name'),
+            'Semester_Year' => $this->input->post('Semester_Year'), 
+            'Semester_Start' => $this->input->post('Semester_Start'),
+            'Semester_Stop' => $this->input->post('Semester_Stop')
+        );
+
+        $this->load->model('Page2_Model');
+        $this->Page2_Model->insertSemester($data);
+        $result = $this->Page2_Model->getSemester($data)[0];
+
+        if($result){
+            echo '<script>alert("เพิ่มปีการศึกษาสำเร็จ");</script>';
+        } else {
+            echo '<script>alert("มีปีการศึกษานี้ในระบบแล้ว");</script>';
+        }
+
+        // index
+        $this->load->model('CurrentSemester_Model');
+        $this->load->model('Semester_Model');
+        $this->load->model('Config_Model');
+
+        $semester = $this->CurrentSemester_Model->getSemester();
+        $maxhour = $this->Config_Model->getConfig($this->MaxHour());
+        if(count($maxhour) > 0){
+            $data['maxhour'] = $maxhour[0];
+        }
+        $data['semester'] = $semester;
+        $data['allsemester'] = $this->Semester_Model->getAllSemester();
+        $this->load->view('config_view', $data);
+    }
     
     public function OpenRegister()
     {

@@ -59,6 +59,7 @@
                                                 <ul class="nav nav-tabs tab-nav-right" role="tablist">
                                                     <li role="presentation" class="active"><a href="#home_animation_2" data-toggle="tab">ตั้งค่าระบบ</a></li>
                                                     <li role="presentation"><a href="#settings_animation_2" data-toggle="tab">รายชื่อนิสิต</a></li>
+                                                    <li role="presentation"><a href="#settings_animation_3" data-toggle="tab">ปีการศึกษา</a></li>
                                                 </ul>
 
                                         <!-- Tab panes -->
@@ -119,6 +120,37 @@
                                                 <div role="tabpanel" class="tab-pane fade" id="settings_animation_2">
                                                     <div class="col-xs-12 col-sm-6">
 										                <button type="button" class="btn btn-success waves-effect m-r-20" data-toggle="modal" data-target="#defaultModal">นำเข้ารายชื่อนิสิต</button>
+									                </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane fade" id="settings_animation_3">
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <form action="<?php echo base_url();?>index.php/Config/insertSemester" method="post">
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <select type="date" id="" name="Semester_Name" class="form-control" placeholder="ชื่อภาคเรียน" required>
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="ฤดูร้อน">ฤดูร้อน</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <input type="number" id="" name="Semester_Year" class="form-control" placeholder="ปีการศึกษา" maxlength="4" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <input type="date" id="" name="Semester_Start" class="form-control" placeholder="วันเปิดภาคเรียน" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
+                                                                    <input type="date" id="" name="Semester_Stop" class="form-control" placeholder="วันปิดภาคเรียน" required>
+                                                                </div>
+                                                            </div>
+                                                            <button type="button" name="btnsave_semester" class="btn btn-success m-t-15 waves-effect">บันทึก</button>
+                                                        </form>
 									                </div>
                                                 </div>
                                             </div>
@@ -187,7 +219,19 @@
 
     <script type="text/javascript">
 		$(document).ready(function (e) {
-            $("body").css("overflow", "hidden");
+            $("body").css("overflow", "hidden")
+
+            $('button[name=btnsave_semester]').click(function(){
+                $.post('<?php echo base_url();?>index.php/Config/insertSemester', 
+                {
+                    Semester_Name: $('select[name=Semester_Name]').val(),
+                    Semester_Year: $('input[name=Semester_Year]').val(),
+                    Semester_Start: $('input[name=Semester_Start]').val(),
+                    Semester_Stop: $('input[name=Semester_Stop]').val(),
+                }, function(res){
+                    swal("บันทึกสำเร็จ!", "บันทึกปีการศึกษาเรียบร้อย", "success");
+                })
+            })
 
 			$('#upload').on('click', function (e) {
 				var file_data = $('#file').prop('files')[0];
