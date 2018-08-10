@@ -264,7 +264,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <table id="tb_report" style="display: none;">
+                                <table id="tb_report" class="table table-bordered" style="display: none;">
                                     <thead>
                                         <tr>
                                             <th>นิสิต</th>
@@ -578,7 +578,20 @@
                     }
                 }
                 $('#tbody_report').html(html)
-                tableToExcel('tb_report', 'ตารางการทำงาน TA')
+                var mywindow = window.open('', 'new div', 'height=400,width=600');
+                mywindow.document.write('<html><head><title></title>');
+                mywindow.document.write('<style>'+$('style[name=print]').html()+ '</style><style type="text/css" media="print">@page { size: landscape; }</style>');
+                mywindow.document.write('<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">')
+                mywindow.document.write('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">')
+                mywindow.document.write('<link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">')
+                mywindow.document.write('</head><body onload="window.print();window.close();">');
+                mywindow.document.write('<table class="table table-bordered">'+$('#tb_report').html() + '</table>');
+                mywindow.document.write('</body></html>');
+                mywindow.document.close();
+                mywindow.focus();
+
+                return true;
+                //tableToExcel('tb_report', 'ตารางการทำงาน TA')
             })
 
             $('button[name=btnfresh]').click(function(){

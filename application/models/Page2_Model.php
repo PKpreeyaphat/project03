@@ -10,7 +10,7 @@ class Page2_Model extends CI_Model
         $insert = $this->db->insert('Subject', $data);
         return $insert;
     }
-
+    
     public function getSemester($data)
     {
         $this->db->where('Semester_Name', $data['Semester_Name']);
