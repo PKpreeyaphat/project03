@@ -65,7 +65,6 @@
         .table-bordered {
             border: 1px solid #ddd;
         }
-
         .table {
             width: 100%;
             max-width: 100%;
@@ -77,6 +76,13 @@
         .white{
             color: white !important;
         }
+    }
+    .table-doc > tbody > tr > td {
+        padding-right: 20px !important;
+    }
+    
+    .font-sarabun{
+        font-family: "TH Sarabun PSK";
     }
     body{
         -webkit-print-color-adjust:exact;
@@ -109,7 +115,9 @@
     .table-bordered {
         border: 1px solid #ddd;
     }
-
+    #page-doc p {
+        font-size: 14px;
+    }
     .table {
         width: 100%;
         max-width: 100%;
@@ -145,7 +153,7 @@
                                     <select class="form-control show-tick" id="subject">
                                     <option>———กรุณาเลือก———</option>
                                     <?php foreach ($subject as $x) { ?>
-                                        <option value="<?=$x->Subject_id?>"><?=$x->Subject_id.' '.$x->Subject_name?></option>
+                                        <option data-normal="<?=$x->GroupNomal?>" data-special="<?=$x->GroupSpecial?>" value="<?=$x->Subject_id?>"><?=$x->Subject_id.' '.$x->Subject_name?></option>
                                     <?php } ?>
                                     ?>
                                     </select>
@@ -170,9 +178,16 @@
                                         <i class="fa fa-print"></i>
                                     </button>
                                 </div>
+                                
                                 <div class="col-md-1">
                                     <p></p>
                                     <button name="btnreport" class="btn btn-sm btn-default m-t-20 waves-effect"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Report</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <p></p>
+                                    <button name="btnpdf" class="btn btn-sm btn-default m-t-20 waves-effect">บันทึกข้อวคาม</button>
                                 </div>
                             </div>
                         </div>
@@ -278,6 +293,59 @@
                                     <tbody id="tbody_report">
                                     </tbody>
                                 </table>
+                                <div id="doc" style="display: none;width: 29.7cm;height: 21cm;">
+                                    <div id="page-doc" style="word-wrap: break-word;margin-top:4em;margin-left:8em;margin-right:4em;" class="container font-sarabun">
+                                        <div class="row">
+                                            <div style="width: 20%; display: inline;">
+                                                <img style="width: 100px; height: 100px;" src="http://council.buu.ac.th/image/LogoBuuThai.jpg" />
+                                            </div>
+                                            <div style="width: 60%;text-align: center;font-weight: bold;font-size: 18px;display: inline-block;vertical-align: bottom;">
+                                                <span>บันทึกข้อความ</span>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top: 20px;">
+                                            <p><strong style="margin-right:1em;">ส่วนงาน</strong> คณะวิทยาการสารสนเทศ สำนักงานจัดการศึกษา โทร ๓๐๙๖</p>
+                                            <p><strong>ที่</strong> ศธ ๖๓๑๓.๒/๕๖๖ <strong style="margin-left:20em;">วันที่</strong> <span id="doc_date"></span></p>
+                                            <p><strong style="margin-right:2.5em;">เรื่อง</strong> ขออนุมัติในหลักการค่าตอบแทนนิสิตระดับปริญญาตรีช่วยปฏิบัติงาน</p>
+                                            <br>
+                                            <p><strong style="margin-right:2.5em;">เรียน</strong> คณบดีคณะวิทยาการสารสนเทศ</p>
+                                            <br>
+                                            <p style="text-indent: 4em;">ด้วยคณบดีวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา ได้เปิดสอนรายวิชา <span name="doc_subject"></span> จำนวน <span id="doc_credit"></span> ในภาคเรียนที่  <span name="doc_semester"></span>
+                                            <span id="doc_normal"></span> <span id="doc_special"></span> ในการนี้สำนักงานจัดการศึกษา ขออนุมัติจ้างนิสิตช่วยงานห้องปฏิบัติการในรายวิชา <span name="doc_subject"></span> รายนามดังนี้
+                                            </p>
+                                            <center>
+                                                <table class="table-doc">
+                                                    <tbody id="tbody-doc">
+                                                        <tr><td>1. <span style="margin-left:0.5em;">56660118 asdasd<span></td><td>2. <span style="margin-left:0.5em;">56660118 asdasd</sapi_windows_cp_conv></td></tr>
+                                                    </tbody>
+                                                </table>
+                                            </center>
+                                            <p>โดยปฏิบัติงานในภาคเรียนที่ <span name="doc_semester"></span> เพื่อช่วยงานสอนของอาจารย์ในชั่งโมงปฏิบัติการ สำหรับหมวดวิชาศึกษาทั่วไปรายวิชา <span name="doc_subject"></span> ของคณะวิทยาการสารสนเทศ</p>
+                                            <br>
+                                            <p style="text-indent: 4em;">จึงเรียนมาเพื่อโปรดพิจรณาอนุมัติในหลักการ การปฏิบัติงานของนิสิตช่วยงาน โดยมีสิทธิเบิกค่าตอบแทนจำนวนเงิน <span id="doc_amount"></span> โดยเบิกจากเงินรายได้ แผนกงานจัดการศึกษาอุดมศึกษา งานจัดการศึกษาระดับปริญญาตรีด้านวิทยาศาสตร์และเทคโนโลยี กองทุนเพื่อการศึกษา งบดำเนินงาน หมวดค่าตอบแทนใช้สอยและวัสดุ
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <div style="display: block;width: 50%; float: left;">
+                                            <br>
+                                            <br>
+                                            <br>
+                                            <br>
+                                            </div>
+                                            <div style="display: block;width: 50%; float: right;">
+                                                <center><p>(<?=$vice_president->Config_value?>)</p></center>
+                                                <center><p>รองคณบดี</p></center>
+                                            </div>
+                                            <div style="display: block;width: 50%;">
+                                                <center><p>อนุมัติ</p></center>
+                                                <br>
+                                                <br>
+                                                <center><p>(<?=$president->Config_value?>)</p></center>
+                                                <center><p>คณบดีคณะวิทยาการสาสนเทศ</p></center>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -305,6 +373,9 @@
     <!-- Sweet Alert Plugin Js -->
     <script src="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.min.js"></script>
 
+    <!-- ThaiBath Js -->
+    <script src="<?php echo base_url() ?>/js/thaibath.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
 
@@ -328,6 +399,44 @@
         })()
 
         $(function(){
+            var toThainum = function(num){
+                var thainum = 
+                {
+                    '1': '๑',
+                    '2': '๒',
+                    '3': '๓',
+                    '4': '๔',
+                    '5': '๕',
+                    '6': '๖',
+                    '7': '๗',
+                    '8': '๘',
+                    '9': '๙',
+                    '0': '๐'}
+                var result = ''
+                num = num + ''
+                for(var i in num){
+                    if(thainum[num[i]]){
+                        result += thainum[num[i]]
+                    }
+                    else{
+                        result += num[i]
+                    }
+                }
+                return result
+            }
+            var year = toThainum(<?=$year?> + 543)
+            var month = Number('<?=$month?>') - 1
+            var day = toThainum('<?=$day?>')
+            var monthThai = ["มกราคม","กุมภาพันธ์","มีนาคม",
+                "เมษายน","พฤษภาคม","มิถุนายน", "กรกฎาคม","สิงหาคม","กันยายน",
+                "ตุลาคม","พฤศจิกายน","ธันวาคม"]
+            var semester = JSON.parse('<?=json_encode($semester)?>')
+            semester.thaibath = ArabicNumberToText(semester.Amount)
+            semester.Amount = toThainum(Number(semester.Amount).toLocaleString(undefined, {minimumFractionDigits: 2}))
+            semester.txt = toThainum(semester.Semester_Name + '/' + semester.Semester_Year)
+           $('span[name=doc_semester]').html(semester.txt)
+           $('#doc_amount').html(semester.Amount + ' บาท (' + semester.thaibath +')')
+           $('#doc_date').html(day +' ' + monthThai[month] + ' พ.ศ. '+ year)
             var time = {
                 1:{}, 
                 2:{},
@@ -416,6 +525,7 @@
                         }
                     }
                     loadFreeTime()
+                    loadtopdf(res)
                 })
             },
             loadSection = function(){
@@ -598,10 +708,82 @@
                 $('#subject').trigger('change')
             })
 
+            $('button[name=btnpdf]').click(function(){
+                var data = {
+                    Subject_id: $('#subject').val()
+                }
+                pdf()
+                
+            })
+
+            var loadtopdf = function(res){
+                var dict_stu = {}
+                var html = ''
+                var html_r = []
+                var count = 0
+                var count_ = 0
+                for(var i in res){
+                    if(!dict_stu[res[i].Student_id]){
+                        dict_stu[res[i].Student_id] = true
+                        count++
+                    }
+                }
+                dict_stu = []
+                for(var i in res){
+                    if(!dict_stu[res[i].Student_id]){
+                        count_++
+                        html_r.push('<td>'+toThainum(Number(i) + 1)+'. <span style="margin-left:0.5em;">'+toThainum(res[i].Student_id)+' '+res[i].Student_firstname+' '+res[i].Student_lastname+'<span></td>')
+                        dict_stu[res[i].Student_id] = true
+                        if(count_ == Math.round(count / 2)){
+                            break
+                        }
+                    }
+                }
+                count_ = 0
+                for(var i in res){
+                    if(!dict_stu[res[i].Student_id]){
+                        count_++
+                        html_r[count_] = '<tr>' + html_r[count_] + '<td>'+toThainum(Number(i) + 1)+'. <span style="margin-left:0.5em;">'+toThainum(res[i].Student_id)+' '+res[i].Student_firstname+' '+res[i].Student_lastname+'<span></td></tr>'
+                        dict_stu[res[i].Student_id] = true
+                    }
+                }
+                html = html_r.join('')
+                $('#tbody-doc').html(html)
+            }
+
+            var pdf = function(){
+                var mywindow = window.open('', 'new div', 'height=400,width=600');
+                mywindow.document.write('<html><head><title></title>');
+                mywindow.document.write('<style>'+$('style[name=print]').html()+ '</style><style type="text/css" media="print"></style>');
+                mywindow.document.write('<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">')
+                mywindow.document.write('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">')
+                mywindow.document.write('<link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">')
+                mywindow.document.write('</head><body onload="window.print();">');
+                mywindow.document.write($('#doc').html());
+                mywindow.document.write('</body></html>');
+                mywindow.document.close();
+                mywindow.focus();
+            }
+
             $('#subject').change(function(){
                 resetTime(student = false)
                 var data = {
                     id: $(this).val()
+                }
+                // doc
+                var doc_subject = toThainum($('#subject option:selected').text())
+                $('span[name=doc_subject]').html(doc_subject)
+                if($('#subject option:selected').data('normal')){
+                    var txt = 'ภาคปกติจำนวน '
+                    txt += toThainum(Number($('#subject option:selected').data('normal')).toLocaleString())
+                    txt += ' กลุ่ม'
+                    $('#doc_normal').html(txt)
+                }
+                if($('#subject option:selected').data('special')){
+                    var txt = 'ภาคพิเศษจำนวน '
+                    txt += toThainum(Number($('#subject option:selected').data('special')).toLocaleString())
+                    txt += ' กลุ่ม'
+                    $('#doc_special').html(txt)                    
                 }
                 $.post('table/loadRoom', {data: data}, function(res){
                     res = JSON.parse(res)

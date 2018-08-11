@@ -31,9 +31,33 @@ class Config extends CI_Controller {
         if(count($maxhour) > 0){
             $data['maxhour'] = $maxhour[0];
         }
+        $president = $this->Config_Model->getConfig("president");
+        if(count($president) > 0){
+            $data['president'] = $president[0];
+        }
+        $vice_president = $this->Config_Model->getConfig('vice_president');
+        if(count($vice_president) > 0){
+            $data['vice_president'] = $vice_president[0];
+        }
         $data['semester'] = $semester;
         $data['allsemester'] = $this->Semester_Model->getAllSemester();
         $this->load->view('config_view', $data);
+    }
+
+    public function saveConfigDoc()
+    {
+        $this->load->model('Config_Model');
+        $data = $this->input->post('data');
+        $save = array(
+            'Config_name' => 'vice_president',
+            'Config_value'=> $data['vice_president']
+        );
+        $this->Config_Model->save($save);
+        $save = array(
+            'Config_name' => 'president',
+            'Config_value'=> $data['president']
+        );
+        $this->Config_Model->save($save);
     }
 
     public function insertSemester()
@@ -42,7 +66,8 @@ class Config extends CI_Controller {
             'Semester_Name' => $this->input->post('Semester_Name'),
             'Semester_Year' => $this->input->post('Semester_Year'), 
             'Semester_Start' => $this->input->post('Semester_Start'),
-            'Semester_Stop' => $this->input->post('Semester_Stop')
+            'Semester_Stop' => $this->input->post('Semester_Stop'),
+            'Amount' => $this->input->post('Amount')
         );
 
         $this->load->model('Page2_Model');

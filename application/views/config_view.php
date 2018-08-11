@@ -60,6 +60,7 @@
                                                     <li role="presentation" class="active"><a href="#home_animation_2" data-toggle="tab">ตั้งค่าระบบ</a></li>
                                                     <li role="presentation"><a href="#settings_animation_2" data-toggle="tab">รายชื่อนิสิต</a></li>
                                                     <li role="presentation"><a href="#settings_animation_3" data-toggle="tab">ปีการศึกษา</a></li>
+                                                    <li role="presentation"><a href="#settings_animation_4" data-toggle="tab">ตั้งค่าเอกสาร</a></li>
                                                 </ul>
 
                                         <!-- Tab panes -->
@@ -141,6 +142,11 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="form-line">
+                                                                    <input type="number" id="" name="Amount" class="form-control" placeholder="ค่าตอบแทนทั้งหมดของเทอมนี้" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="form-line">
                                                                     <input type="date" id="" name="Semester_Start" class="form-control" placeholder="วันเปิดภาคเรียน" required>
                                                                 </div>
                                                             </div>
@@ -152,6 +158,36 @@
                                                             <button type="button" name="btnsave_semester" class="btn btn-success m-t-15 waves-effect">บันทึก</button>
                                                         </form>
 									                </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane fade" id="settings_animation_4">
+                                                    <br>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label><b>คณบดี :</b></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                            <input value="<?=(isset($president))? $president->Config_value : 0 ?>" class="form-control" type="text" name="president">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label><b>รองคณบดี :</b></label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8">
+                                                        <div class="form-group">
+                                                            <div class="form-line">
+                                                                <input value="<?=(isset($vice_president))? $vice_president->Config_value : 0 ?>" class="form-control" type="text" name="vice_president">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-6">
+                                                        <button type="button" name="btnsave_configdoc" class="btn btn-success m-t-15 waves-effect">บันทึก</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -221,13 +257,49 @@
 		$(document).ready(function (e) {
             $("body").css("overflow", "hidden")
 
+            $('button[name=btnsave_configdoc]').click(function(){
+                var data = {
+                    vice_president: $('input[name=vice_president]').val(),
+                    president: $('input[name=president]').val(),
+                }
+                $.post('<?php echo base_url();?>index.php/Config/saveConfigDoc', {data: data}, function(res){
+                    swal("บันทึกสำเร็จ!", "บันทึกตั้งค่าเอกสารเรียบร้อย", "success");
+                })
+            })
+
             $('button[name=btnsave_semester]').click(function(){
+                var iserror = false
+                $('.error.focused').removeClass('error focused')
+                if(!$('input[name=Semester_Year]').val()){
+                    var form_line = $('input[name=Semester_Year]').closest('.form-line');
+                    $(form_line).addClass('error focused')
+                    iserror = true
+                }
+                if(!$('input[name=Semester_Start]').val()){
+                    var form_line = $('input[name=Semester_Start]').closest('.form-line');
+                    $(form_line).addClass('error focused')
+                    iserror = true
+                }
+                if(!$('input[name=Semester_Stop]').val()){
+                    var form_line = $('input[name=Semester_Stop]').closest('.form-line');
+                    $(form_line).addClass('error focused')
+                    iserror = true
+                }
+                if(!$('input[name=Amount]').val()){
+                    var form_line = $('input[name=Amount]').closest('.form-line');
+                    $(form_line).addClass('error focused')
+                    iserror = true
+                }
+                if(iserror){
+                    return
+                }
                 $.post('<?php echo base_url();?>index.php/Config/insertSemester', 
                 {
                     Semester_Name: $('select[name=Semester_Name]').val(),
                     Semester_Year: $('input[name=Semester_Year]').val(),
                     Semester_Start: $('input[name=Semester_Start]').val(),
                     Semester_Stop: $('input[name=Semester_Stop]').val(),
+                    Amount:  $('input[name=Amount]').val()
                 }, function(res){
                     swal("บันทึกสำเร็จ!", "บันทึกปีการศึกษาเรียบร้อย", "success");
                 })

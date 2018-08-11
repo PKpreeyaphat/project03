@@ -96,6 +96,16 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="form-line">
+                                        <select class="form-control" name="Degree">
+                                            <option value="ตรี" <?=(isset($student) && $student->Degree == 'ตรี')? 'selected' : ''?>>ป.ตรี</option>
+                                            <option value="โท" <?=(isset($student) && $student->Degree == 'โท')? 'selected' : ''?>>ป.โท</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <div class="form-line">
                                         <input type="text" id="" value="<?=(isset($student))? $student->Student_tel : ''?>"  name="Student_tel" class="form-control" placeholder="เบอร์โทรศัพท์">
                                     </div>
                                 </div>
@@ -281,6 +291,7 @@
                         Student_email: $('input[name=Student_email]').val(),
                         Student_tel: $('input[name=Student_tel]').val(),
                         Subject_id: Subject_id,
+                        Degree: $('select[name=Degree]').val(),
                         time: JSON.stringify( time )
                     }, function(data){
                         swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");

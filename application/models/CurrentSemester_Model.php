@@ -38,7 +38,7 @@ class CurrentSemester_Model extends CI_Model
 
     public function getAllCurSemester()
     {
-        return $this->db->query("SELECT Semester.Semester_ID, Semester_Name, Semester.Semester_Year, isOpen 
+        return $this->db->query("SELECT Semester.Semester_ID, Semester_Name, Semester.Semester_Year, isOpen, Amount
         FROM CurrentSemester NATURAL JOIN Semester")->result();
     }
 
