@@ -76,6 +76,30 @@ class Config extends CI_Controller {
         $this->Page2_Model->insertSemester($save);
     }
 
+    public function Doc(){
+        $this->load->model('CurrentSemester_Model');
+        $this->load->model('Semester_Model');
+		$this->load->model('AllSubject_Model');
+        $this->load->model('Config_Model');
+
+        $semester = $this->CurrentSemester_Model->getSemester();
+        $data['subject'] = $this->AllSubject_Model->getSubjectWithCountSection($semester->Semester_ID);
+        $president = $this->Config_Model->getConfig("president");
+        if(count($president) > 0){
+            $data['president'] = $president[0];
+        }
+        $vice_president = $this->Config_Model->getConfig('vice_president');
+        if(count($vice_president) > 0){
+            $data['vice_president'] = $vice_president[0];
+        }
+        $data['semester'] = $semester;
+        $data['allsemester'] = $this->Semester_Model->getAllSemester();
+        $data['year'] = date("Y");
+        $data['month'] = date("m");
+        $data['day'] = date("d");
+        $this->load->view('manage_doc', $data);
+    }
+
     public function insertSemester()
     {
         $data = array(

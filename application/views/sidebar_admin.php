@@ -105,6 +105,13 @@
         </ul> -->
         </li>
         <li>
+            <!-- <a href="javascript:void(0);" class="menu-toggle"> -->
+            <a href="<?php echo base_url(); ?>index.php/Config/Doc">
+                <i class="material-icons">layers</i>
+                <span>จัดการเอกสาร</span>
+            </a>
+        </li>
+        <li>
             <a href="<?php echo base_url(); ?>index.php/StudentWork">
                 <i class="material-icons">work</i>
                 <span>ตารางการทำงาน</span>
