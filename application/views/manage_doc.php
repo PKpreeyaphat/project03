@@ -203,7 +203,7 @@
                 var data = {
                     Subject_id: $('#subject').val()
                 }
-                $.post('table/loadStudentWork', {data: data}, function(res){
+                $.post('<?=base_url()?>index.php/table/loadStudentWork', {data: data}, function(res){
                     res = JSON.parse(res)
                     loadtopdf(res)
                 })
