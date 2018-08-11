@@ -12,9 +12,11 @@ class Config extends CI_Controller {
     {
         $this->load->model('CurrentSemester_Model');
         $this->load->model('Semester_Model');
+		$this->load->model('AllSubject_Model');
         $this->load->model('Config_Model');
 
         $semester = $this->CurrentSemester_Model->getSemester();
+        $data['subject'] = $this->AllSubject_Model->getSubjectWithCountSection($semester->Semester_ID);
         // $last = $this->Semester_Model->Last();
         // if(count($last) > 0){
         //     $last = $last[0];
@@ -41,13 +43,19 @@ class Config extends CI_Controller {
         }
         $data['semester'] = $semester;
         $data['allsemester'] = $this->Semester_Model->getAllSemester();
+        $data['year'] = date("Y");
+        $data['month'] = date("m");
+        $data['day'] = date("d");
         $this->load->view('config_view', $data);
     }
 
     public function saveConfigDoc()
     {
+        $this->load->model('CurrentSemester_Model');
         $this->load->model('Config_Model');
+        $this->load->model('Page2_Model');
         $data = $this->input->post('data');
+        // 
         $save = array(
             'Config_name' => 'vice_president',
             'Config_value'=> $data['vice_president']
@@ -58,6 +66,14 @@ class Config extends CI_Controller {
             'Config_value'=> $data['president']
         );
         $this->Config_Model->save($save);
+        //
+        $semester = $this->CurrentSemester_Model->getSemester();
+        $save = array(
+            'Semester_Name' => $semester->Semester_Name,
+            'Semester_Year'=> $semester->Semester_Year,
+            'Amount' => $data['Amount']
+        );
+        $this->Page2_Model->insertSemester($save);
     }
 
     public function insertSemester()
@@ -66,8 +82,7 @@ class Config extends CI_Controller {
             'Semester_Name' => $this->input->post('Semester_Name'),
             'Semester_Year' => $this->input->post('Semester_Year'), 
             'Semester_Start' => $this->input->post('Semester_Start'),
-            'Semester_Stop' => $this->input->post('Semester_Stop'),
-            'Amount' => $this->input->post('Amount')
+            'Semester_Stop' => $this->input->post('Semester_Stop')
         );
 
         $this->load->model('Page2_Model');

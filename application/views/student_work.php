@@ -184,12 +184,6 @@
                                     <button name="btnreport" class="btn btn-sm btn-default m-t-20 waves-effect"><i class="fa fa-file-excel-o" aria-hidden="true"></i>&nbsp; Report</button>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <p></p>
-                                    <button name="btnpdf" class="btn btn-sm btn-default m-t-20 waves-effect">บันทึกข้อวคาม</button>
-                                </div>
-                            </div>
                         </div>
                         <div id="loadTable">
                             <div class="body table-responsive">
@@ -293,58 +287,6 @@
                                     <tbody id="tbody_report">
                                     </tbody>
                                 </table>
-                                <div id="doc" style="display: none;width: 29.7cm;height: 21cm;">
-                                    <div id="page-doc" style="word-wrap: break-word;margin-top:4em;margin-left:8em;margin-right:4em;" class="container font-sarabun">
-                                        <div class="row">
-                                            <div style="width: 20%; display: inline;">
-                                                <img style="width: 100px; height: 100px;" src="http://council.buu.ac.th/image/LogoBuuThai.jpg" />
-                                            </div>
-                                            <div style="width: 60%;text-align: center;font-weight: bold;font-size: 18px;display: inline-block;vertical-align: bottom;">
-                                                <span>บันทึกข้อความ</span>
-                                            </div>
-                                        </div>
-                                        <div class="row" style="margin-top: 20px;">
-                                            <p><strong style="margin-right:1em;">ส่วนงาน</strong> คณะวิทยาการสารสนเทศ สำนักงานจัดการศึกษา โทร ๓๐๙๖</p>
-                                            <p><strong>ที่</strong> ศธ ๖๓๑๓.๒/๕๖๖ <strong style="margin-left:20em;">วันที่</strong> <span id="doc_date"></span></p>
-                                            <p><strong style="margin-right:2.5em;">เรื่อง</strong> ขออนุมัติในหลักการค่าตอบแทนนิสิตระดับปริญญาตรีช่วยปฏิบัติงาน</p>
-                                            <br>
-                                            <p><strong style="margin-right:2.5em;">เรียน</strong> คณบดีคณะวิทยาการสารสนเทศ</p>
-                                            <br>
-                                            <p style="text-indent: 4em;">ด้วยคณบดีวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา ได้เปิดสอนรายวิชา <span name="doc_subject"></span> จำนวน <span id="doc_credit"></span> ในภาคเรียนที่  <span name="doc_semester"></span>
-                                            <span id="doc_normal"></span> <span id="doc_special"></span> ในการนี้สำนักงานจัดการศึกษา ขออนุมัติจ้างนิสิตช่วยงานห้องปฏิบัติการในรายวิชา <span name="doc_subject"></span> รายนามดังนี้
-                                            </p>
-                                            <center>
-                                                <table class="table-doc">
-                                                    <tbody id="tbody-doc">
-                                                    </tbody>
-                                                </table>
-                                            </center>
-                                            <p>โดยปฏิบัติงานในภาคเรียนที่ <span name="doc_semester"></span> เพื่อช่วยงานสอนของอาจารย์ในชั่งโมงปฏิบัติการ สำหรับหมวดวิชาศึกษาทั่วไปรายวิชา <span name="doc_subject"></span> ของคณะวิทยาการสารสนเทศ</p>
-                                            <br>
-                                            <p style="text-indent: 4em;">จึงเรียนมาเพื่อโปรดพิจรณาอนุมัติในหลักการ การปฏิบัติงานของนิสิตช่วยงาน โดยมีสิทธิเบิกค่าตอบแทนจำนวนเงิน <span id="doc_amount"></span> โดยเบิกจากเงินรายได้ แผนกงานจัดการศึกษาอุดมศึกษา งานจัดการศึกษาระดับปริญญาตรีด้านวิทยาศาสตร์และเทคโนโลยี กองทุนเพื่อการศึกษา งบดำเนินงาน หมวดค่าตอบแทนใช้สอยและวัสดุ
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <div style="display: block;width: 50%; float: left;">
-                                            <br>
-                                            <br>
-                                            <br>
-                                            <br>
-                                            </div>
-                                            <div style="display: block;width: 50%; float: right;">
-                                                <center><p>(<?=$vice_president->Config_value?>)</p></center>
-                                                <center><p>รองคณบดี</p></center>
-                                            </div>
-                                            <div style="display: block;width: 50%;">
-                                                <center><p>อนุมัติ</p></center>
-                                                <br>
-                                                <br>
-                                                <center><p>(<?=$president->Config_value?>)</p></center>
-                                                <center><p>คณบดีคณะวิทยาการสาสนเทศ</p></center>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
