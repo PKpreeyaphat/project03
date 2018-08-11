@@ -316,7 +316,6 @@
                                             <center>
                                                 <table class="table-doc">
                                                     <tbody id="tbody-doc">
-                                                        <tr><td>1. <span style="margin-left:0.5em;">56660118 asdasd<span></td><td>2. <span style="margin-left:0.5em;">56660118 asdasd</sapi_windows_cp_conv></td></tr>
                                                     </tbody>
                                                 </table>
                                             </center>
