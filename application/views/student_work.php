@@ -758,7 +758,7 @@
                 mywindow.document.write('<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">')
                 mywindow.document.write('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">')
                 mywindow.document.write('<link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">')
-                mywindow.document.write('</head><body onload="window.print();">');
+                mywindow.document.write('</head><body onload="window.print();window.close();">');
                 mywindow.document.write($('#doc').html());
                 mywindow.document.write('</body></html>');
                 mywindow.document.close();
