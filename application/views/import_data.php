@@ -205,7 +205,7 @@
 
 				$.ajax({
 				type: "GET",
-				url: "<?php echo base_url() ?>index.php/ImportData/getSectionInfo/" + sectionID,
+				url: "<?php echo base_url() ?>index.php/ImportData/getSectionInfo/<?php echo $Subject_id ?>/<?php echo $Semester_ID ?>/" + sectionID,
 				success: function (response) {
 					var data = jQuery.parseJSON(response);
 					console.log(data)

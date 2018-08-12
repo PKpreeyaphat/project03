@@ -19,7 +19,8 @@ class InputData extends CI_Controller
     {
         $data = array(
             'Subject_id' => $this->input->post('Subject_id'),
-            'Subject_name' => $this->input->post('Subject_name')
+            'Subject_name' => $this->input->post('Subject_name'),
+            'Subject_credit' => $this->input->post('Subject_credit')
         );
 
         $this->load->model('Page2_Model');

@@ -10,6 +10,12 @@ class Page2_Model extends CI_Model
         $insert = $this->db->insert('Subject', $data);
         return $insert;
     }
+
+    public function updateCredit($subject, $data)
+    {
+        $this->db->where('Subject_id', $subject);
+        $this->db->update('Subject', $data);
+    }
     
     public function getSemester($data)
     {

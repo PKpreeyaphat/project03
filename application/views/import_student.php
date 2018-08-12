@@ -54,6 +54,37 @@
 								</div>
 							</div>
 							<div class="body">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="form-line">
+											<select name="subject" class="form-control show-tick">
+												<option value="">รายวิชา</option>
+												<?php foreach ($subject as $x) { ?>
+												<option value="<?=$x->Subject_id?>">
+													<?=$x->Subject_id.' '.$x->Subject_name?>
+												</option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="form-line">
+											<select class="form-control show-tick" name="Semester_ID">
+												<option value="">ปีการศึกษา</option>
+												<?php foreach ($semester as $x) {
+													if($Semester_ID == $x->Semester_ID){
+														echo '<option selected value="'.$x->Semester_ID.'">ปี '.$x->Semester_Year.' ภาค '. $x->Semester_Name.'</option>';
+													}
+													else{
+														echo '<option value="'.$x->Semester_ID.'">ปี '.$x->Semester_Year.' ภาค '. $x->Semester_Name.'</option>';
+													}
+												} ?>
+											</select>
+										</div>
+									</div>
+								</div>
 								<div class="body table-responsive">
 									<table class="table">
 										<thead>
@@ -64,28 +95,7 @@
 												<th>รายละเอียด</th>
 											</tr>
 										</thead>
-										<tbody>
-											<?php foreach ($students as $x) { ?>
-											<tr>
-												<td>
-													<?php echo $x->Student_id ?>
-												</td>
-												<td>
-											
-														<?php echo $x->Student_firstname." ".$x->Student_lastname ?>
-													</a>
-												</td>
-												<td>
-													<?php echo $x->Grade ?>
-												</td>
-												<td>
-													<button type="button" id="<?php echo $x->Student_id ?>" class="btn bg-teal btn-detail waves-effect m-r-20" data-toggle="modal" data-target="#detailModal">เพิ่มเติม</button>
-												</td>
-												<!--
-												<td>-</td>
-												<td>-</td> -->
-											</tr>
-											<?php } ?>
+										<tbody id="tbody">
 										</tbody>
 									</table>
 								</div>
@@ -124,6 +134,16 @@
 							</div>
 						</div>
 					</div>
+					<div class="row clearfix">
+						<div class="col-lg-5">
+							<label for="">ระดับการศึกษา</label>
+						</div>
+						<div class="col-lg-7">
+							<div class="form-group">
+								<div id="degreeLabel"></div>
+							</div>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
@@ -138,69 +158,58 @@
 	<script type="text/javascript">
 		$(document).ready(function (e) {
 
-			$('.btn-detail').click(function (e) {
-				e.preventDefault();
+			$("#tbody").on("click", ".btn-detail", function () {
 
 				studentID = $.trim($('td:nth-child(1)', $(this).parents('tr')).text());
 
 				$.ajax({
 					type: "GET",
-					url: "<?php echo base_url() ?>index.php/ImportStudent/getStudentInfo/" + studentID,
+					url: "<?php echo base_url() ?>index.php/ImportStudent/getStudentInfo/" + $('select[name=subject]').val() + "/" + $(
+						'select[name=Semester_ID]').val() + "/" + studentID,
 					success: function (response) {
 						var data = jQuery.parseJSON(response);
 						console.log(data);
 						$("#nameLabel").text(data.Student_firstname + " " + data.Student_lastname);
 						$("#emailLabel").text(data.Student_email);
 						$("#telLabel").text(data.Student_tel);
+						$("#degreeLabel").text(data.Degree);
 					}
 				});
 			});
 
-			$('#upload').on('click', function (e) {
-				var file_data = $('#file').prop('files')[0];
-				var form_data = new FormData();
-				form_data.append('file', file_data);
-
-				$.ajax({
-					url: '<?php echo base_url() ?>/index.php/ImportStudent/upload_file', // point to server-side controller method
-					dataType: 'json', // what to expect back from the server
-					cache: false,
-					contentType: false,
-					processData: false,
-					data: form_data,
-					type: 'post',
-					success: function (res) {
-						EMPTY_FILE = 0;
-						UPLOAD_FAIL = 1;
-						UPLOAD_SUCCESS = 2;
-
-						switch (res.status) {
-							case EMPTY_FILE:
-								alert(res.msg);
-								break;
-
-							case UPLOAD_FAIL:
-								alert(res.msg);
-								$('#file').val('');
-								break;
-
-							case UPLOAD_SUCCESS:
-								alert(res.msg);
-								$('#defaultModal').modal('toggle');
-
-								$('#file').val('');
-
-								var table = "";
-								res.data.forEach(x => {
-									table += "<tr><td>" + x.ID + "</td><td>" + x.name + "</td></tr>";
-								});
-
-								$('#confirmData').html(table);
-								$('#confirmModal').modal('show');
-								break;
-						}
+			var LoadData = function () {
+				var subject_id = $('select[name=subject]').val();
+				var semester_id = $('select[name=Semester_ID]').val();
+				$.post("<?=base_url()?>index.php/ImportStudent/Students", {
+					subject_id: subject_id,
+					semester_id: semester_id
+				}, function (data) {
+					data = JSON.parse(data);
+					var html = '';
+					for (var i in data) {
+						html +=
+							'<tr>' +
+							'<td>' + data[i].Student_id + '</td>' +
+							'<td>' + data[i].Student_firstname + ' ' + data[i].Student_lastname + '</td>' +
+							'<td>' + data[i].Grade + '</td>' +
+							'<td><button type="button" id="' + data[i].Student_id +
+							'" class="btn bg-teal btn-detail waves-effect m-r-20" data-toggle="modal" data-target="#detailModal">เพิ่มเติม</button></td>' +
+							'</tr>';
 					}
+					$('#tbody').html(html);
 				});
+			};
+
+			$('select[name=subject]').change(function () {
+				if ($("select[name=Semester_ID]").val() != "") {
+					LoadData();
+				}
+			});
+
+			$('select[name=Semester_ID]').change(function () {
+				if ($("select[name=subject]").val() != "") {
+					LoadData();
+				}
 			});
 		});
 

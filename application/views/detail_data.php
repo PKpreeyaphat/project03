@@ -137,7 +137,7 @@
 										</div>
 									</div>
 									<button type="submit" class="btn btn-success m-t-15 waves-effect">ตกลง</button>
-									<button type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
+									<a href="javascript:window.history.go(-1);" class="btn btn-danger m-t-15 waves-effect">กลับ</a>
 								</form>
 							</div>
 						</div>
