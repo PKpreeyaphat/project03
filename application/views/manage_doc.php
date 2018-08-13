@@ -32,7 +32,28 @@
     <link href="<?php echo base_url() ?>/css/themes/all-themes.css" rel="stylesheet" />
 
     <style name="print">
+    @import url('<?=base_url()?>/system/fonts/thsarabunnew.css');
+
+   
+
     @media print { 
+        *{ margin: 0; padding: 0; }
+        body{ font-family: 'THSarabunNew', sans-serif; font-size: 0.95em; line-height: 1.7em; background: #e1e1e1; }
+        h1,h2,h3,h4,h5{ line-height: 2em; clear: both; }
+        h2{ background: #0F7AC2; padding: 0 10px; color: #FFF; margin: 20px 0 10px; }
+        p{ padding: 0 0 10px 0; }
+        .n{ font-weight: normal; font-style: normal; }
+        .b{ font-weight: bold; font-style: normal; }
+        .i{ font-weight: normal; font-style: italic; }
+        .bi{ font-weight: bold; font-style: italic; }
+        ul,ol{padding: 0 0 10px 0;}
+        li{ margin: 0 0 0 2em; padding: 0 0 5px 0; }
+        code{ background: #FFF; }
+        #container{ width: 900px; margin: 20px auto 0; border: 1px solid #333; padding: 20px; background: #FFF; }
+        #instruction{ padding: 10px 10px 0; background: #e6e6e6; }
+        #footer{ width: 940px; margin: 0 auto; padding: 10px 0 20px; }
+        .right{text-align: right;}
+        .type{ font-family: 'THSarabunNew', sans-serif; height: 5em; width: 98%;font-size: 1em;clear: both;margin: 20px auto 10px;padding: 5px 1%; }
         @page {
             margin:0;
         }
@@ -80,7 +101,7 @@
     }
     
     .font-sarabun{
-        font-family: "TH Sarabun PSK";
+        font-family: "THSarabunNew";
     }
     body{
         -webkit-print-color-adjust:exact;
@@ -177,7 +198,7 @@
     </div>
 
     <div id="doc" style="display: none;width: 29.7cm;height: 21cm;">
-        <div id="page-doc" style="word-wrap: break-word;margin-top:4em;margin-left:8em;margin-right:4em;" class="container font-sarabun">
+        <div id="page-doc" style="word-wrap: break-word;margin-top:4em;margin-left:7em;margin-right:4em;" class="container font-sarabun">
             <div class="row">
                 <div style="width: 20%; display: inline;">
                     <img style="width: 100px; height: 100px;" src="http://council.buu.ac.th/image/LogoBuuThai.jpg" />
