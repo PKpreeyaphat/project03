@@ -125,7 +125,7 @@
 						<h5>ตัวอย่างไฟล์</h5>
 						<h6>**ต้องใช้ CSV UTF-8 (Comma delimited)(*.csv) เป็นนามสกุลไฟล์</h6>
 						<div class="images">
-							<img src="<?php echo base_url() ?>/images/room.PNG" width="50%" hight="" alt="subject" />
+							<img src="<?php echo base_url() ?>/images/Room01.PNG" width="50%" hight="" alt="subject" />
 						</div>
 					</div>
 				</div>
@@ -191,6 +191,7 @@
 							<thead>
 								<tr>
 									<th>ห้องปฏิบัติการ</th>
+									<th>จำนวนที่นั่ง</th>
 								</tr>
 							</thead>
 							<tbody id="confirmData">

@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Page2_Model extends CI_Model
+class Subject_Model extends CI_Model
 {
 
     public function insertSubject($data)
@@ -52,6 +52,12 @@ class Page2_Model extends CI_Model
         $this->db->query("DELETE FROM Subject WHERE 1");
     }
 
+    public function updateCredit($subject, $data)
+    {
+        $this->db->where('Subject_id', $subject);
+        $this->db->update('Subject', $data);
+    }
+
 }
 
-/* End of file Page2_Model.php */
+/* End of file Subject_Model.php */

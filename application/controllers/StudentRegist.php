@@ -54,6 +54,7 @@ class StudentRegist extends CI_Controller {
         $Student_grade = $this->input->post('Student_grade');
         $Student_email = $this->input->post('Student_email');
         $Student_tel = $this->input->post('Student_tel');
+        $Degree = $this->input->post('Degree');
         
         $student = $this->student_Model->checkStudent($Student_id);
         if(count($student) > 0){
@@ -70,7 +71,8 @@ class StudentRegist extends CI_Controller {
                 'Student_id' => $Student_id,
                 'Subject_id' => $Subject_id,
                 'Semester_ID' => $Semester_ID,
-                'Grade' => $Student_grade
+                'Grade' => $Student_grade,
+                'Degree' => $Degree
             );
             $this->registerSubject_Model->save($data);
         }

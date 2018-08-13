@@ -17,9 +17,11 @@ class Student_Model extends CI_Model
         return $res->result(); 
     }
 
-    public function getStudentByID($id)
+    public function getStudentByID($subject, $semester, $id)
     {
         $this->db->join('RegisterSubject', 'RegisterSubject.Student_id = Student.Student_id', 'left');
+        $this->db->where('Subject_id', $subject);
+        $this->db->where('Semester_ID', $semester);
         $this->db->where('Student.Student_id', $id);
         $res = $this->db->get('Student');
         return $res->result(); 
@@ -27,7 +29,7 @@ class Student_Model extends CI_Model
 
     public function getGradeSubject($id, $Subject_id, $Semester_ID)
     {
-        $sql = "SELECT std.Student_id, std.Student_email, std.Student_tel, std.Student_firstname, std.Student_lastname, reg.Grade
+        $sql = "SELECT reg.Degree, std.Student_id, std.Student_email, std.Student_tel, std.Student_firstname, std.Student_lastname, reg.Grade
             FROM Student std left join `RegisterSubject` reg on std.Student_id = reg.Student_id
             and Semester_ID = ? and Subject_id = ?
             WHERE std.Student_id = ?";

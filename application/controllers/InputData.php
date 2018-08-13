@@ -10,26 +10,21 @@ class InputData extends CI_Controller
         $this->load->view('input_data');
     }
 
+    public function Semester()
+    {
+        $this->load->view('input_semester');
+    }
+
     public function insert()
     {
         $data = array(
-            'Semester_Name' => $this->input->post('Semester_Name'),
-            'Semester_Year' => $this->input->post('Semester_Year'), 
-            'Semester_Start' => $this->input->post('Semester_Start'),
-            'Semester_Stop' => $this->input->post('Semester_Stop'), 
-        );
-
-        $this->load->model('Page2_Model');
-        $this->Page2_Model->insertSemester($data);
-        $result = $this->Page2_Model->getSemester($data)[0];
-
-        $data = array(
             'Subject_id' => $this->input->post('Subject_id'),
-            'Subject_name' => $this->input->post('Subject_name')
+            'Subject_name' => $this->input->post('Subject_name'),
+            'Subject_credit' => $this->input->post('Subject_credit')
         );
 
         $this->load->model('Page2_Model');
-        $result = $this->Page2_Model->insertSubject($data);
+        $result = $this->Subject_Model->insertSubject($data);
 
         if($result){
             echo '<script>alert("เพิ่มรายวิชาสำเร็จ");</script>';

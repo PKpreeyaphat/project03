@@ -30,9 +30,11 @@ class Import_Model extends CI_Model {
         return $query->result();
     }
 
-    public function getSection($id)
+    public function getSection($subjectID, $semesterID, $sectionID)
     {
-        $this->db->where('Section_id', $id);
+        $this->db->where('Subject_id', $subjectID);
+        $this->db->where('Semester_ID', $semesterID);
+        $this->db->where('Section_id', $sectionID);
         $query = $this->db->get('Section');
         return $query->result()[0];
     }

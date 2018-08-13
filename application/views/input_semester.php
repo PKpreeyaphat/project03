@@ -47,24 +47,33 @@
 						<div class="card">
 							<div class="header">
 								<h2>
-									เพิ่มรายวิชา
+                                เพิ่มปีการศึกษา
 								</h2>
 							</div>
 							<div class="body">
-								<form action="<?php echo base_url();?>index.php/InputData/insert" method="post">
+								<form action="<?php echo base_url();?>index.php/InputData/insertSemester" method="post">
 									<div class="form-group">
 										<div class="form-line">
-											<input type="text" id="" name="Subject_id" class="form-control" placeholder="รหัสวิชา" required>
+											<select type="date" id="" name="Semester_Name" class="form-control" placeholder="ชื่อภาคเรียน" required>
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="ฤดูร้อน">ฤดูร้อน</option>
+											</select>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="form-line">
-											<input type="text" id="" name="Subject_name" class="form-control" placeholder="รายวิชา" required>
+											<input type="number" id="" name="Semester_Year" class="form-control" placeholder="ปีการศึกษา" maxlength="4" required>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="form-line">
-											<input type="text" id="" name="Subject_credit" class="form-control" placeholder="3 (2-2-5)" required>
+											<input type="date" id="" name="Semester_Start" class="form-control" placeholder="วันเปิดภาคเรียน" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-line">
+											<input type="date" id="" name="Semester_Stop" class="form-control" placeholder="วันปิดภาคเรียน" required>
 										</div>
 									</div>
 									<button type="submit" class="btn btn-success m-t-15 waves-effect">บันทึก</button>

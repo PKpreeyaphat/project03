@@ -67,14 +67,11 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
+                            <h2>จัดตารางการทำงาน TA</h2>
+                        </div>
+                        <br>
+                        <div class="container-fluid">
                             <div class="row clearfix">
-                                <div class="col-lg-6">
-                                    <h2>จัดตารางการทำงาน TA</h2>
-                                </div>
-
-                                <div class="col-lg-6 align-right">
-                                    <button type="button" class="btn btn-primary waves-effect m-r-20">จัดตาราง</button>
-                                </div>
                                 <div class="col-md-3">
                                     <p>
                                         <b>เลือกรายวิชา :</b>
@@ -106,12 +103,14 @@
                                     </select>
 
                                 </div>
-                                <!-- <div class="col-md-2">
-                                    <p></p>
-                                    <button name="btnfresh" class="btn btn-sm btn-default m-t-20 waves-effect"><i class="material-icons">refresh</i></button>
-                                </div> -->
                             </div>
-                        </div>
+                            <div class="form-group">
+                                <h6>สีเทา = วัน-เวลาว่างของนิสิตตรงกับวัน-เวลาที่มีเรียน **สามารถลงได้**</h6>
+                                <h6>สีแดง = วัน-เวลาของนิสิตไม่ตรงกับวัน-เวลาที่มีเรียน **ไม่สามารถลงได้**</h6>
+                                <h6>สีฟ้า = นิสิตลงวัน-เวลาที่เลือกแค่คนเดียว **มีที่ว่างอีก 1 คน**</h6>
+                                <h6>สีเขียว = นิสิตของกลุ่มที่ต้องการเต็มแล้ว</h6>
+                            </div>
+                        </div>    
                         <div id="loadTable">
                             <div class="body table-responsive">
                                 <table id="tb" class="table table-bordered display dataTable with-check">

@@ -9,7 +9,8 @@ class ImportStudent extends CI_Controller
     {
         $this->load->model('AllSubject_Model');
         $this->load->model('Semester_Model');
-        $data['students'] = $this->AllSubject_Model->getRegisterStudentApprovedBySubject('88510159', $this->Semester_Model->Last()[0]->Semester_ID);
+        $data['subject'] = $this->AllSubject_Model->getSubject();
+        $data['semester'] = $this->Semester_Model->getAllSemester();
         $this->load->view('import_student', $data);
     }
 
@@ -21,10 +22,20 @@ class ImportStudent extends CI_Controller
     //     redirect('ImportStudent','refresh');
     // }
 
-    public function getStudentInfo($id)
+    public function Students()
+    {
+        $this->load->model('AllSubject_Model');
+        $this->load->model('Semester_Model');
+        $subject = $this->input->post('subject_id');
+        $semester = $this->input->post('semester_id');
+        $students = $this->AllSubject_Model->getRegisterStudentApprovedBySubject($subject, $semester);
+        echo json_encode($students);
+    }
+
+    public function getStudentInfo($subject, $semester, $studentID)
     {
         $this->load->model('Student_Model');
-        echo json_encode($this->Student_Model->getStudentByID($id)[0]);
+        echo json_encode($this->Student_Model->getStudentByID($subject, $semester, $studentID)[0]);
     }
 
 }

@@ -87,41 +87,6 @@
 				<?php echo form_open_multipart('ImportData/uploadFile'); ?>
 				<div class="modal-body">
 					<input type="file" id="" name="excel_file" class="form-control" placeholder="">
-					<br>
-					<div class="row clearfix">
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-							<div class="form-group">
-								<div class="form-line">
-									<select type="date" id="" name="Semester_Name" class="form-control" placeholder="ชื่อภาคเรียน" required>
-										<option value="1">1</option>
-										<option value="2">2</option>
-										<option value="ฤดูร้อน">ฤดูร้อน</option>
-									</select>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-							<div class="form-group">
-								<div class="form-line">
-									<input type="number" id="" name="Semester_Year" class="form-control" placeholder="ปีการศึกษา" maxlength="4" required>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-							<div class="form-group">
-								<div class="form-line">
-									<input type="date" id="" name="Semester_Start" class="form-control" placeholder="วันเปิดภาคเรียน" required>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-							<div class="form-group">
-								<div class="form-line">
-									<input type="date" id="" name="Semester_Stop" class="form-control" placeholder="วันปิดภาคเรียน" required>
-								</div>
-							</div>
-						</div>
-					</div>
 					<hr>
 					<div class="form-group">
 						<h5>ตัวอย่างไฟล์</h5>

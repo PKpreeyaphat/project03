@@ -7,12 +7,12 @@ class DetailData extends CI_Controller {
 
     public function index()
     {
-        $this->load->model('Page2_Model');
+        $this->load->model('Subject_Model');
         $this->load->model('Room_Model');
         $this->load->model('Semester_Model');
         $data['semester'] = $this->Semester_Model->getAllSemester();
         $data['room'] = $this->Room_Model->getAllRoom();
-        $data['subject'] = $this->Page2_Model->getAllSubject();
+        $data['subject'] = $this->Subject_Model->getAllSubject();
         $this->load->view('detail_data', $data);
     }
 

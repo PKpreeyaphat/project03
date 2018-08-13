@@ -43,14 +43,14 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="card">
                     <div class="header">
-                        <h2> รายวิชาที่เปิดรับสมัคร ภาคเรียนที่ <?=$semester->Semester_Name?></h2>
+                        <h2> รายวิชาที่เปิดรับสมัคร ภาคเรียนที่ <?=($semester != null) ? $semester->Semester_Name : "" ?></h2>
                     </div>
                         <div class="body">
                             <div class="row clearfix">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">
                                         <label for="">ชื่อรายวิชา</label>
-                                        <?php foreach ($subject as $x) { ?>
+                                        <?php if ($subject != null) { foreach ($subject as $x) { ?>
                                             <div class="row">
                                                 <div class="col-lg-6">
                                                 <button class="btn btn-default m-r-15 m-t-15 waves-effect"><?=$x->Subject_id.' '.$x->Subject_name?></button>
@@ -70,7 +70,7 @@
                                                 ?>
                                                 </div>
                                             </div>
-                                        <?php } ?>
+                                        <?php }} ?>
                                     </div>
                                 </div>
                             </div>

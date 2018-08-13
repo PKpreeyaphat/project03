@@ -40,18 +40,10 @@
             </a>
         </li> -->
         <li>
-            <a href="javascript:void(0);" class="menu-toggle">
-            <!-- <a href="<?php echo base_url(); ?>index.php/student" -->
+            <a href="<?php echo base_url(); ?>index.php/Student"
                     <i class="material-icons">group</i>
-                    <span>ข้อมูลนิสิต</span>
+                    <span>ข้อมูลส่วนตัว</span>
             </a>
-                <ul class="ml-menu">
-                    <li>
-                        <a href="<?php echo base_url(); ?>index.php/Student">
-                            <span>แก้ไขข้อมูลส่วนตัว</span>
-                        </a>
-                    </li>
-                </ul>
         </li>
         <!-- <li>
             <a href="javascript:void(0);" class="menu-toggle">

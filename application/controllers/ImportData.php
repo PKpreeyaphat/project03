@@ -19,10 +19,10 @@ class ImportData extends CI_Controller
         $this->load->view('import_data', $data);
     }
 
-    public function getSectionInfo($id)
+    public function getSectionInfo($subjectID, $semesterID, $sectionID)
     {
         $this->load->model('Import_Model');
-        echo json_encode($this->Import_Model->getSection($id));
+        echo json_encode($this->Import_Model->getSection($subjectID, $semesterID, $sectionID));
     }
 
     public function uploadFile()
@@ -61,34 +61,21 @@ class ImportData extends CI_Controller
                 redirect('ImportRoom', 'refresh');
             }
 
-            $data = array(
-                'Semester_Name' => $this->input->post('Semester_Name'),
-                'Semester_Year' => $this->input->post('Semester_Year'), 
-                'Semester_Start' => $this->input->post('Semester_Start'),
-                'Semester_Stop' => $this->input->post('Semester_Stop'), 
-            );
-    
-            $this->load->model('Page2_Model');
-            $this->Page2_Model->insertSemester($data);
-            $result = $this->Page2_Model->getSemester($data)[0];
-
-            $data = array(
-                'Semester_ID' => $result->Semester_ID,
-                'isOpen' => '0'
-            );
-    
-            $this->CurrentSemester_Model->save($data);
-
             foreach ($csvData as $row) {
 
-                if (sizeof($this->Page2_Model->getSubjectByID($row["ID"])) == 0){
+                if (sizeof($this->Subject_Model->getSubjectByID($row["ID"])) == 0){
                     $data = array(
                         'Subject_id' => $row["ID"],
                         'Subject_name' => substr($row["Subject"], 0, 45),
                     );
 
-                    $this->Page2_Model->insertSubject($data);
+                    $this->Subject_Model->insertSubject($data);
                 }
+
+                $data = array(
+                    'Subject_credit' => $row["Credit"],
+                );
+                $this->Subject_Model->updateCredit($row["ID"], $data);
 
                 $pivotNewLine = strpos($row["Day"], "\n", 0);
 
@@ -128,7 +115,7 @@ class ImportData extends CI_Controller
                     $data = array(
                         'Subject_id' => $row["ID"],
                         'Section_id' => $row["Section"],
-                        'Semester_ID' => $this->Semester_Model->Last()[0]->Semester_ID,
+                        'Semester_ID' => $this->CurrentSemester_Model->getSemester()->Semester_ID,
                         'Section_name' => substr($row["Subject"], 45),
                         'Section_student_quantity' => $row["Student"],
                         'Section_day' => $firstDay,
@@ -145,7 +132,7 @@ class ImportData extends CI_Controller
                     $data = array(
                         'Subject_id' => $row["ID"],
                         'Section_id' => $row["Section"],
-                        'Semester_ID' => $this->Semester_Model->Last()[0]->Semester_ID,
+                        'Semester_ID' => $this->CurrentSemester_Model->getSemester()->Semester_ID,
                         'Section_name' => substr($row["Subject"], 45),
                         'Section_student_quantity' => $row["Student"],
                         'Section_day' => $secondDay,

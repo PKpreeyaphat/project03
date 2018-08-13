@@ -11,9 +11,19 @@ class AllSubject_Model extends CI_Model {
         return $query->result();
     }
 
+    public function getSubjectWithCountSection($semester_id)
+    {
+        $query_str = "SELECT sub.*, 
+        (select IFNULL(SUM(case when sec.Section_id != 4 then 1 else 0 end),0) from Section sec where sec.Semester_ID = ? AND sec.Subject_id = sub.Subject_id) as GroupNomal ,
+        (select IFNULL(SUM(case when sec.Section_id = 4 then 1 else 0 end),0) from Section sec where sec.Semester_ID = ? AND sec.Subject_id = sub.Subject_id) as GroupSpecial
+        FROM `Subject` sub";
+        $query = $this->db->query($query_str, array($semester_id, $semester_id));
+        return $query->result();
+    }
+
     public function getUnRegister($student_id, $semester_id)
     {
-        $query_str="SELECT sj.Subject_id, sj.Subject_name, reg.Student_id
+        $query_str = "SELECT sj.Subject_id, sj.Subject_name, reg.Student_id
             from Subject sj LEFT JOIN Register reg ON sj.Subject_id = reg.Subject_id AND reg.Student_id = ? 
             AND Semester_ID = ?
             GROUP BY sj.Subject_id, sj.Subject_name, reg.Student_id";
