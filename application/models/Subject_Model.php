@@ -58,6 +58,12 @@ class Subject_Model extends CI_Model
         $this->db->update('Subject', $data);
     }
 
+    public function updateAmount($subject, $data)
+    {
+        $this->db->where('Subject_id', $subject);
+        $this->db->update('Subject', $data);
+    }
+
 }
 
 /* End of file Subject_Model.php */

@@ -79,6 +79,19 @@ class Config extends CI_Controller {
         $this->Subject_Model->insertSemester($save);
     }
 
+    public function getAmountBySubjectID($id)
+    {
+        $this->load->model('Subject_Model');
+        echo $this->Subject_Model->getSubjectById($id)[0]->Subject_amount;
+    }
+
+    public function updateSubjectAmount($subject, $amount)
+    {
+        $data = array('Subject_amount' => $amount);
+        $this->load->model('Subject_Model');
+        $this->Subject_Model->updateAmount($subject, $data);
+    }
+
     public function Doc(){
         $this->load->model('CurrentSemester_Model');
         $this->load->model('Semester_Model');

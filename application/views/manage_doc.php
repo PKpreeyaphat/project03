@@ -157,7 +157,7 @@
 			.table-bordered>tfoot>tr>td {
 				border: 1px solid #ddd;
 			}
-			
+
 			.table-bordered {
 				border: 1px solid #ddd;
 			}
@@ -418,12 +418,22 @@
 												<select class="form-control show-tick" id="subject">
 													<option>———กรุณาเลือก———</option>
 													<?php foreach ($subject as $x) { ?>
-													<option data-amount="<?=$x->Subject_amount?>" data-credit="<?=$x->Subject_credit?>" data-normal="<?=$x->GroupNomal?>" data-thainame="<?=$x->Subject_id.' '.$x->Subject_thai_name?>" data-special="<?=$x->GroupSpecial?>" value="<?=$x->Subject_id?>">
+													<option data-credit="<?=$x->Subject_credit?>" data-normal="<?=$x->GroupNomal?>" data-thainame="<?=$x->Subject_id.' '.$x->Subject_thai_name?>"
+													data-special="<?=$x->GroupSpecial?>" value="<?=$x->Subject_id?>">
 														<?=$x->Subject_id.' '.$x->Subject_name?>
 													</option>
 													<?php } ?> ?>
 												</select>
-
+											</div>
+											<div class="col-md-5">
+												<p>
+													<b>ค่าตอบแทนทั้งหมด :</b>
+												</p>
+												<div class="form-group">
+													<div class="form-line">
+														<input type="text" id="" name="Subject_amount" class="form-control" required>
+													</div>
+												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-1">
@@ -464,7 +474,7 @@
 					<strong style="margin-right:2.5em;">เรื่อง</strong> ขออนุมัติในหลักการค่าตอบแทนนิสิตระดับปริญญาตรีช่วยปฏิบัติงาน</p>
 				<p style="margin-bottom: 15px;">
 					<strong style="margin-right:2.5em;">เรียน</strong> คณบดีคณะวิทยาการสารสนเทศ</p>
-				<p style="text-indent: 4em;">ด้วยคณบดีวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา ได้เปิดสอนรายวิชา
+				<p style="text-indent: 4em;">ด้วยคณะวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา ได้เปิดสอนรายวิชา
 					<span name="doc_subject"></span>
 					<span id="doc_credit"></span> ในภาคเรียนที่
 					<span name="doc_semester"></span>
@@ -482,7 +492,7 @@
 					<span name="doc_semester"></span> เพื่อช่วยงานสอนของอาจารย์ในชั่งโมงปฏิบัติการ สำหรับหมวดวิชาศึกษาทั่วไปรายวิชา
 					<span name="doc_subject"></span> ของคณะวิทยาการสารสนเทศ</p>
 				<br>
-				<p style="text-indent: 4em;">จึงเรียนมาเพื่อโปรดพิจรณาอนุมัติในหลักการ การปฏิบัติงานของนิสิตช่วยงาน โดยมีสิทธิเบิกค่าตอบแทนจำนวนเงิน
+				<p style="text-indent: 4em;">จึงเรียนมาเพื่อโปรดพิจารณาอนุมัติในหลักการ การปฏิบัติงานของนิสิตช่วยงาน โดยมีสิทธิเบิกค่าตอบแทนจำนวนเงิน
 					<span id="doc_amount"></span> โดยเบิกจากเงินรายได้ แผนกงานจัดการศึกษาอุดมศึกษา งานจัดการศึกษาระดับปริญญาตรีด้านวิทยาศาสตร์และเทคโนโลยี กองทุนเพื่อการศึกษา
 					งบดำเนินงาน หมวดค่าตอบแทนใช้สอยและวัสดุ
 					<br>
@@ -582,10 +592,9 @@
 				var data = {
 					Subject_id: $('#subject').val()
 				}
-                $('button[name=btnpdf]').prop('disabled', true)
+				$('button[name=btnpdf]').prop('disabled', true)
 				// doc
 				var doc_subject = toThainum($('#subject option:selected').data('thainame'));
-                console.log(doc_subject);
 				$('span[name=doc_subject]').html(doc_subject)
 				if ($('#subject option:selected').data('normal')) {
 					var txt = 'ภาคปกติจำนวน '
@@ -604,8 +613,8 @@
 					txt += toThainum($('#subject option:selected').data('credit')) + ' หน่วยกิต'
 					$('#doc_credit').html(txt)
 				}
-				if ($('#subject option:selected').data('amount')) {
-					var amount_val = $('#subject option:selected').data('amount')
+				if ($('input[name=Subject_amount]').val()) {
+					var amount_val = $('input[name=Subject_amount]').val()
 					var thaibath = ArabicNumberToText(amount_val)
 					var Amount = toThainum(Number(amount_val).toLocaleString(undefined, {
 						minimumFractionDigits: 2
@@ -620,11 +629,26 @@
 				})
 			}
 
+			var loadAmount = function () {
+				$.get('<?=base_url()?>index.php/Config/getAmountBySubjectID/' + $('#subject').val(), 
+				function (res) {
+					$('input[name=Subject_amount]').val(res);
+				})
+			}
+
+			var updateAmount = function () {
+				$.get('<?=base_url()?>index.php/Config/updateSubjectAmount/' + $('#subject').val() + '/' + $('input[name=Subject_amount]').val(), 
+				function (res) { })
+			}
+
 			$('#subject').change(function () {
 				loadWork()
+				loadAmount()
 			})
 
 			$('button[name=btnpdf]').click(function () {
+				updateAmount()
+				loadWork()
 				pdf()
 			})
 
@@ -660,12 +684,12 @@
 							res[i].Student_lastname + '<span></td></tr>'
 						dict_stu[res[i].Student_id] = true
 						count_++
-                        console.log(html_r);
+						console.log(html_r);
 					}
 				}
 				html = html_r.join('')
 				$('#tbody-doc').html(html)
-                $('button[name=btnpdf]').prop('disabled', false)
+				$('button[name=btnpdf]').prop('disabled', false)
 			}
 
 			var pdf = function () {
