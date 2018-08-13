@@ -429,7 +429,6 @@
                         }
                     }
                     loadFreeTime()
-                    loadtopdf(res)
                 })
             },
             loadSection = function(){

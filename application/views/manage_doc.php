@@ -47,6 +47,11 @@
 				line-height: 1.7em;
 				background: #e1e1e1;
 			}
+			table {
+				border-spacing: 0;
+				border-collapse: collapse;
+				font-size: 14px !important;
+			}
 			h1,
 			h2,
 			h3,
@@ -152,10 +157,7 @@
 			.table-bordered>tfoot>tr>td {
 				border: 1px solid #ddd;
 			}
-			table {
-				border-spacing: 0;
-				border-collapse: collapse;
-			}
+			
 			.table-bordered {
 				border: 1px solid #ddd;
 			}
@@ -186,6 +188,10 @@
 
 		.white {
 			color: white !important;
+		}
+
+		table {
+			font-size: 14px;
 		}
 
 		table.dataTable tbody>tr.selected,
@@ -440,7 +446,7 @@
 		<div id="page-doc" style="word-wrap: break-word;margin-top:4em;margin-left:7em;margin-right:4em;" class="container font-sarabun">
 			<div class="row">
 				<div style="width: 20%; display: inline;">
-					<img style="width: 100px; height: 100px;" src="http://council.buu.ac.th/image/LogoBuuThai.jpg" />
+					<img style="width: 80px; height: 80px;" src="http://council.buu.ac.th/image/LogoBuuThai.jpg" />
 				</div>
 				<div style="width: 60%;text-align: center;font-weight: bold;font-size: 18px;display: inline-block;vertical-align: bottom;">
 					<span>บันทึกข้อความ</span>
@@ -454,12 +460,10 @@
 					<strong style="margin-left:15em;">วันที่</strong>
 					<span id="doc_date"></span>
 				</p>
-				<p>
+				<p style="margin-bottom: 15px;">
 					<strong style="margin-right:2.5em;">เรื่อง</strong> ขออนุมัติในหลักการค่าตอบแทนนิสิตระดับปริญญาตรีช่วยปฏิบัติงาน</p>
-				<br>
-				<p>
+				<p style="margin-bottom: 15px;">
 					<strong style="margin-right:2.5em;">เรียน</strong> คณบดีคณะวิทยาการสารสนเทศ</p>
-				<br>
 				<p style="text-indent: 4em;">ด้วยคณบดีวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา ได้เปิดสอนรายวิชา
 					<span name="doc_subject"></span>
 					<span id="doc_credit"></span> ในภาคเรียนที่
@@ -483,9 +487,7 @@
 					งบดำเนินงาน หมวดค่าตอบแทนใช้สอยและวัสดุ
 					<br>
 					<br>
-					<br>
 					<div style="display: block;width: 50%; float: left;">
-						<br>
 						<br>
 						<br>
 						<br>
@@ -642,7 +644,7 @@
 				for (var i in res) {
 					if (!dict_stu[res[i].Student_id]) {
 						count_++
-						html_r.push('<td>' + toThainum(Number(i) + 1) + '. <span style="margin-left:0.5em;">' + toThainum(res[i].Student_id) +
+						html_r.push('<td>' + toThainum(Number(i) + 1) + '.<span style="margin-left:0.5em;">' + toThainum(res[i].Student_id) +
 							' ' + res[i].Student_firstname + ' ' + res[i].Student_lastname + '<span></td>')
 						dict_stu[res[i].Student_id] = true
 						if (count_ == Math.round(count / 2)) {
@@ -654,7 +656,7 @@
 				for (var i in res) {
 					if (!dict_stu[res[i].Student_id]) {
 						html_r[count_] = '<tr>' + html_r[count_] + '<td>' + toThainum(Number(i) + 1) +
-							'. <span style="margin-left:0.5em;">' + toThainum(res[i].Student_id) + ' ' + res[i].Student_firstname + ' ' +
+							'.<span style="margin-left:0.5em;">' + toThainum(res[i].Student_id) + ' ' + res[i].Student_firstname + ' ' +
 							res[i].Student_lastname + '<span></td></tr>'
 						dict_stu[res[i].Student_id] = true
 						count_++

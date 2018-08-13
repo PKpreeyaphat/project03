@@ -14,8 +14,8 @@ class AllSubject_Model extends CI_Model {
     public function getSubjectWithCountSection($semester_id)
     {
         $query_str = "SELECT sub.*, 
-        (select IFNULL(SUM(case when sec.Section_id != 4 then 1 else 0 end),0) from Section sec where sec.Semester_ID = ? AND sec.Subject_id = sub.Subject_id) as GroupNomal ,
-        (select IFNULL(SUM(case when sec.Section_id = 4 then 1 else 0 end),0) from Section sec where sec.Semester_ID = ? AND sec.Subject_id = sub.Subject_id) as GroupSpecial
+        (select IFNULL(SUM(case when sec.Section_id < 3 then 1 else 0 end),0) from Section sec where sec.Semester_ID = ? AND sec.Subject_id = sub.Subject_id) as GroupNomal ,
+        (select IFNULL(SUM(case when sec.Section_id >= 3 then 1 else 0 end),0) from Section sec where sec.Semester_ID = ? AND sec.Subject_id = sub.Subject_id) as GroupSpecial
         FROM `Subject` sub";
         $query = $this->db->query($query_str, array($semester_id, $semester_id));
         return $query->result();
