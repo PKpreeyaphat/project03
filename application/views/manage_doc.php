@@ -185,7 +185,7 @@
             </div>
             <div class="row" style="margin-top: 20px;">
                 <p><strong style="margin-right:1em;">ส่วนงาน</strong> คณะวิทยาการสารสนเทศ สำนักงานจัดการศึกษา โทร ๓๐๙๖</p>
-                <p><strong>ที่</strong> ศธ ๖๓๑๓.๒/๕๖๖ <strong style="margin-left:18em;">วันที่</strong> <span id="doc_date"></span></p>
+                <p><strong>ที่</strong> ศธ ๖๓๑๓.๒/๕๖๖ <strong style="margin-left:15em;">วันที่</strong> <span id="doc_date"></span></p>
                 <p><strong style="margin-right:2.5em;">เรื่อง</strong> ขออนุมัติในหลักการค่าตอบแทนนิสิตระดับปริญญาตรีช่วยปฏิบัติงาน</p>
                 <br>
                 <p><strong style="margin-right:2.5em;">เรียน</strong> คณบดีคณะวิทยาการสารสนเทศ</p>
@@ -309,7 +309,7 @@
                 }
                 if($('#subject option:selected').data('credit')){
                     var txt = 'จำนวน '
-                    txt += toThainum($('#subject option:selected').data('credit'))
+                    txt += toThainum($('#subject option:selected').data('credit')) + ' หน่วยกิต'
                     $('#doc_credit').html(txt)                    
                 }
                 $.post('<?=base_url()?>index.php/table/loadStudentWork', {data: data}, function(res){
