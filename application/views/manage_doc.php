@@ -585,6 +585,7 @@
 				var data = {
 					Subject_id: $('#subject').val()
 				}
+                $('button[name=btnpdf]').prop('disabled', true)
 				// doc
 				var doc_subject = toThainum($('#subject option:selected').data('thainame'));
                 console.log(doc_subject);
@@ -649,15 +650,18 @@
 				count_ = 0
 				for (var i in res) {
 					if (!dict_stu[res[i].Student_id]) {
-						count_++
 						html_r[count_] = '<tr>' + html_r[count_] + '<td>' + toThainum(Number(i) + 1) +
 							'. <span style="margin-left:0.5em;">' + toThainum(res[i].Student_id) + ' ' + res[i].Student_firstname + ' ' +
 							res[i].Student_lastname + '<span></td></tr>'
 						dict_stu[res[i].Student_id] = true
+						count_++
+                        console.log(html_r);
 					}
 				}
 				html = html_r.join('')
+                console.log(html);
 				$('#tbody-doc').html(html)
+                $('button[name=btnpdf]').prop('disabled', false)
 			}
 
 			var pdf = function () {
