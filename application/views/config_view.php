@@ -87,7 +87,7 @@
 																	<select class="form-control show-tick" name="semester">
 																		<?php
                                                                     foreach($allsemester as $row){
-                                                                        if($semester->Semester_ID == $row->Semester_ID){
+                                                                        if($semester != null && $semester->Semester_ID == $row->Semester_ID){
                                                                             echo '<option selected value="'.$row->Semester_ID.'">ปี '.$row->Semester_Year.' ภาค '.$row->Semester_Name.'</option>';
                                                                         }
                                                                         else{
@@ -119,7 +119,12 @@
 																	<b>เปิด-ปิดรับสมัคร :</b>
 																</label>
 																<label>
-																	<input <?=($semester->isOpen == 1)? 'checked': ''?> name="isopen" type="checkbox">
+																	<input 
+																	<?php 
+																		if($semester != null) {
+																			echo ($semester->isOpen == 1) ? 'checked': '';
+																		}
+																		?> name="isopen" type="checkbox">
 																	<span class="lever switch-col-green">
 																	</span>
 																</label>

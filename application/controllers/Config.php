@@ -16,7 +16,11 @@ class Config extends CI_Controller {
         $this->load->model('Config_Model');
 
         $semester = $this->CurrentSemester_Model->getSemester();
-        $data['subject'] = $this->AllSubject_Model->getSubjectWithCountSection($semester->Semester_ID);
+        if ($semester != null) {
+            $data['subject'] = $this->AllSubject_Model->getSubjectWithCountSection($semester->Semester_ID);
+        } else {
+            $data['subject'] = null;
+        }
         // $last = $this->Semester_Model->Last();
         // if(count($last) > 0){
         //     $last = $last[0];
@@ -83,7 +87,11 @@ class Config extends CI_Controller {
         $this->load->model('Config_Model');
 
         $semester = $this->CurrentSemester_Model->getSemester();
-        $data['subject'] = $this->AllSubject_Model->getSubjectWithCountSection($semester->Semester_ID);
+        if ($semester != null) {
+            $data['subject'] = $this->AllSubject_Model->getSubjectWithCountSection($semester->Semester_ID);
+        } else {
+            $data['subject'] = null;
+        }
         $president = $this->Config_Model->getConfig("president");
         if(count($president) > 0){
             $data['president'] = $president[0];

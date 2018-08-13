@@ -116,7 +116,7 @@ class StudentRegist extends CI_Controller {
     //     redirect('StudentRegist', 'refresh');
     // }else{
     //     $this->load->model('Student_Model');
-    //     $data['Student'] = $this->Student_Model->getStudentByID($id);
+    //     $data['Student'] = $this->Student_Model->getStudentInfo($id);
     //     $data['edit'] = true;
     //     $data['id'] = $id;
     //     $this->load->view('student_regist',$data);

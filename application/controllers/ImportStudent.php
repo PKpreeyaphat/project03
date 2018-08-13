@@ -35,7 +35,7 @@ class ImportStudent extends CI_Controller
     public function getStudentInfo($subject, $semester, $studentID)
     {
         $this->load->model('Student_Model');
-        echo json_encode($this->Student_Model->getStudentByID($subject, $semester, $studentID)[0]);
+        echo json_encode($this->Student_Model->getStudentInfo($subject, $semester, $studentID)[0]);
     }
 
 }

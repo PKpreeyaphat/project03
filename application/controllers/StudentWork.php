@@ -12,7 +12,11 @@ class StudentWork extends CI_Controller {
         $this->load->model('Config_Model');
 
         $data['semester'] = $this->CurrentSemester_Model->getSemester();
-        $data['subject'] = $this->AllSubject_Model->getSubjectWithCountSection($data['semester']->Semester_ID);
+        if ($data['semester'] != null) {
+            $data['subject'] = $this->AllSubject_Model->getSubjectWithCountSection($data['semester']->Semester_ID);
+        } else {
+            $data['subject'] = null;
+        }
         $president = $this->Config_Model->getConfig("president");
         if(count($president) > 0){
             $data['president'] = $president[0];

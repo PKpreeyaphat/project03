@@ -11,12 +11,6 @@ class Subject_Model extends CI_Model
         return $insert;
     }
 
-    public function updateCredit($subject, $data)
-    {
-        $this->db->where('Subject_id', $subject);
-        $this->db->update('Subject', $data);
-    }
-    
     public function getSemester($data)
     {
         $this->db->where('Semester_Name', $data['Semester_Name']);
