@@ -52,7 +52,7 @@ class ImportData extends CI_Controller
             }
 
             $this->load->model('Import_Model');
-            $this->load->model('Page2_Model');
+            $this->load->model('Subject_Model');
             $this->load->model('Room_Model');
             $this->load->model('Semester_Model');
 

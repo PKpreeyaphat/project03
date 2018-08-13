@@ -54,12 +54,17 @@
 								<form action="<?php echo base_url();?>index.php/InputData/insert" method="post">
 									<div class="form-group">
 										<div class="form-line">
-											<input type="text" id="" name="Subject_id" class="form-control" placeholder="รหัสวิชา" required>
+											<input type="text" id="" name="Subject_id" class="form-control" placeholder="รหัสรายวิชา" required>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="form-line">
-											<input type="text" id="" name="Subject_name" class="form-control" placeholder="รายวิชา" required>
+											<input type="text" id="" name="Subject_name" class="form-control" placeholder="ชื่อรายวิชาภาษาอังกฤษ" required>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="form-line">
+											<input type="text" id="" name="Subject_thai_name" class="form-control" placeholder="ชื่อรายวิชาภาษาไทย" required>
 										</div>
 									</div>
 									<div class="form-group">

@@ -53,7 +53,7 @@ class Config extends CI_Controller {
     {
         $this->load->model('CurrentSemester_Model');
         $this->load->model('Config_Model');
-        $this->load->model('Page2_Model');
+        $this->load->model('Subject_Model');
         $data = $this->input->post('data');
         // 
         $save = array(
@@ -109,7 +109,7 @@ class Config extends CI_Controller {
             'Semester_Stop' => $this->input->post('Semester_Stop')
         );
 
-        $this->load->model('Page2_Model');
+        $this->load->model('Subject_Model');
         $this->Subject_Model->insertSemester($data);
         $result = $this->Subject_Model->getSemester($data)[0];
 

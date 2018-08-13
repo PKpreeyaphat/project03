@@ -14,16 +14,17 @@ class InputData extends CI_Controller
     {
         $this->load->view('input_semester');
     }
-
+    
     public function insert()
     {
         $data = array(
             'Subject_id' => $this->input->post('Subject_id'),
             'Subject_name' => $this->input->post('Subject_name'),
+            'Subject_thai_name' => $this->input->post('Subject_thai_name'),
             'Subject_credit' => $this->input->post('Subject_credit')
         );
 
-        $this->load->model('Page2_Model');
+        $this->load->model('Subject_Model');
         $result = $this->Subject_Model->insertSubject($data);
 
         if($result){
