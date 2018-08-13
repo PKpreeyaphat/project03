@@ -33,6 +33,9 @@
 
     <style name="print">
     @media print { 
+        @page {
+            margin:0;
+        }
         body {
             -webkit-print-color-adjust: exact !important;
         }
