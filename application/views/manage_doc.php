@@ -30,6 +30,95 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="<?php echo base_url() ?>/css/themes/all-themes.css" rel="stylesheet" />
+
+    <style name="print">
+    @media print { 
+        body {
+            -webkit-print-color-adjust: exact !important;
+        }
+        .table thead tr th {
+            background-color: #00a968 !important;
+            color: white !important;
+        }
+        .table tbody tr th {
+            background-color: #A0A0A0 !important;
+            color: white !important;
+        }
+        .table  .white{
+            color: white !important;
+        }
+        .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > th, .table > caption + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > td, .table > thead:first-child > tr:first-child > td {
+            border-top: 0;
+        }
+        .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+            border: 1px solid #ddd;
+        }
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        .table-bordered {
+            border: 1px solid #ddd;
+        }
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+        .learn{
+            background-color: #C0D0FF !important;
+        }
+        .white{
+            color: white !important;
+        }
+    }
+    .table-doc > tbody > tr > td {
+        padding-right: 20px !important;
+    }
+    
+    .font-sarabun{
+        font-family: "TH Sarabun PSK";
+    }
+    body{
+        -webkit-print-color-adjust:exact;
+    }
+    .white{
+        color: white !important;
+    }
+    table.dataTable tbody>tr.selected,table.dataTable tbody>tr>.selected{background-color:#B0BED9}table.dataTable.stripe tbody>tr.odd.selected,table.dataTable.stripe tbody>tr.odd>.selected,table.dataTable.display tbody>tr.odd.selected,table.dataTable.display tbody>tr.odd>.selected{background-color:#acbad4}table.dataTable.hover tbody>tr.selected:hover,table.dataTable.hover tbody>tr>.selected:hover,table.dataTable.display tbody>tr.selected:hover,table.dataTable.display tbody>tr>.selected:hover{background-color:#aab7d1}table.dataTable.order-column tbody>tr.selected>.sorting_1,table.dataTable.order-column tbody>tr.selected>.sorting_2,table.dataTable.order-column tbody>tr.selected>.sorting_3,table.dataTable.order-column tbody>tr>.selected,table.dataTable.display tbody>tr.selected>.sorting_1,table.dataTable.display tbody>tr.selected>.sorting_2,table.dataTable.display tbody>tr.selected>.sorting_3,table.dataTable.display tbody>tr>.selected{background-color:#acbad5}table.dataTable.display tbody>tr.odd.selected>.sorting_1,table.dataTable.order-column.stripe tbody>tr.odd.selected>.sorting_1{background-color:#a6b4cd}table.dataTable.display tbody>tr.odd.selected>.sorting_2,table.dataTable.order-column.stripe tbody>tr.odd.selected>.sorting_2{background-color:#a8b5cf}table.dataTable.display tbody>tr.odd.selected>.sorting_3,table.dataTable.order-column.stripe tbody>tr.odd.selected>.sorting_3{background-color:#a9b7d1}table.dataTable.display tbody>tr.even.selected>.sorting_1,table.dataTable.order-column.stripe tbody>tr.even.selected>.sorting_1{background-color:#acbad5}table.dataTable.display tbody>tr.even.selected>.sorting_2,table.dataTable.order-column.stripe tbody>tr.even.selected>.sorting_2{background-color:#aebcd6}table.dataTable.display tbody>tr.even.selected>.sorting_3,table.dataTable.order-column.stripe tbody>tr.even.selected>.sorting_3{background-color:#afbdd8}table.dataTable.display tbody>tr.odd>.selected,table.dataTable.order-column.stripe tbody>tr.odd>.selected{background-color:#a6b4cd}table.dataTable.display tbody>tr.even>.selected,table.dataTable.order-column.stripe tbody>tr.even>.selected{background-color:#acbad5}table.dataTable.display tbody>tr.selected:hover>.sorting_1,table.dataTable.order-column.hover tbody>tr.selected:hover>.sorting_1{background-color:#a2aec7}table.dataTable.display tbody>tr.selected:hover>.sorting_2,table.dataTable.order-column.hover tbody>tr.selected:hover>.sorting_2{background-color:#a3b0c9}table.dataTable.display tbody>tr.selected:hover>.sorting_3,table.dataTable.order-column.hover tbody>tr.selected:hover>.sorting_3{background-color:#a5b2cb}table.dataTable.display tbody>tr:hover>.selected,table.dataTable.display tbody>tr>.selected:hover,table.dataTable.order-column.hover tbody>tr:hover>.selected,table.dataTable.order-column.hover tbody>tr>.selected:hover{background-color:#a2aec7}table.dataTable tbody td.select-checkbox,table.dataTable tbody th.select-checkbox{position:relative}table.dataTable tbody td.select-checkbox:before,table.dataTable tbody td.select-checkbox:after,table.dataTable tbody th.select-checkbox:before,table.dataTable tbody th.select-checkbox:after{display:block;position:absolute;top:1.2em;left:50%;width:12px;height:12px;box-sizing:border-box}table.dataTable tbody td.select-checkbox:before,table.dataTable tbody th.select-checkbox:before{content:' ';margin-top:-6px;margin-left:-6px;border:1px solid black;border-radius:3px}table.dataTable tr.selected td.select-checkbox:after,table.dataTable tr.selected th.select-checkbox:after{content:'\2714';margin-top:-11px;margin-left:-4px;text-align:center;text-shadow:1px 1px #B0BED9, -1px -1px #B0BED9, 1px -1px #B0BED9, -1px 1px #B0BED9}div.dataTables_wrapper span.select-info,div.dataTables_wrapper span.select-item{margin-left:0.5em}@media screen and (max-width: 640px){div.dataTables_wrapper span.select-info,div.dataTables_wrapper span.select-item{margin-left:0;display:block}}
+    table > thead > tr > th {
+        background-color: #00a968;
+        color: white;
+    }
+    table > tbody > tr > th{
+        background-color: #A0A0A0;
+        color: white;
+    }
+    #tb > tbody > tr > td {
+        cursor: pointer;
+    }
+    .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > th, .table > caption + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > td, .table > thead:first-child > tr:first-child > td {
+        border-top: 0;
+    }
+    .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+        border: 1px solid #ddd;
+    }
+    table {
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+    #page-doc p {
+        font-size: 14px;
+    }
+    .table {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    </style>
 </head>
 
 <body class="theme-maroon">
@@ -61,7 +150,7 @@
                                             <select class="form-control show-tick" id="subject">
                                             <option>———กรุณาเลือก———</option>
                                             <?php foreach ($subject as $x) { ?>
-                                                <option data-normal="<?=$x->GroupNomal?>" data-special="<?=$x->GroupSpecial?>" value="<?=$x->Subject_id?>"><?=$x->Subject_id.' '.$x->Subject_name?></option>
+                                                <option data-credit="<?=$x->Subject_credit?>" data-normal="<?=$x->GroupNomal?>" data-special="<?=$x->GroupSpecial?>" value="<?=$x->Subject_id?>"><?=$x->Subject_id.' '.$x->Subject_name?></option>
                                             <?php } ?>
                                             ?>
                                             </select>
@@ -101,7 +190,7 @@
                 <br>
                 <p><strong style="margin-right:2.5em;">เรียน</strong> คณบดีคณะวิทยาการสารสนเทศ</p>
                 <br>
-                <p style="text-indent: 4em;">ด้วยคณบดีวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา ได้เปิดสอนรายวิชา <span name="doc_subject"></span> จำนวน <span id="doc_credit"></span> ในภาคเรียนที่  <span name="doc_semester"></span>
+                <p style="text-indent: 4em;">ด้วยคณบดีวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา ได้เปิดสอนรายวิชา <span name="doc_subject"></span> <span id="doc_credit"></span> ในภาคเรียนที่  <span name="doc_semester"></span>
                 <span id="doc_normal"></span> <span id="doc_special"></span> ในการนี้สำนักงานจัดการศึกษา ขออนุมัติจ้างนิสิตช่วยงานห้องปฏิบัติการในรายวิชา <span name="doc_subject"></span> รายนามดังนี้
                 </p>
                 <center>
@@ -203,6 +292,26 @@
                 var data = {
                     Subject_id: $('#subject').val()
                 }
+                // doc
+                var doc_subject = toThainum($('#subject option:selected').text())
+                $('span[name=doc_subject]').html(doc_subject)
+                if($('#subject option:selected').data('normal')){
+                    var txt = 'ภาคปกติจำนวน '
+                    txt += toThainum(Number($('#subject option:selected').data('normal')).toLocaleString())
+                    txt += ' กลุ่ม'
+                    $('#doc_normal').html(txt)
+                }
+                if($('#subject option:selected').data('special')){
+                    var txt = 'ภาคพิเศษจำนวน '
+                    txt += toThainum(Number($('#subject option:selected').data('special')).toLocaleString())
+                    txt += ' กลุ่ม'
+                    $('#doc_special').html(txt)                    
+                }
+                if($('#subject option:selected').data('credit')){
+                    var txt = 'จำนวน '
+                    txt += toThainum($('#subject option:selected').data('credit'))
+                    $('#doc_credit').html(txt)                    
+                }
                 $.post('<?=base_url()?>index.php/table/loadStudentWork', {data: data}, function(res){
                     res = JSON.parse(res)
                     loadtopdf(res)
@@ -254,12 +363,12 @@
 
             var pdf = function(){
                 var mywindow = window.open('', 'new div', 'height=400,width=600');
-                mywindow.document.write('<html><head><title></title>');
+                mywindow.document.write('<html><head><title></title><meta charset="UTF-8">');
                 mywindow.document.write('<style>'+$('style[name=print]').html()+ '</style><style type="text/css" media="print"></style>');
                 mywindow.document.write('<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">')
                 mywindow.document.write('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">')
                 mywindow.document.write('<link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">')
-                mywindow.document.write('</head><body onload="window.print();window.close();">');
+                mywindow.document.write('</head><body onload="window.print();">');
                 mywindow.document.write($('#doc').html());
                 mywindow.document.write('</body></html>');
                 mywindow.document.close();
