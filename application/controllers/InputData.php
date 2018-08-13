@@ -21,7 +21,8 @@ class InputData extends CI_Controller
             'Subject_id' => $this->input->post('Subject_id'),
             'Subject_name' => $this->input->post('Subject_name'),
             'Subject_thai_name' => $this->input->post('Subject_thai_name'),
-            'Subject_credit' => $this->input->post('Subject_credit')
+            'Subject_credit' => $this->input->post('Subject_credit'),
+            'Subject_amount' => $this->input->post('Subject_amount')
         );
 
         $this->load->model('Subject_Model');

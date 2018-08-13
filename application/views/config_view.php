@@ -203,21 +203,6 @@
 																</div>
 															</div>
 														</div>
-														<div class="col-lg-4">
-															<div class="form-group">
-																<label>
-																	<b>ค่าตอบแทน :</b>
-																</label>
-															</div>
-														</div>
-														<div class="col-lg-8">
-															<div class="form-group">
-																<div class="form-line">
-																	<input type="number" value="<?=(isset($semester))? $semester->Amount : 0 ?>" id="" name="Amount" class="form-control" placeholder=""
-																	required>
-																</div>
-															</div>
-														</div>
 														<div class="col-xs-12 col-sm-6">
 															<button type="button" name="btnsave_configdoc" class="btn btn-success m-t-15 waves-effect">บันทึก</button>
 														</div>
@@ -293,8 +278,7 @@
 			$('button[name=btnsave_configdoc]').click(function () {
 				var data = {
 					vice_president: $('input[name=vice_president]').val(),
-					president: $('input[name=president]').val(),
-					Amount: $('input[name=Amount]').val()
+					president: $('input[name=president]').val()
 				}
 				$.post('<?php echo base_url();?>index.php/Config/saveConfigDoc', {
 					data: data
@@ -328,8 +312,7 @@
 					Semester_Name: $('select[name=Semester_Name]').val(),
 					Semester_Year: $('input[name=Semester_Year]').val(),
 					Semester_Start: $('input[name=Semester_Start]').val(),
-					Semester_Stop: $('input[name=Semester_Stop]').val(),
-					Amount: $('input[name=Amount]').val()
+					Semester_Stop: $('input[name=Semester_Stop]').val()
 				}, function (res) {
 					swal({
 							title: "บันทึกสำเร็จ!",

@@ -412,7 +412,7 @@
 												<select class="form-control show-tick" id="subject">
 													<option>———กรุณาเลือก———</option>
 													<?php foreach ($subject as $x) { ?>
-													<option data-credit="<?=$x->Subject_credit?>" data-normal="<?=$x->GroupNomal?>" data-thainame="<?=$x->Subject_id.' '.$x->Subject_thai_name?>" data-special="<?=$x->GroupSpecial?>" value="<?=$x->Subject_id?>">
+													<option data-amount="<?=$x->Subject_amount?>" data-credit="<?=$x->Subject_credit?>" data-normal="<?=$x->GroupNomal?>" data-thainame="<?=$x->Subject_id.' '.$x->Subject_thai_name?>" data-special="<?=$x->GroupSpecial?>" value="<?=$x->Subject_id?>">
 														<?=$x->Subject_id.' '.$x->Subject_name?>
 													</option>
 													<?php } ?> ?>
@@ -572,13 +572,8 @@
 				"ตุลาคม", "พฤศจิกายน", "ธันวาคม"
 			]
 			var semester = JSON.parse('<?=json_encode($semester)?>')
-			semester.thaibath = ArabicNumberToText(semester.Amount)
-			semester.Amount = toThainum(Number(semester.Amount).toLocaleString(undefined, {
-				minimumFractionDigits: 2
-			}))
 			semester.txt = toThainum(semester.Semester_Name + '/' + semester.Semester_Year)
 			$('span[name=doc_semester]').html(semester.txt)
-			$('#doc_amount').html(semester.Amount + ' บาท (' + semester.thaibath + ')')
 			$('#doc_date').html(day + ' ' + monthThai[month] + ' พ.ศ. ' + year)
 
 			var loadWork = function () {
@@ -606,6 +601,14 @@
 					var txt = 'จำนวน '
 					txt += toThainum($('#subject option:selected').data('credit')) + ' หน่วยกิต'
 					$('#doc_credit').html(txt)
+				}
+				if ($('#subject option:selected').data('amount')) {
+					var amount_val = $('#subject option:selected').data('amount')
+					var thaibath = ArabicNumberToText(amount_val)
+					var Amount = toThainum(Number(amount_val).toLocaleString(undefined, {
+						minimumFractionDigits: 2
+					}))
+					$('#doc_amount').html(Amount + ' บาท (' + thaibath + ')')
 				}
 				$.post('<?=base_url()?>index.php/table/loadStudentWork', {
 					data: data
@@ -659,7 +662,6 @@
 					}
 				}
 				html = html_r.join('')
-                console.log(html);
 				$('#tbody-doc').html(html)
                 $('button[name=btnpdf]').prop('disabled', false)
 			}
@@ -669,12 +671,6 @@
 				mywindow.document.write('<html><head><title></title><meta charset="UTF-8">');
 				mywindow.document.write('<style>' + $('style[name=print]').html() +
 					'</style><style type="text/css" media="print"></style>');
-				mywindow.document.write(
-					'<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">'
-				)
-				mywindow.document.write(
-					'<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">')
-				mywindow.document.write('<link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">')
 				mywindow.document.write('</head><body onload="window.print();window.close();">');
 				mywindow.document.write($('#doc').html());
 				mywindow.document.write('</body></html>');

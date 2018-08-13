@@ -74,8 +74,7 @@ class Config extends CI_Controller {
         $semester = $this->CurrentSemester_Model->getSemester();
         $save = array(
             'Semester_Name' => $semester->Semester_Name,
-            'Semester_Year'=> $semester->Semester_Year,
-            'Amount' => $data['Amount']
+            'Semester_Year'=> $semester->Semester_Year
         );
         $this->Subject_Model->insertSemester($save);
     }

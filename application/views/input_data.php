@@ -72,6 +72,11 @@
 											<input type="text" id="" name="Subject_credit" class="form-control" placeholder="3 (2-2-5)" required>
 										</div>
 									</div>
+									<div class="form-group">
+										<div class="form-line">
+											<input type="text" id="" name="Subject_amount" class="form-control" placeholder="ค่าตอบแทนทั้งหมด" required>
+										</div>
+									</div>
 									<button type="submit" class="btn btn-success m-t-15 waves-effect">บันทึก</button>
 									<a href="<?php echo base_url();?>index.php/InputData/goBack"><button type="button" class="btn btn-danger m-t-15 waves-effect">กลับ</button></a>
 								</form>

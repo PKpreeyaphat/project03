@@ -39,6 +39,7 @@
     <style name="print">
     @media print { 
         body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             -webkit-print-color-adjust: exact !important;
         }
         .table thead tr th {
@@ -340,44 +341,6 @@
         })()
 
         $(function(){
-            var toThainum = function(num){
-                var thainum = 
-                {
-                    '1': '๑',
-                    '2': '๒',
-                    '3': '๓',
-                    '4': '๔',
-                    '5': '๕',
-                    '6': '๖',
-                    '7': '๗',
-                    '8': '๘',
-                    '9': '๙',
-                    '0': '๐'}
-                var result = ''
-                num = num + ''
-                for(var i in num){
-                    if(thainum[num[i]]){
-                        result += thainum[num[i]]
-                    }
-                    else{
-                        result += num[i]
-                    }
-                }
-                return result
-            }
-            var year = toThainum(<?=$year?> + 543)
-            var month = Number('<?=$month?>') - 1
-            var day = toThainum('<?=$day?>')
-            var monthThai = ["มกราคม","กุมภาพันธ์","มีนาคม",
-                "เมษายน","พฤษภาคม","มิถุนายน", "กรกฎาคม","สิงหาคม","กันยายน",
-                "ตุลาคม","พฤศจิกายน","ธันวาคม"]
-            var semester = JSON.parse('<?=json_encode($semester)?>')
-            semester.thaibath = ArabicNumberToText(semester.Amount)
-            semester.Amount = toThainum(Number(semester.Amount).toLocaleString(undefined, {minimumFractionDigits: 2}))
-            semester.txt = toThainum(semester.Semester_Name + '/' + semester.Semester_Year)
-           $('span[name=doc_semester]').html(semester.txt)
-           $('#doc_amount').html(semester.Amount + ' บาท (' + semester.thaibath +')')
-           $('#doc_date').html(day +' ' + monthThai[month] + ' พ.ศ. '+ year)
             var time = {
                 1:{}, 
                 2:{},
@@ -565,11 +528,10 @@
 
             $('button[name=btnprint]').click(function(){
                 var mywindow = window.open('', 'new div', 'height=400,width=600');
-                mywindow.document.write('<html><head><title></title>');
+                mywindow.document.write('<html><head><meta charset="UTF-8"><title></title>');
                 mywindow.document.write('<style>'+$('style[name=print]').html()+ '</style><style type="text/css" media="print">@page { size: landscape; }</style>');
                 mywindow.document.write('<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">')
                 mywindow.document.write('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">')
-                mywindow.document.write('<link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">')
                 mywindow.document.write('</head><body onload="window.print();window.close();">');
                 mywindow.document.write($('.body.table-responsive').html());
                 mywindow.document.write('</body></html>');
@@ -630,11 +592,10 @@
                 }
                 $('#tbody_report').html(html)
                 var mywindow = window.open('', 'new div', 'height=400,width=600');
-                mywindow.document.write('<html><head><title></title>');
+                mywindow.document.write('<html><meta charset="UTF-8"><head><title></title>');
                 mywindow.document.write('<style>'+$('style[name=print]').html()+ '</style><style type="text/css" media="print">@page { size: landscape; }</style>');
                 mywindow.document.write('<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">')
                 mywindow.document.write('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">')
-                mywindow.document.write('<link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">')
                 mywindow.document.write('</head><body onload="window.print();window.close();">');
                 mywindow.document.write('<table class="table table-bordered">'+$('#tb_report').html() + '</table>');
                 mywindow.document.write('</body></html>');
@@ -649,82 +610,10 @@
                 $('#subject').trigger('change')
             })
 
-            $('button[name=btnpdf]').click(function(){
-                var data = {
-                    Subject_id: $('#subject').val()
-                }
-                pdf()
-                
-            })
-
-            var loadtopdf = function(res){
-                var dict_stu = {}
-                var html = ''
-                var html_r = []
-                var count = 0
-                var count_ = 0
-                for(var i in res){
-                    if(!dict_stu[res[i].Student_id]){
-                        dict_stu[res[i].Student_id] = true
-                        count++
-                    }
-                }
-                dict_stu = []
-                for(var i in res){
-                    if(!dict_stu[res[i].Student_id]){
-                        count_++
-                        html_r.push('<td>'+toThainum(Number(i) + 1)+'. <span style="margin-left:0.5em;">'+toThainum(res[i].Student_id)+' '+res[i].Student_firstname+' '+res[i].Student_lastname+'<span></td>')
-                        dict_stu[res[i].Student_id] = true
-                        if(count_ == Math.round(count / 2)){
-                            break
-                        }
-                    }
-                }
-                count_ = 0
-                for(var i in res){
-                    if(!dict_stu[res[i].Student_id]){
-                        count_++
-                        html_r[count_] = '<tr>' + html_r[count_] + '<td>'+toThainum(Number(i) + 1)+'. <span style="margin-left:0.5em;">'+toThainum(res[i].Student_id)+' '+res[i].Student_firstname+' '+res[i].Student_lastname+'<span></td></tr>'
-                        dict_stu[res[i].Student_id] = true
-                    }
-                }
-                html = html_r.join('')
-                $('#tbody-doc').html(html)
-            }
-
-            var pdf = function(){
-                var mywindow = window.open('', 'new div', 'height=400,width=600');
-                mywindow.document.write('<html><head><title></title>');
-                mywindow.document.write('<style>'+$('style[name=print]').html()+ '</style><style type="text/css" media="print"></style>');
-                mywindow.document.write('<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">')
-                mywindow.document.write('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">')
-                mywindow.document.write('<link href="<?php echo base_url() ?>/css/style.css" rel="stylesheet">')
-                mywindow.document.write('</head><body onload="window.print();window.close();">');
-                mywindow.document.write($('#doc').html());
-                mywindow.document.write('</body></html>');
-                mywindow.document.close();
-                mywindow.focus();
-            }
-
             $('#subject').change(function(){
                 resetTime(student = false)
                 var data = {
                     id: $(this).val()
-                }
-                // doc
-                var doc_subject = toThainum($('#subject option:selected').text())
-                $('span[name=doc_subject]').html(doc_subject)
-                if($('#subject option:selected').data('normal')){
-                    var txt = 'ภาคปกติจำนวน '
-                    txt += toThainum(Number($('#subject option:selected').data('normal')).toLocaleString())
-                    txt += ' กลุ่ม'
-                    $('#doc_normal').html(txt)
-                }
-                if($('#subject option:selected').data('special')){
-                    var txt = 'ภาคพิเศษจำนวน '
-                    txt += toThainum(Number($('#subject option:selected').data('special')).toLocaleString())
-                    txt += ' กลุ่ม'
-                    $('#doc_special').html(txt)                    
                 }
                 $.post('table/loadRoom', {data: data}, function(res){
                     res = JSON.parse(res)
