@@ -48,7 +48,7 @@
 							<div class="header">
 								<div class="row clearfix">
 									<div class="col-xs-12 col-sm-6">
-										<h2> ห้องปฏิบัติการ</h2>
+										<h2>ห้องปฏิบัติการปีการศึกษา <?=($semester != null) ? $semester->Semester_Year : "" ?> ภาคเรียนที่ <?=($semester != null) ? $semester->Semester_Name : "" ?></h2>
 									</div>
 									<div class="col-xs-12 col-sm-6 align-right">
 										<button type="button" class="btn btn-success waves-effect m-r-20" data-toggle="modal" data-target="#addRoomModal">เพิ่มห้องปฏิบัติการ</button>

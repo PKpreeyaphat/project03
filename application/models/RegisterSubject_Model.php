@@ -32,6 +32,16 @@ class RegisterSubject_Model extends CI_Model
         return $query->result(); 
     }
 
+
+    public function getQtyStudent($data)
+    {
+        $this->db->where('Subject_id', $data['Subject_id']);
+        $this->db->where('Semester_ID', $data['Semester_ID']);
+        $this->db->where('Degree', $data['Degree']);
+        $query = $this->db->get('RegisterSubject');
+        return $query->result(); 
+    }
+
     public function deleteAllRegisterSubject()
     {
         $this->db->query("DELETE FROM RegisterSubject WHERE 1");

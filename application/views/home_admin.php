@@ -46,7 +46,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2> รายชื่อนิสิตผู้ช่วยสอน</h2>
+                            <h2> รายชื่อนิสิตผู้ช่วยสอนปีการศึกษา <?=($semester != null) ? $semester->Semester_Year : "" ?> ภาคเรียนที่ <?=($semester != null) ? $semester->Semester_Name : "" ?></h2>
                         </div>
                         <div class="body">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

@@ -9,6 +9,13 @@ class ImportStudent extends CI_Controller
     {
         $this->load->model('AllSubject_Model');
         $this->load->model('Semester_Model');
+        $this->load->model('CurrentSemester_Model');
+        $Semester = $this->CurrentSemester_Model->getSemester();
+        if ($Semester != null) {
+            $data['currentSemester'] = $Semester;
+        } else {
+            $data['currentSemester'] = null;
+        }
         $data['subject'] = $this->AllSubject_Model->getSubject();
         $data['semester'] = $this->Semester_Model->getAllSemester();
         $this->load->view('import_student', $data);

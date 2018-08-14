@@ -79,10 +79,24 @@ class Config extends CI_Controller {
         $this->Subject_Model->insertSemester($save);
     }
 
-    public function getAmountBySubjectID($id)
+    public function getQtyTA($subject)
     {
-        $this->load->model('Subject_Model');
-        echo $this->Subject_Model->getSubjectById($id)[0]->Subject_amount;
+        $this->load->model('CurrentSemester_Model');
+        $this->load->model('RegisterSubject_Model');
+        $data1 = array(
+            'Subject_id' => $subject,
+            'Semester_ID' => $semester = $this->CurrentSemester_Model->getSemester()->Semester_ID,
+            'Degree' => "ตรี",
+        );
+        $data2 = array(
+            'Subject_id' => $subject,
+            'Semester_ID' => $semester = $this->CurrentSemester_Model->getSemester()->Semester_ID,
+            'Degree' => "โท",
+        );
+        $result1 = $this->RegisterSubject_Model->getQtyStudent($data1);
+        $result2 = $this->RegisterSubject_Model->getQtyStudent($data2);
+        $json = array('qtyTA1' => count($result1), 'qtyTA2' => count($result2));
+        echo json_encode($json);
     }
 
     public function updateSubjectAmount($subject, $amount)

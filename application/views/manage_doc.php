@@ -404,7 +404,7 @@
 						<div class="card">
 							<div class="header">
 								<h2>
-									จัดการเอกสาร
+									จัดการเอกสารปีการศึกษา <?=($semester != null) ? $semester->Semester_Year : "" ?> ภาคเรียนที่ <?=($semester != null) ? $semester->Semester_Name : "" ?>
 								</h2>
 							</div>
 							<div class="body">
@@ -630,10 +630,25 @@
 			}
 
 			var loadAmount = function () {
-				$.get('<?=base_url()?>index.php/Config/getAmountBySubjectID/' + $('#subject').val(), 
-				function (res) {
-					$('input[name=Subject_amount]').val(res);
-				})
+					var qtyTA1 = 0
+					var qtyTA2 = 0
+
+					jQuery.ajax({
+						url: '<?=base_url()?>index.php/Config/getQtyTA/' + $('#subject').val(),
+						success: function(res) {
+							data = JSON.parse(res);
+							qtyTA1 = data.qtyTA1;
+							qtyTA2 = data.qtyTA2;
+						},
+						async:false
+					});
+
+					console.log(qtyTA1)
+					console.log(qtyTA2)
+
+					var qtySection = $('#subject option:selected').data('normal') + $('#subject option:selected').data('special')
+					var calcAmount = (((qtyTA1 *45) + (qtyTA2 * 90))*30)*qtySection
+					$('input[name=Subject_amount]').val(calcAmount);
 			}
 
 			var updateAmount = function () {

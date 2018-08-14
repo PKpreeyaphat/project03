@@ -144,7 +144,7 @@
                             <div class="row clearfix">
                                 
                                 <div class="col-lg-12 m-b-20">
-                                    <h2>ตารางการทำงาน TA</h2>
+                                    <h2>ตารางการทำงาน TA ปีการศึกษา <?=($semester != null) ? $semester->Semester_Year : "" ?> ภาคเรียนที่ <?=($semester != null) ? $semester->Semester_Name : "" ?></h2>
                                 </div>
 
                                 <div class="col-md-5">

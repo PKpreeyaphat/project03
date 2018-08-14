@@ -67,7 +67,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="header">
-                            <h2>จัดตารางการทำงาน TA</h2>
+                            <h2>จัดตารางการทำงาน TA ปีการศึกษา <?=($semester != null) ? $semester->Semester_Year : "" ?> ภาคเรียนที่ <?=($semester != null) ? $semester->Semester_Name : "" ?></h2>
                         </div>
                         <br>
                         <div class="container-fluid">

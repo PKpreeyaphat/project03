@@ -48,7 +48,7 @@
 							<div class="header">
 								<div class="row clearfix">
 									<div class="col-xs-12 col-sm-6">
-										<h2>รายวิชาทั้งหมด</h2>
+										<h2>รายวิชาทั้งหมดปีการศึกษา <?=($semester != null) ? $semester->Semester_Year : "" ?> ภาคเรียนที่ <?=($semester != null) ? $semester->Semester_Name : "" ?></h2>
 									</div>
 									<div class="col-xs-12 col-sm-6 align-right">
 										<a href="<?php echo base_url(); ?>index.php/InputData">

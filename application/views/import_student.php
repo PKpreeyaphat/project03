@@ -49,7 +49,7 @@
 							<div class="header">
 								<div class="row clearfix">
 									<div class="col-xs-12 col-sm-6">
-										<h2> รายชื่อนิสิตผู้ช่วยสอน </h2>
+										<h2> รายชื่อนิสิตผู้ช่วยสอนปีการศึกษา <?=($semester != null) ? $currentSemester->Semester_Year : "" ?> ภาคเรียนที่ <?=($semester != null) ? $currentSemester->Semester_Name : "" ?></h2>
 									</div>
 								</div>
 							</div>

@@ -9,7 +9,13 @@ class Table extends CI_Controller {
     {
 		$this->load->model("Table_Model");
 		$this->load->model('AllSubject_Model');
-		
+		$this->load->model('CurrentSemester_Model');
+        $Semester = $this->CurrentSemester_Model->getSemester();
+        if ($Semester != null) {
+            $data['semester'] = $Semester;
+        } else {
+            $data['semester'] = null;
+        }
         $data['subject'] = $this->AllSubject_Model->getSubject();
     	$data['getRoom'] = $this->Table_Model->getRoom();
         $this->load->view('table_data',$data);

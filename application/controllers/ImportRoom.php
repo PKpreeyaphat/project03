@@ -9,6 +9,13 @@ class ImportRoom extends CI_Controller
     public function index()
     {
         $this->load->model('Room_Model');
+        $this->load->model('CurrentSemester_Model');
+        $Semester = $this->CurrentSemester_Model->getSemester();
+        if ($Semester != null) {
+            $data['semester'] = $Semester;
+        } else {
+            $data['semester'] = null;
+        }
         $data['room'] = $this->Room_Model->getAllRoom();
         $this->load->view('import_room', $data);
     }
