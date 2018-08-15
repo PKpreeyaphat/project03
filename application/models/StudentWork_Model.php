@@ -55,6 +55,7 @@ class StudentWork_Model extends CI_Model {
         $this->db->join('Room', 'Room.Room_id = Section.Room_id');
         $this->db->join('Student', 'Student.Student_id = StudentWork_tmp.Student_id');
         $this->db->where('Section.Subject_id', $data['Subject_id']);
+        $this->db->where('Section.Semester_ID', $data['Semester_ID']);
         $res = $this->db->get('StudentWork_tmp');
         return $res->result();
     }
@@ -66,6 +67,7 @@ class StudentWork_Model extends CI_Model {
         $this->db->join('Room', 'Room.Room_id = Section.Room_id');
         $this->db->join('Student', 'Student.Student_id = StudentWork.sw_Student_id');
         $this->db->where('Section.Subject_id', $data['Subject_id']);
+        $this->db->where('Section.Semester_ID', $data['Semester_ID']);
         $res = $this->db->get('StudentWork');
         return $res->result();
     }

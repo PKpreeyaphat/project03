@@ -32,7 +32,11 @@ class Table extends CI_Controller {
 	public function loadStudentWork_tmp()
 	{
 		$this->load->model('StudentWork_Model');
+		$this->load->model('CurrentSemester_Model');
 		$data = $this->input->post('data');
+		if(!isset($data['Semester_ID'])){
+			$data['Semester_ID'] = $this->CurrentSemester_Model->getSemester_ID();
+		}
 		$rs = $this->StudentWork_Model->getWork_tmp($data);
 		echo json_encode($rs);
 	}
@@ -40,7 +44,11 @@ class Table extends CI_Controller {
 	public function loadStudentWork()
 	{
 		$this->load->model('StudentWork_Model');
+		$this->load->model('CurrentSemester_Model');
 		$data = $this->input->post('data');
+		if(!isset($data['Semester_ID'])){
+			$data['Semester_ID'] = $this->CurrentSemester_Model->getSemester_ID();
+		}
 		$rs = $this->StudentWork_Model->getWork($data);
 		echo json_encode($rs);
 	}
