@@ -594,6 +594,10 @@
 				}
 				$('button[name=btnpdf]').prop('disabled', true)
 				// doc
+				$('#doc_credit').html('')
+				$('#doc_special').html('')
+				$('#doc_normal').html('')
+				$('#doc_amount').html('')
 				var doc_subject = toThainum($('#subject option:selected').data('thainame'));
 				$('span[name=doc_subject]').html(doc_subject)
 				if ($('#subject option:selected').data('normal')) {
