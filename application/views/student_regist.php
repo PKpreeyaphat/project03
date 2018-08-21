@@ -82,7 +82,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" id="" value="<?=(isset($student))? $student->Grade : ''?>" name="Student_grade" class="form-control" placeholder="เกรดเฉลี่ยรายวิชา">
+                                        <input type="text" id="" value="<?=(isset($student))? $student->Grade : ''?>" name="Student_grade" class="form-control" placeholder="เกรดรายวิชา">
                                     </div>
                                 </div>
                             </div>
@@ -97,8 +97,8 @@
                                 <div class="form-group">
                                     <div class="form-line">
                                         <select class="form-control" name="Degree">
-                                            <option value="ตรี" <?=(isset($student) && $student->Degree == 'ตรี')? 'selected' : ''?>>ป.ตรี</option>
-                                            <option value="โท" <?=(isset($student) && $student->Degree == 'โท')? 'selected' : ''?>>ป.โท</option>
+                                            <option value="1" <?=(isset($student) && $student->Degree == '1')? 'selected' : ''?>>ป.ตรี</option>
+                                            <option value="2" <?=(isset($student) && $student->Degree == '2')? 'selected' : ''?>>ป.โท</option>
                                         </select>
                                     </div>
                                 </div>

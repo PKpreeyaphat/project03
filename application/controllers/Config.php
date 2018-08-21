@@ -80,24 +80,27 @@ class Config extends CI_Controller {
     }
 
     public function getQtyTA($subject)
-    {
-        $this->load->model('CurrentSemester_Model');
-        $this->load->model('RegisterSubject_Model');
+	{
+		$this->load->model('StudentWork_Model');
+		$this->load->model('CurrentSemester_Model');
         $data1 = array(
             'Subject_id' => $subject,
             'Semester_ID' => $semester = $this->CurrentSemester_Model->getSemester()->Semester_ID,
-            'Degree' => "ตรี",
+            'Degree' => "1",
         );
         $data2 = array(
             'Subject_id' => $subject,
             'Semester_ID' => $semester = $this->CurrentSemester_Model->getSemester()->Semester_ID,
-            'Degree' => "โท",
+            'Degree' => "2",
         );
-        $result1 = $this->RegisterSubject_Model->getQtyStudent($data1);
-        $result2 = $this->RegisterSubject_Model->getQtyStudent($data2);
-        $json = array('qtyTA1' => count($result1), 'qtyTA2' => count($result2));
-        echo json_encode($json);
-    }
+		if(!isset($data['Semester_ID'])){
+			$data['Semester_ID'] = $this->CurrentSemester_Model->getSemester_ID();
+		}
+        $result1 = $this->StudentWork_Model->countWork($data1);
+        $result2 = $this->StudentWork_Model->countWork($data2);
+        $json = array('qtyTA1' => $result1, 'qtyTA2' => $result2);
+		echo json_encode($json);
+	}
 
     public function updateSubjectAmount($subject, $amount)
     {
