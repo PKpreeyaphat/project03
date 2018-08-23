@@ -66,8 +66,11 @@ class StudentWork_Model extends CI_Model {
                     Section.Subject_id = sw_Subject_id');
         $this->db->join('Room', 'Room.Room_id = Section.Room_id');
         $this->db->join('Student', 'Student.Student_id = StudentWork.sw_Student_id');
+        $this->db->join('RegisterSubject', 'RegisterSubject.Student_id = Student.Student_id AND 
+                    RegisterSubject.Subject_id = sw_Subject_id AND RegisterSubject.Semester_ID = Section.Semester_ID');
         $this->db->where('Section.Subject_id', $data['Subject_id']);
         $this->db->where('Section.Semester_ID', $data['Semester_ID']);
+        $this->db->where('RegisterSubject.Degree', $data['Degree']);
         $res = $this->db->get('StudentWork');
         return $res->result();
     }

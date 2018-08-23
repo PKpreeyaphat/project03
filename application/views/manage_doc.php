@@ -603,7 +603,8 @@
 
 			var loadWork = function () {
 				var data = {
-					Subject_id: $('#subject').val()
+					Subject_id: $('#subject').val(),
+					Degree: $('select[name=Degree]').val()
 				}
 				$('button[name=btnpdf]').prop('disabled', true)
 				// doc
