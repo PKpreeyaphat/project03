@@ -74,13 +74,9 @@ class StudentWork_Model extends CI_Model {
 
     public function countWork($data)
     {
-        $this->db->join('Section', 'Section.Section_id = sw_Section_id AND 
-                    Section.Subject_id = sw_Subject_id');
-        $this->db->join('Room', 'Room.Room_id = Section.Room_id');
-        $this->db->join('Student', 'Student.Student_id = StudentWork.sw_Student_id');
-        $this->db->join('RegisterSubject', 'RegisterSubject.Student_id = StudentWork.sw_Student_id');
-        $this->db->where('Section.Subject_id', $data['Subject_id']);
-        $this->db->where('Section.Semester_ID', $data['Semester_ID']);
+        $this->db->join('RegisterSubject', 'RegisterSubject.Student_id = sw_Student_id');
+        $this->db->where('RegisterSubject.Subject_id', $data['Subject_id']);
+        $this->db->where('RegisterSubject.Semester_ID', $data['Semester_ID']);
         $this->db->where('RegisterSubject.Degree', $data['Degree']);
         $res = $this->db->get('StudentWork');
         return count($res->result());

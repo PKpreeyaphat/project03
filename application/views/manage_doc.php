@@ -427,6 +427,19 @@
 											</div>
 											<div class="col-md-5">
 												<p>
+													<b>ระดับการศึกษา :</b>
+												</p>
+												<div class="form-group">
+													<div class="form-line">
+														<select class="form-control" name="Degree">
+															<option value="1">ป.ตรี</option>
+															<option value="2">ป.โท</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-5">
+												<p>
 													<b>ค่าตอบแทนทั้งหมด :</b>
 												</p>
 												<div class="form-group">
@@ -647,18 +660,28 @@
 						async:false
 					});
 
-					console.log(qtyTA1)
-					console.log(qtyTA2)
+					console.log(qtyTA1);
+					console.log(qtyTA2);
 
-					var qtySection = $('#subject option:selected').data('normal') + $('#subject option:selected').data('special')
-					var calcAmount = (((qtyTA1 *45) + (qtyTA2 * 90))*30)*qtySection
-					$('input[name=Subject_amount]').val(calcAmount);
+					var degree = $('select[name=Degree] option:selected').val();
+					if(degree == 1) {
+						var calcAmountTA1 = (qtyTA1 * 45) * 30;
+						$('input[name=Subject_amount]').val(calcAmountTA1);
+					} else if (degree == 2) {
+						var calcAmountTA2 = (qtyTA2 * 90) * 30;
+						$('input[name=Subject_amount]').val(calcAmountTA2);
+					}
 			}
 
 			var updateAmount = function () {
 				$.get('<?=base_url()?>index.php/Config/updateSubjectAmount/' + $('#subject').val() + '/' + $('input[name=Subject_amount]').val(), 
 				function (res) { })
 			}
+
+			$('select[name=Degree]').change(function () {
+				loadWork()
+				loadAmount()
+			})
 
 			$('#subject').change(function () {
 				loadWork()
