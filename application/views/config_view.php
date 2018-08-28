@@ -229,6 +229,14 @@
 				<div class="modal-body">
 					<input type="file" id="file" name="file" class="form-control" placeholder="">
 					<p id="msg"></p>
+					<hr>
+					<div class="form-group">
+						<h5>ตัวอย่างไฟล์</h5>
+						<h6>**ต้องใช้ CSV UTF-8 (Comma delimited)(*.csv) เป็นนามสกุลไฟล์</h6>
+						<div class="images">
+							<img src="<?php echo base_url() ?>/images/student.PNG" width="70%" hight="" alt="subject" />
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="submit" id="upload" class="btn btn-success waves-effect">UPLOAD</button>
