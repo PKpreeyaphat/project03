@@ -225,6 +225,8 @@
     <!-- Waves Effect Plugin Js -->
     <script src="<?php echo base_url() ?>/plugins/node-waves/waves.js"></script>
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     <!-- Sweet Alert Plugin Js -->
     <script src="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.min.js"></script>
 
