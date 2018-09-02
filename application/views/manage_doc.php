@@ -380,6 +380,10 @@
 			font-size: 14px;
 		}
 
+		#page-word p {
+			font-size: 14px;
+		}
+
 		.table {
 			width: 100%;
 			max-width: 100%;
@@ -457,7 +461,6 @@
 													<p></p>
 													<button type="button" name="btnword" class="btn btn-sm btn-default m-t-20 waves-effect">ใบบันทึกข้อความ MS Word</button>
 												</div>
-	<canvas id="can"></canvas>
 											</div>
 										</div>
 									</div>
@@ -468,6 +471,83 @@
 				</div>
 			</div>
 		</section>
+	</div>
+
+	<div id="word" style="display: none;width: 29.7cm;height: 21cm;">
+		<div id="page-word" style="word-wrap: break-word;margin-top:4em;margin-left:7em;margin-right:4em;" class="container font-sarabun">
+			<div class="row">
+				<div style="width: 20%; display: inline;">
+					<img id="img_buu" style="width: 80px; height: 80px;" src="<?php echo base_url() ?>LogoBuuThai.png">
+				</div>
+				<div style="width: 60%;text-align: center;font-weight: bold;font-size: 18px;display: inline-block;vertical-align: bottom;">
+					<span>บันทึกข้อความ</span>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 20px;">
+				<p>
+					<strong style="margin-right:1em;">ส่วนงาน</strong> คณะวิทยาการสารสนเทศ สำนักงานจัดการศึกษา โทร ๓๐๙๖</p>
+				<p>
+					<strong>ที่</strong> ศธ ๖๓๑๓.๒/๕๖๖
+					<strong style="margin-left:15em;">วันที่</strong>
+					<span name="doc_date"></span>
+				</p>
+				<p style="margin-bottom: 15px;">
+					<strong style="margin-right:1.5em;">เรื่อง</strong> ขออนุมัติในหลักการค่าตอบแทนนิสิตระดับปริญญาตรีช่วยปฏิบัติงาน</p>
+				<p style="margin-bottom: 15px;">
+					<strong style="margin-right:1.5em;">เรียน</strong> คณบดีคณะวิทยาการสารสนเทศ</p>
+				<p style="text-indent: 2em;">ด้วยคณะวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา ได้เปิดสอนรายวิชา
+					<span name="doc_subject"></span>
+					<span name="doc_credit"></span> ในภาคเรียนที่
+					<span name="doc_semester"></span>
+					<span name="doc_normal"></span>
+					<span name="doc_special"></span> ในการนี้สำนักงานจัดการศึกษา ขออนุมัติจ้างนิสิตช่วยงานห้องปฏิบัติการในรายวิชา
+					<span name="doc_subject"></span> รายนามดังนี้
+				</p>
+				<center>
+					<table class="table-doc">
+						<tbody name="tbody-doc">
+						</tbody>
+					</table>
+				</center>
+				<p>โดยปฏิบัติงานในภาคเรียนที่
+					<span name="doc_semester"></span> เพื่อช่วยงานสอนของอาจารย์ในชั่งโมงปฏิบัติการ สำหรับหมวดวิชาศึกษาทั่วไปรายวิชา
+					<span name="doc_subject"></span> ของคณะวิทยาการสารสนเทศ</p>
+				<br>
+				<p style="text-indent: 2em;">จึงเรียนมาเพื่อโปรดพิจารณาอนุมัติในหลักการ การปฏิบัติงานของนิสิตช่วยงาน โดยมีสิทธิเบิกค่าตอบแทนจำนวนเงิน
+					<span name="doc_amount"></span> โดยเบิกจากเงินรายได้ แผนกงานจัดการศึกษาอุดมศึกษา งานจัดการศึกษาระดับปริญญาตรีด้านวิทยาศาสตร์และเทคโนโลยี กองทุนเพื่อการศึกษา
+					งบดำเนินงาน หมวดค่าตอบแทนใช้สอยและวัสดุ
+					<br>
+					<br>
+					<div style="display: block;width: 50%; float: left;">
+						<br>
+						<br>
+						<br>
+					</div>
+					<div style="display: block;width: 50%; float: right;">
+						<center>
+							<p>(
+								<?=$vice_president->Config_value?>)</p>
+						</center>
+						<center>
+							<p>รองคณบดี</p>
+						</center>
+					</div>
+					<div style="display: block;width: 50%;">
+						<center>
+							<p>อนุมัติ</p>
+						</center>
+						<br>
+						<br>
+						<center>
+							<p>(
+								<?=$president->Config_value?>)</p>
+						</center>
+						<center>
+							<p>คณบดีคณะวิทยาการสาสนเทศ</p>
+						</center>
+					</div>
+			</div>
+		</div>
 	</div>
 
 
@@ -487,7 +567,7 @@
 				<p>
 					<strong>ที่</strong> ศธ ๖๓๑๓.๒/๕๖๖
 					<strong style="margin-left:15em;">วันที่</strong>
-					<span id="doc_date"></span>
+					<span name="doc_date"></span>
 				</p>
 				<p style="margin-bottom: 15px;">
 					<strong style="margin-right:2.5em;">เรื่อง</strong> ขออนุมัติในหลักการค่าตอบแทนนิสิตระดับปริญญาตรีช่วยปฏิบัติงาน</p>
@@ -495,15 +575,15 @@
 					<strong style="margin-right:2.5em;">เรียน</strong> คณบดีคณะวิทยาการสารสนเทศ</p>
 				<p style="text-indent: 4em;">ด้วยคณะวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา ได้เปิดสอนรายวิชา
 					<span name="doc_subject"></span>
-					<span id="doc_credit"></span> ในภาคเรียนที่
+					<span name="doc_credit"></span> ในภาคเรียนที่
 					<span name="doc_semester"></span>
-					<span id="doc_normal"></span>
-					<span id="doc_special"></span> ในการนี้สำนักงานจัดการศึกษา ขออนุมัติจ้างนิสิตช่วยงานห้องปฏิบัติการในรายวิชา
+					<span name="doc_normal"></span>
+					<span name="doc_special"></span> ในการนี้สำนักงานจัดการศึกษา ขออนุมัติจ้างนิสิตช่วยงานห้องปฏิบัติการในรายวิชา
 					<span name="doc_subject"></span> รายนามดังนี้
 				</p>
 				<center>
 					<table class="table-doc">
-						<tbody id="tbody-doc">
+						<tbody name="tbody-doc">
 						</tbody>
 					</table>
 				</center>
@@ -512,7 +592,7 @@
 					<span name="doc_subject"></span> ของคณะวิทยาการสารสนเทศ</p>
 				<br>
 				<p style="text-indent: 4em;">จึงเรียนมาเพื่อโปรดพิจารณาอนุมัติในหลักการ การปฏิบัติงานของนิสิตช่วยงาน โดยมีสิทธิเบิกค่าตอบแทนจำนวนเงิน
-					<span id="doc_amount"></span> โดยเบิกจากเงินรายได้ แผนกงานจัดการศึกษาอุดมศึกษา งานจัดการศึกษาระดับปริญญาตรีด้านวิทยาศาสตร์และเทคโนโลยี กองทุนเพื่อการศึกษา
+					<span name="doc_amount"></span> โดยเบิกจากเงินรายได้ แผนกงานจัดการศึกษาอุดมศึกษา งานจัดการศึกษาระดับปริญญาตรีด้านวิทยาศาสตร์และเทคโนโลยี กองทุนเพื่อการศึกษา
 					งบดำเนินงาน หมวดค่าตอบแทนใช้สอยและวัสดุ
 					<br>
 					<br>
@@ -609,7 +689,7 @@
 			var semester = JSON.parse('<?=json_encode($semester)?>')
 			semester.txt = toThainum(semester.Semester_Name + '/' + semester.Semester_Year)
 			$('span[name=doc_semester]').html(semester.txt)
-			$('#doc_date').html(day + ' ' + monthThai[month] + ' พ.ศ. ' + year)
+			$('span[name=doc_date]').html(day + ' ' + monthThai[month] + ' พ.ศ. ' + year)
 
 			var loadWork = function () {
 				var data = {
@@ -618,28 +698,28 @@
 				}
 				$('button[name=btnpdf]').prop('disabled', true)
 				// doc
-				$('#doc_credit').html('')
-				$('#doc_special').html('')
-				$('#doc_normal').html('')
-				$('#doc_amount').html('')
+				$('span[name=doc_credit]').html('')
+				$('span[name=doc_special]').html('')
+				$('span[name=doc_normal]').html('')
+				$('span[name=doc_amount]').html('')
 				var doc_subject = toThainum($('#subject option:selected').data('thainame'));
 				$('span[name=doc_subject]').html(doc_subject)
 				if ($('#subject option:selected').data('normal')) {
 					var txt = 'ภาคปกติจำนวน '
 					txt += toThainum(Number($('#subject option:selected').data('normal')).toLocaleString())
 					txt += ' กลุ่ม'
-					$('#doc_normal').html(txt)
+					$('span[name=doc_normal]').html(txt)
 				}
 				if ($('#subject option:selected').data('special')) {
 					var txt = 'ภาคพิเศษจำนวน '
 					txt += toThainum(Number($('#subject option:selected').data('special')).toLocaleString())
 					txt += ' กลุ่ม'
-					$('#doc_special').html(txt)
+					$('span[name=doc_special]').html(txt)
 				}
 				if ($('#subject option:selected').data('credit')) {
 					var txt = 'จำนวน '
 					txt += toThainum($('#subject option:selected').data('credit')) + ' หน่วยกิต'
-					$('#doc_credit').html(txt)
+					$('span[name=doc_credit]').html(txt)
 				}
 				if ($('input[name=Subject_amount]').val()) {
 					var amount_val = $('input[name=Subject_amount]').val()
@@ -647,7 +727,7 @@
 					var Amount = toThainum(Number(amount_val).toLocaleString(undefined, {
 						minimumFractionDigits: 2
 					}))
-					$('#doc_amount').html(Amount + ' บาท (' + thaibath + ')')
+					$('span[name=doc_amount]').html(Amount + ' บาท (' + thaibath + ')')
 				}
 				$.post('<?=base_url()?>index.php/table/loadStudentWork', {
 					data: data
@@ -741,7 +821,7 @@
 					}
 				}
 				html = html_r.join('')
-				$('#tbody-doc').html(html)
+				$('tbody[name=tbody-doc]').html(html)
 				$('button[name=btnpdf]').prop('disabled', false)
 			}
 
@@ -768,44 +848,8 @@
 			}
 
 			$('button[name=btnword]').click(function () {
-				$("#doc").wordExport('document');
+				$("#word").wordExport('document');
 				return
-				var filename = 'document'
-				var preHtml = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Export HTML To Doc</title>"+
-				'<style>' + $('style[name=print]').html() +"</style></head><body>";
-
-				var postHtml = "</body></html>";
-				var html = preHtml + document.getElementById('doc').innerHTML + postHtml;
-
-				var blob = new Blob(['\ufeff', html], {
-					type: 'application/msword'
-				});
-
-				// Specify link url
-				var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(html);
-
-				// Specify file name
-				filename = filename ? filename + '.doc' : 'document.doc';
-
-				// Create download link element
-				var downloadLink = document.createElement("a");
-
-				document.body.appendChild(downloadLink);
-
-				if (navigator.msSaveOrOpenBlob) {
-					navigator.msSaveOrOpenBlob(blob, filename);
-				} else {
-					// Create a link to the file
-					downloadLink.href = url;
-
-					// Setting the file name
-					downloadLink.download = filename;
-
-					//triggering the function
-					downloadLink.click();
-				}
-
-				document.body.removeChild(downloadLink);
 			})
 		})
 
