@@ -45,6 +45,14 @@ class Config extends CI_Controller {
         if(count($vice_president) > 0){
             $data['vice_president'] = $vice_president[0];
         }
+        $labor1 = $this->Config_Model->getConfig('labor1');
+        if(count($vice_president) > 0){
+            $data['labor1'] = $labor1[0];
+        }
+        $labor2 = $this->Config_Model->getConfig('labor2');
+        if(count($vice_president) > 0){
+            $data['labor2'] = $labor2[0];
+        }
         $data['semester'] = $semester;
         $data['allsemester'] = $this->Semester_Model->getAllSemester();
         $data['year'] = date("Y");
@@ -59,17 +67,13 @@ class Config extends CI_Controller {
         $this->load->model('Config_Model');
         $this->load->model('Subject_Model');
         $data = $this->input->post('data');
-        // 
-        $save = array(
-            'Config_name' => 'vice_president',
-            'Config_value'=> $data['vice_president']
-        );
-        $this->Config_Model->save($save);
-        $save = array(
-            'Config_name' => 'president',
-            'Config_value'=> $data['president']
-        );
-        $this->Config_Model->save($save);
+        foreach ( $data as $key => $value ){
+            $save = array(
+                'Config_name' => $key,
+                'Config_value'=> $value
+            );
+            $this->Config_Model->save($save);
+        }
         //
         $semester = $this->CurrentSemester_Model->getSemester();
         $save = array(
