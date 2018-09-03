@@ -37,9 +37,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <style name="print">
+    body {
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #333;
+        font-family: 'Roboto', Arial, Tahoma, sans-serif;
+        -webkit-print-color-adjust: exact !important;
+    }
     @media print { 
         body {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            font-family: 'Roboto', Arial, Tahoma, sans-serif;
             -webkit-print-color-adjust: exact !important;
         }
         .table thead tr th {
@@ -533,7 +543,7 @@
                 mywindow.document.write('<style>'+$('style[name=print]').html()+ '</style><style type="text/css" media="print">@page { size: landscape; }</style>');
                 mywindow.document.write('<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">')
                 mywindow.document.write('<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">')
-                mywindow.document.write('</head><body onload="window.print();window.close();">');
+                mywindow.document.write('</head><body onload="window.print();">');
                 mywindow.document.write($('.body.table-responsive').html());
                 mywindow.document.write('</body></html>');
                 mywindow.document.close();

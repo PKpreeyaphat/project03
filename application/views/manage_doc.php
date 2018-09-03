@@ -34,24 +34,43 @@
 	<style name="print">
 		@import url('<?=base_url()?>/system/fonts/thsarabunnew.css');
 
+		.center {
+			text-align: center;
+		}
 
+		.right {
+			text-align: right;
+		}
+
+		.table-doc {
+			width: 100%;
+		}
 
 		@media print {
-			* {
-				margin: 0;
-				padding: 0;
+			.center {
+				text-align: center;
 			}
+
+			@page { 
+				margin-top: 1.5cm;
+				margin-right: 1.5cm;
+				margin-bottom: 1.5cm;
+				margin-left: 2.2cm;
+			}
+
 			body {
 				font-family: 'THSarabunNew', sans-serif;
 				font-size: 0.95em;
 				line-height: 1.7em;
 				background: #e1e1e1;
 			}
+
 			table {
 				border-spacing: 0;
 				border-collapse: collapse;
 				font-size: 14px !important;
 			}
+
 			h1,
 			h2,
 			h3,
@@ -60,42 +79,52 @@
 				line-height: 2em;
 				clear: both;
 			}
+
 			h2 {
 				background: #0F7AC2;
 				padding: 0 10px;
 				color: #FFF;
 				margin: 20px 0 10px;
 			}
+
 			p {
 				padding: 0 0 10px 0;
 			}
+
 			.n {
 				font-weight: normal;
 				font-style: normal;
 			}
+
 			.b {
 				font-weight: bold;
 				font-style: normal;
 			}
+
 			.i {
 				font-weight: normal;
 				font-style: italic;
 			}
+
 			.bi {
 				font-weight: bold;
 				font-style: italic;
 			}
+
 			ul,
 			ol {
 				padding: 0 0 10px 0;
 			}
+
 			li {
 				margin: 0 0 0 2em;
 				padding: 0 0 5px 0;
 			}
+
 			code {
 				background: #FFF;
 			}
+
 			#container {
 				width: 900px;
 				margin: 20px auto 0;
@@ -103,18 +132,22 @@
 				padding: 20px;
 				background: #FFF;
 			}
+
 			#instruction {
 				padding: 10px 10px 0;
 				background: #e6e6e6;
 			}
+
 			#footer {
 				width: 940px;
 				margin: 0 auto;
 				padding: 10px 0 20px;
 			}
+
 			.right {
 				text-align: right;
 			}
+
 			.type {
 				font-family: 'THSarabunNew', sans-serif;
 				height: 5em;
@@ -124,23 +157,20 @@
 				margin: 20px auto 10px;
 				padding: 5px 1%;
 			}
-			@page {
-				margin: 0;
-			}
+
 			body {
 				-webkit-print-color-adjust: exact !important;
 			}
-			.table thead tr th {
-				background-color: #00a968 !important;
-				color: white !important;
-			}
+
 			.table tbody tr th {
 				background-color: #A0A0A0 !important;
 				color: white !important;
 			}
+
 			.table .white {
 				color: white !important;
 			}
+
 			.table>caption+thead>tr:first-child>th,
 			.table>colgroup+thead>tr:first-child>th,
 			.table>thead:first-child>tr:first-child>th,
@@ -149,6 +179,7 @@
 			.table>thead:first-child>tr:first-child>td {
 				border-top: 0;
 			}
+
 			.table-bordered>thead>tr>th,
 			.table-bordered>tbody>tr>th,
 			.table-bordered>tfoot>tr>th,
@@ -161,21 +192,25 @@
 			.table-bordered {
 				border: 1px solid #ddd;
 			}
+
 			.table {
 				width: 100%;
 				max-width: 100%;
 				margin-bottom: 20px;
 			}
+
 			.learn {
 				background-color: #C0D0FF !important;
 			}
+
 			.white {
 				color: white !important;
 			}
 		}
 
 		.table-doc>tbody>tr>td {
-			padding-right: 20px !important;
+			padding-left: 10px !important;
+			padding-right: 10px !important;
 		}
 
 		.font-sarabun {
@@ -192,6 +227,10 @@
 
 		table {
 			font-size: 14px;
+		}
+
+		table>tr>th {
+			text-align: center;
 		}
 
 		table.dataTable tbody>tr.selected,
@@ -328,16 +367,12 @@
 		}
 
 		@media screen and (max-width: 640px) {
+
 			div.dataTables_wrapper span.select-info,
 			div.dataTables_wrapper span.select-item {
 				margin-left: 0;
 				display: block
 			}
-		}
-
-		table>thead>tr>th {
-			background-color: #00a968;
-			color: white;
 		}
 
 		table>tbody>tr>th {
@@ -389,7 +424,6 @@
 			max-width: 100%;
 			margin-bottom: 20px;
 		}
-
 	</style>
 </head>
 
@@ -474,7 +508,7 @@
 	</div>
 
 	<div id="word" style="display: none;width: 29.7cm;height: 21cm;">
-		<div id="page-word" style="word-wrap: break-word;margin-top:4em;margin-left:7em;margin-right:4em;" class="container font-sarabun">
+		<div id="page-word" style="word-wrap: break-word;" class="container font-sarabun">
 			<div class="row">
 				<div style="width: 20%; display: inline;">
 					<img id="img_buu" style="width: 80px; height: 80px;" src="<?php echo base_url() ?>LogoBuuThai.png">
@@ -489,34 +523,48 @@
 				<p>
 					<strong>ที่</strong> ศธ ๖๓๑๓.๒/๕๖๖
 					<strong style="margin-left:15em;">วันที่</strong>
-					<span name="doc_date"></span>
+					<span class="doc_date"></span>
 				</p>
 				<p style="margin-bottom: 15px;">
 					<strong style="margin-right:1.5em;">เรื่อง</strong> ขออนุมัติในหลักการค่าตอบแทนนิสิตระดับปริญญาตรีช่วยปฏิบัติงาน</p>
 				<p style="margin-bottom: 15px;">
 					<strong style="margin-right:1.5em;">เรียน</strong> คณบดีคณะวิทยาการสารสนเทศ</p>
 				<p style="text-indent: 2em;">ด้วยคณะวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา ได้เปิดสอนรายวิชา
-					<span name="doc_subject"></span>
-					<span name="doc_credit"></span> ในภาคเรียนที่
-					<span name="doc_semester"></span>
-					<span name="doc_normal"></span>
-					<span name="doc_special"></span> ในการนี้สำนักงานจัดการศึกษา ขออนุมัติจ้างนิสิตช่วยงานห้องปฏิบัติการในรายวิชา
-					<span name="doc_subject"></span> รายนามดังนี้
+					<span class="doc_subject"></span>
+					<span class="doc_credit"></span> ในภาคเรียนที่
+					<span class="doc_semester"></span>
+					<span class="doc_normal"></span>
+					<span class="doc_special"></span> ในการนี้สำนักงานจัดการศึกษา ขออนุมัติจ้างนิสิตช่วยงานห้องปฏิบัติการในรายวิชา
+					<span class="doc_subject"></span> รายนามดังนี้
 				</p>
 				<center>
-					<table class="table-doc">
-						<tbody name="tbody-doc">
+					<table class="table-bordered table-doc">
+						<thead>
+							<tr>
+								<th>ลำดับ</th>
+								<th>รหัสนิสิต</th>
+								<th>ชื่อ-สกุล</th>
+								<th>กลุ่ม</th>
+								<th>จำนวน<br>นิสิต</th>
+								<th>จำนวน<br>(ชม.)</th>
+								<th>ชั่วโมงละ<br>(บาท)</th>
+								<th>จำนวน<br>รวม<br>(บาท)</th>
+							</tr>
+						</thead>
+						<tbody class="tbody-doc">
 						</tbody>
 					</table>
 				</center>
-				<p>โดยปฏิบัติงานในภาคเรียนที่
-					<span name="doc_semester"></span> เพื่อช่วยงานสอนของอาจารย์ในชั่งโมงปฏิบัติการ สำหรับหมวดวิชาศึกษาทั่วไปรายวิชา
-					<span name="doc_subject"></span> ของคณะวิทยาการสารสนเทศ</p>
 				<br>
-				<p style="text-indent: 2em;">จึงเรียนมาเพื่อโปรดพิจารณาอนุมัติในหลักการ การปฏิบัติงานของนิสิตช่วยงาน โดยมีสิทธิเบิกค่าตอบแทนจำนวนเงิน
-					<span name="doc_amount"></span> โดยเบิกจากเงินรายได้ แผนกงานจัดการศึกษาอุดมศึกษา งานจัดการศึกษาระดับปริญญาตรีด้านวิทยาศาสตร์และเทคโนโลยี กองทุนเพื่อการศึกษา
-					งบดำเนินงาน หมวดค่าตอบแทนใช้สอยและวัสดุ
+				<p>โดยปฏิบัติงานในภาคเรียนที่
+					<span class="doc_semester"></span> เพื่อช่วยงานสอนของอาจารย์ในชั่งโมงปฏิบัติการ สำหรับหมวดวิชาศึกษาทั่วไปรายวิชา
+					<span class="doc_subject"></span> ของคณะวิทยาการสารสนเทศ</p>
+				<p style="text-indent: 2em;">ในการนี้ สำนักงานจัดการศึกษา คณะวิทยากาารสารสนเทศ จึงขออนุมัติจ้างนิสิตช่วยปฏิบัติงานวิชาการ
+				โดยเบิกค่าตอบแทน ตามประกาศคณะวิทยาการสารสนเทศ ที่ ๐๐๓/๒๕๖๑ เรื่องหลักเกณฑ์การจ่ายค่าตอบแทนนิสิตช่วย ปฏิบัติงานคณะวิทยาการสารสนเทศ
+				พ.ศ. ๒๕๖๑ จากเงินรายได้ แผนกงานจัดการศึกษาอุดมศึกษา งานจัดการศึกษาระดับ ปริญญาตรีด้านวิทยาศาสตร์และเทคโนโลยี กองทุนเพื่อการศึกษา
+					งบดำเนินงาน หมวดค่าตอบแทนใช้สอยและวัสดุ เป็นจำนวน <span class="doc_amount"></span>
 					<br>
+					<p style="text-indent: 2em;">จึงเรียนมาเพื่อโปรดพิจารณาอนุมัติ</p>
 					<br>
 					<div style="display: block;width: 50%; float: left;">
 						<br>
@@ -551,8 +599,8 @@
 	</div>
 
 
-	<div id="doc" style="display: none;width: 29.7cm;height: 21cm;">
-		<div id="page-doc" style="word-wrap: break-word;margin-top:4em;margin-left:7em;margin-right:4em;" class="container font-sarabun">
+	<div id="doc" style="width: 29.7cm;height: 21cm;">
+		<div id="page-doc" style="word-wrap: break-word;" class="container font-sarabun">
 			<div class="row">
 				<div style="width: 20%; display: inline;">
 					<img id="img_buu" style="width: 80px; height: 80px;" src="<?php echo base_url() ?>LogoBuuThai.png">
@@ -567,34 +615,49 @@
 				<p>
 					<strong>ที่</strong> ศธ ๖๓๑๓.๒/๕๖๖
 					<strong style="margin-left:15em;">วันที่</strong>
-					<span name="doc_date"></span>
+					<span class="doc_date"></span>
 				</p>
 				<p style="margin-bottom: 15px;">
 					<strong style="margin-right:2.5em;">เรื่อง</strong> ขออนุมัติในหลักการค่าตอบแทนนิสิตระดับปริญญาตรีช่วยปฏิบัติงาน</p>
 				<p style="margin-bottom: 15px;">
 					<strong style="margin-right:2.5em;">เรียน</strong> คณบดีคณะวิทยาการสารสนเทศ</p>
 				<p style="text-indent: 4em;">ด้วยคณะวิทยาการสารสนเทศ มหาวิทยาลัยบูรพา ได้เปิดสอนรายวิชา
-					<span name="doc_subject"></span>
-					<span name="doc_credit"></span> ในภาคเรียนที่
-					<span name="doc_semester"></span>
-					<span name="doc_normal"></span>
-					<span name="doc_special"></span> ในการนี้สำนักงานจัดการศึกษา ขออนุมัติจ้างนิสิตช่วยงานห้องปฏิบัติการในรายวิชา
-					<span name="doc_subject"></span> รายนามดังนี้
+					<span class="doc_subject"></span>
+					<span class="doc_credit"></span> ในภาคเรียนที่
+					<span class="doc_semester"></span>
+					<span class="doc_normal"></span>
+					<span class="doc_special"></span> ในการนี้สำนักงานจัดการศึกษา ขออนุมัติจ้างนิสิตช่วยงานห้องปฏิบัติการในรายวิชา
+					<span class="doc_subject"></span> รายนามดังนี้
 				</p>
 				<center>
-					<table class="table-doc">
-						<tbody name="tbody-doc">
+					<table class="table-bordered table-doc">
+						<thead>
+							<tr>
+								<th>ลำดับ</th>
+								<th>รหัสนิสิต</th>
+								<th>ชื่อ-สกุล</th>
+								<th>กลุ่ม</th>
+								<th>จำนวน<br>นิสิต</th>
+								<th>จำนวน<br>(ชม.)</th>
+								<th>ชั่วโมงละ<br>(บาท)</th>
+								<th>จำนวน<br>รวม<br>(บาท)</th>
+							</tr>
+						</thead>
+						<tbody class="tbody-doc">
 						</tbody>
 					</table>
 				</center>
-				<p>โดยปฏิบัติงานในภาคเรียนที่
-					<span name="doc_semester"></span> เพื่อช่วยงานสอนของอาจารย์ในชั่งโมงปฏิบัติการ สำหรับหมวดวิชาศึกษาทั่วไปรายวิชา
-					<span name="doc_subject"></span> ของคณะวิทยาการสารสนเทศ</p>
 				<br>
-				<p style="text-indent: 4em;">จึงเรียนมาเพื่อโปรดพิจารณาอนุมัติในหลักการ การปฏิบัติงานของนิสิตช่วยงาน โดยมีสิทธิเบิกค่าตอบแทนจำนวนเงิน
-					<span name="doc_amount"></span> โดยเบิกจากเงินรายได้ แผนกงานจัดการศึกษาอุดมศึกษา งานจัดการศึกษาระดับปริญญาตรีด้านวิทยาศาสตร์และเทคโนโลยี กองทุนเพื่อการศึกษา
-					งบดำเนินงาน หมวดค่าตอบแทนใช้สอยและวัสดุ
+				<p>โดยปฏิบัติงานในภาคเรียนที่
+					<span class="doc_semester"></span> เพื่อช่วยงานสอนของอาจารย์ในชั่งโมงปฏิบัติการ สำหรับหมวดวิชาศึกษาทั่วไปรายวิชา
+					<span class="doc_subject"></span> ของคณะวิทยาการสารสนเทศ</p>
+				<p style="text-indent: 4em;">ในการนี้ สำนักงานจัดการศึกษา คณะวิทยากาารสารสนเทศ จึงขออนุมัติจ้างนิสิตช่วยปฏิบัติงานวิชาการ
+				โดยเบิกค่าตอบแทน ตามประกาศคณะวิทยาการสารสนเทศ ที่ ๐๐๓/๒๕๖๑ เรื่องหลักเกณฑ์การจ่ายค่าตอบแทนนิสิตช่วย ปฏิบัติงานคณะวิทยาการสารสนเทศ
+				พ.ศ. ๒๕๖๑ จากเงินรายได้ แผนกงานจัดการศึกษาอุดมศึกษา งานจัดการศึกษาระดับ ปริญญาตรีด้านวิทยาศาสตร์และเทคโนโลยี กองทุนเพื่อการศึกษา
+					งบดำเนินงาน หมวดค่าตอบแทนใช้สอยและวัสดุ เป็นจำนวน <span class="doc_amount"></span>
 					<br>
+					<br>
+					<p style="text-indent: 4em;">จึงเรียนมาเพื่อโปรดพิจารณาอนุมัติ</p>
 					<br>
 					<div style="display: block;width: 50%; float: left;">
 						<br>
@@ -655,6 +718,7 @@
 
 	<script>
 		$(function () {
+			var labor = {1: '<?=$labor1->Config_value?>', 2: '<?=$labor2->Config_value?>'}
 			var toThainum = function (num) {
 				var thainum = {
 					'1': '๑',
@@ -688,8 +752,8 @@
 			]
 			var semester = JSON.parse('<?=json_encode($semester)?>')
 			semester.txt = toThainum(semester.Semester_Name + '/' + semester.Semester_Year)
-			$('span[name=doc_semester]').html(semester.txt)
-			$('span[name=doc_date]').html(day + ' ' + monthThai[month] + ' พ.ศ. ' + year)
+			$('.doc_semester').html(semester.txt)
+			$('.doc_date').html(day + ' ' + monthThai[month] + ' พ.ศ. ' + year)
 
 			var loadWork = function () {
 				var data = {
@@ -698,28 +762,28 @@
 				}
 				$('button[name=btnpdf]').prop('disabled', true)
 				// doc
-				$('span[name=doc_credit]').html('')
-				$('span[name=doc_special]').html('')
-				$('span[name=doc_normal]').html('')
-				$('span[name=doc_amount]').html('')
+				$('.doc_credit').html('')
+				$('.doc_special').html('')
+				$('.doc_normal').html('')
+				$('.doc_amount').html('')
 				var doc_subject = toThainum($('#subject option:selected').data('thainame'));
-				$('span[name=doc_subject]').html(doc_subject)
+				$('.doc_subject').html(doc_subject)
 				if ($('#subject option:selected').data('normal')) {
 					var txt = 'ภาคปกติจำนวน '
 					txt += toThainum(Number($('#subject option:selected').data('normal')).toLocaleString())
 					txt += ' กลุ่ม'
-					$('span[name=doc_normal]').html(txt)
+					$('.doc_normal').html(txt)
 				}
 				if ($('#subject option:selected').data('special')) {
 					var txt = 'ภาคพิเศษจำนวน '
 					txt += toThainum(Number($('#subject option:selected').data('special')).toLocaleString())
 					txt += ' กลุ่ม'
-					$('span[name=doc_special]').html(txt)
+					$('.doc_special').html(txt)
 				}
 				if ($('#subject option:selected').data('credit')) {
 					var txt = 'จำนวน '
 					txt += toThainum($('#subject option:selected').data('credit')) + ' หน่วยกิต'
-					$('span[name=doc_credit]').html(txt)
+					$('.doc_credit').html(txt)
 				}
 				if ($('input[name=Subject_amount]').val()) {
 					var amount_val = $('input[name=Subject_amount]').val()
@@ -727,7 +791,7 @@
 					var Amount = toThainum(Number(amount_val).toLocaleString(undefined, {
 						minimumFractionDigits: 2
 					}))
-					$('span[name=doc_amount]').html(Amount + ' บาท (' + thaibath + ')')
+					$('.doc_amount').html(Amount + ' บาท (' + thaibath + ')')
 				}
 				$.post('<?=base_url()?>index.php/table/loadStudentWork', {
 					data: data
@@ -786,44 +850,96 @@
 			})
 
 			var loadtopdf = function (res) {
-				var dict_stu = {}
+				console.log(res);
+				var labor_cost = labor[$('select[name=Degree]').val()]
 				var html = ''
-				var html_r = []
-				var count = 0
-				var count_ = 0
+				var html_r = [], total = 0
 				for (var i in res) {
-					if (!dict_stu[res[i].Student_id]) {
-						dict_stu[res[i].Student_id] = true
-						count++
-					}
+					html += '<tr>'
+					html += '<td class="center">'+toThainum(Number(i) + 1)+'</td>'
+					html += '<td class="center">'+res[i].Student_id.toThainum()+'</td>'
+					html += '<td>'+res[i].Student_firstname + ' ' + res[i].Student_lastname +'</td>'
+					html += '<td class="center">'+res[i].Section_id.toThainum()+'</td>'
+					html += '<td class="center">'+res[i].Section_student_quantity.toThainum()+'</td>'
+					html += '<td class="center">'+res[i].TotalHour.toThainum()+'</td>'
+					html += '<td class="center">'+labor_cost.toThainum()+'</td>'
+					html += '<td class="center">'+(Number(labor_cost) * Number(res[i].TotalHour)).toLocaleString().toThainum()+'</td>'
+					html += '</tr>'
+					html += '<tr>'
+					html += '<td class="center">'+toThainum(Number(i) + 1)+'</td>'
+					html += '<td class="center">'+res[i].Student_id.toThainum()+'</td>'
+					html += '<td>'+res[i].Student_firstname + ' ' + res[i].Student_lastname +'</td>'
+					html += '<td class="center">'+res[i].Section_id.toThainum()+'</td>'
+					html += '<td class="center">'+res[i].Section_student_quantity.toThainum()+'</td>'
+					html += '<td class="center">'+res[i].TotalHour.toThainum()+'</td>'
+					html += '<td class="center">'+labor_cost.toThainum()+'</td>'
+					html += '<td class="center">'+(Number(labor_cost) * Number(res[i].TotalHour)).toLocaleString().toThainum()+'</td>'
+					html += '</tr>'
+					total += Number(labor_cost) * Number(res[i].TotalHour)
 				}
-				dict_stu = []
-				for (var i in res) {
-					if (!dict_stu[res[i].Student_id]) {
-						count_++
-						html_r.push('<td>' + toThainum(Number(i) + 1) + '.<span style="margin-left:0.5em;">' + toThainum(res[i].Student_id) +
-							' ' + res[i].Student_firstname + ' ' + res[i].Student_lastname + '<span></td>')
-						dict_stu[res[i].Student_id] = true
-						if (count_ == Math.round(count / 2)) {
-							break
-						}
-					}
-				}
-				count_ = 0
-				for (var i in res) {
-					if (!dict_stu[res[i].Student_id]) {
-						html_r[count_] = '<tr>' + html_r[count_] + '<td>' + toThainum(Number(i) + 1) +
-							'.<span style="margin-left:0.5em;">' + toThainum(res[i].Student_id) + ' ' + res[i].Student_firstname + ' ' +
-							res[i].Student_lastname + '<span></td></tr>'
-						dict_stu[res[i].Student_id] = true
-						count_++
-						console.log(html_r);
-					}
-				}
-				html = html_r.join('')
-				$('tbody[name=tbody-doc]').html(html)
+				html += '<tr><td class="right" colspan="7">รวมเป็นเงิน '+ArabicNumberToText(total)+'</td><td class="center">'+total.toLocaleString().toThainum()+'</td></tr>'
+				// html = html_r.join('')
+				$('.tbody-doc').html(html)
 				$('button[name=btnpdf]').prop('disabled', false)
 			}
+
+			Object.defineProperty(Number.prototype, "toThainum", {
+				value: function toThainum() {
+					var thainum = {
+						'1': '๑',
+						'2': '๒',
+						'3': '๓',
+						'4': '๔',
+						'5': '๕',
+						'6': '๖',
+						'7': '๗',
+						'8': '๘',
+						'9': '๙',
+						'0': '๐'
+					}
+					var result = '', num = this
+					num = num + ''
+					for (var i in num) {
+						if (thainum[num[i]]) {
+							result += thainum[num[i]]
+						} else {
+							result += num[i]
+						}
+					}
+					return result
+				},
+				writable: true,
+				configurable: true
+			});
+
+			Object.defineProperty(String.prototype, "toThainum", {
+				value: function toThainum() {
+					var thainum = {
+						'1': '๑',
+						'2': '๒',
+						'3': '๓',
+						'4': '๔',
+						'5': '๕',
+						'6': '๖',
+						'7': '๗',
+						'8': '๘',
+						'9': '๙',
+						'0': '๐'
+					}
+					var result = '', num = this
+					num = num + ''
+					for (var i in num) {
+						if (thainum[num[i]]) {
+							result += thainum[num[i]]
+						} else {
+							result += num[i]
+						}
+					}
+					return result
+				},
+				writable: true,
+				configurable: true
+			});
 
 			var pdf = function () {
 				var mywindow = window.open('', 'new div', 'height=400,width=600');

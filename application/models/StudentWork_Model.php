@@ -62,6 +62,24 @@ class StudentWork_Model extends CI_Model {
 
     public function getWork($data)
     {
+        /*
+        SELECT Student.Student_id,Student.Student_firstname,Student.Student_lastname,Section.Section_id,Section.Section_student_quantity
+        , count(*) * 2 * 15 as TotalHour
+        FROM `StudentWork`
+        inner join Section on Section.Section_id = sw_Section_id AND Section.Subject_id = sw_Subject_id
+        inner join Room on Room.Room_id = Section.Room_id
+        inner join Student on Student.Student_id = StudentWork.sw_Student_id
+        inner join RegisterSubject on RegisterSubject.Student_id = Student.Student_id 
+            AND RegisterSubject.Subject_id = sw_Subject_id AND RegisterSubject.Semester_ID = Section.Semester_ID
+        where Section.Subject_id = '88510159'
+        AND Section.Semester_ID = 1
+        group by Student.Student_id,Student.Student_firstname,Student.Student_lastname,
+        Section.Section_id,Section.Section_student_quantity
+        */
+        $this->db->select('Student.Student_id, Student.Student_firstname
+            , Student.Student_lastname, Section.Section_id, Section.Section_student_quantity
+            , Section.Section_day, Section_start_time, Section_end_time, Room_name, Room.Room_id
+            , count(*) * 2 * 15 as TotalHour');
         $this->db->join('Section', 'Section.Section_id = sw_Section_id AND 
                     Section.Subject_id = sw_Subject_id');
         $this->db->join('Room', 'Room.Room_id = Section.Room_id');
@@ -73,6 +91,9 @@ class StudentWork_Model extends CI_Model {
         if(isset($data['Degree'])){
             $this->db->where('RegisterSubject.Degree', $data['Degree']);
         }
+        $this->db->group_by('Student.Student_id, Student.Student_firstname, Student.Student_lastname,
+            , Section.Section_day, Section_start_time, Section_end_time, Room_name, Room.Room_id
+            , Section.Section_id, Section.Section_student_quantity'); 
         $res = $this->db->get('StudentWork');
         return $res->result();
     }

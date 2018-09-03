@@ -133,6 +133,14 @@ class Config extends CI_Controller {
         if(count($vice_president) > 0){
             $data['vice_president'] = $vice_president[0];
         }
+        $labor1 = $this->Config_Model->getConfig('labor1');
+        if(count($vice_president) > 0){
+            $data['labor1'] = $labor1[0];
+        }
+        $labor2 = $this->Config_Model->getConfig('labor2');
+        if(count($vice_president) > 0){
+            $data['labor2'] = $labor2[0];
+        }
         $data['semester'] = $semester;
         $data['allsemester'] = $this->Semester_Model->getAllSemester();
         $data['year'] = date("Y");
