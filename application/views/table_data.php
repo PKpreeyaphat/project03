@@ -313,7 +313,6 @@
                 }
                 $.post('table/loadStudentWork_tmp', {data: data}, function(res){
                     res = JSON.parse(res)
-                    console.log(res);
                     for(var i in res){
                         res[i].Section_start_time = convertime(res[i].Section_start_time)
                         res[i].Section_end_time = convertime(res[i].Section_end_time)
@@ -383,6 +382,8 @@
                             var dict_room = {}
                             for(var stu in data.register){
                                 if(sel_room == 'All' || sel_room == data.register[stu].Room_id){
+                                    if(data.register[stu].Name == null)
+                                    return
                                     if(!duplicate[data.register[stu].Room_id]){
                                         for(var rm in data.Room[data.register[stu].Room_id]){
                                             var r = data.Room[data.register[stu].Room_id][rm]
