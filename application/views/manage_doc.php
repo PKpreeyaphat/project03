@@ -599,7 +599,7 @@
 	</div>
 
 
-	<div id="doc" style="width: 29.7cm;height: 21cm;">
+	<div id="doc" style="display: none;width: 29.7cm;height: 21cm;">
 		<div id="page-doc" style="word-wrap: break-word;" class="container font-sarabun">
 			<div class="row">
 				<div style="width: 20%; display: inline;">
