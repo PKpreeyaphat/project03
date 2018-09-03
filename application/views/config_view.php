@@ -30,7 +30,13 @@
 
 	<!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
 	<link href="<?php echo base_url() ?>/css/themes/all-themes.css" rel="stylesheet" />
+	<style>
+	body{
+		overflow: auto!important;
+	}
+	</style>
 </head>
+
 
 <body class="theme-maroon">
 	<!-- Page Loader -->
@@ -175,73 +181,83 @@
 													</div>
 													<div role="tabpanel" class="tab-pane fade" id="settings_animation_4">
 														<br>
-														<div class="col-lg-4">
-															<div class="form-group">
-																<label>
-																	<b>คณบดี :</b>
-																</label>
+														<div class="row">
+															<div class="col-lg-4">
+																<div class="form-group">
+																	<label>
+																		<b>คณบดี :</b>
+																	</label>
+																</div>
 															</div>
-														</div>
-														<div class="col-lg-8">
-															<div class="form-group">
-																<div class="form-line">
-																	<input value="<?=(isset($president))? $president->Config_value : 0 ?>" class="form-control" type="text" name="president">
+															<div class="col-lg-8">
+																<div class="form-group">
+																	<div class="form-line">
+																		<input value="<?=(isset($president))? $president->Config_value : 0 ?>" class="form-control" type="text" name="president">
+																	</div>
 																</div>
 															</div>
 														</div>
-														<div class="col-lg-4">
-															<div class="form-group">
-																<label>
-																	<b>รองคณบดี :</b>
-																</label>
+														<div class="row">
+															<div class="col-lg-4">
+																<div class="form-group">
+																	<label>
+																		<b>รองคณบดี :</b>
+																	</label>
+																</div>
 															</div>
-														</div>
-														<div class="col-lg-8">
-															<div class="form-group">
-																<div class="form-line">
-																	<input value="<?=(isset($vice_president))? $vice_president->Config_value : 0 ?>" class="form-control" type="text" name="vice_president">
+															<div class="col-lg-8">
+																<div class="form-group">
+																	<div class="form-line">
+																		<input value="<?=(isset($vice_president))? $vice_president->Config_value : 0 ?>" class="form-control" type="text" name="vice_president">
+																	</div>
 																</div>
 															</div>
 														</div>
-														<div class="col-lg-4">
-															<div class="form-group">
-																<label>
-																	<b>ค่าชั่วโมง ป.ตรี :</b>
-																</label>
+														<div class="row">
+															<div class="col-lg-4">
+																<div class="form-group">
+																	<label>
+																		<b>ค่าชั่วโมง ป.ตรี :</b>
+																	</label>
+																</div>
 															</div>
-														</div>
-														<div class="col-lg-8">
-															<div class="form-group">
-																<div class="form-line">
-																	<input value="<?=(isset($labor1))? $labor1->Config_value : 0 ?>" class="form-control" type="text" name="labor1">
+															<div class="col-lg-8">
+																<div class="form-group">
+																	<div class="form-line">
+																		<input value="<?=(isset($labor1))? $labor1->Config_value : 0 ?>" class="form-control" type="text" name="labor1">
+																	</div>
 																</div>
 															</div>
 														</div>
-														<div class="col-lg-4">
-															<div class="form-group">
-																<label>
-																	<b>ค่าชั่วโมง ป.โท :</b>
-																</label>
+														<div class="row">
+															<div class="col-lg-4">
+																<div class="form-group">
+																	<label>
+																		<b>ค่าชั่วโมง ป.โท :</b>
+																	</label>
+																</div>
 															</div>
-														</div>
-														<div class="col-lg-8">
-															<div class="form-group">
-																<div class="form-line">
-																	<input value="<?=(isset($labor2))? $labor2->Config_value : 0 ?>" class="form-control" type="text" name="labor2">
+															<div class="col-lg-8">
+																<div class="form-group">
+																	<div class="form-line">
+																		<input value="<?=(isset($labor2))? $labor2->Config_value : 0 ?>" class="form-control" type="text" name="labor2">
+																	</div>
 																</div>
 															</div>
 														</div>
-														<div class="col-lg-4">
-															<div class="form-group">
-																<label>
-																	<b>จำนวนชม. :</b>
-																</label>
+														<div class="row">
+															<div class="col-lg-4">
+																<div class="form-group">
+																	<label>
+																		<b>จำนวนชม. :</b>
+																	</label>
+																</div>
 															</div>
-														</div>
-														<div class="col-lg-8">
-															<div class="form-group">
-																<div class="form-line">
-																	<input value="<?=(isset($hourlabor))? $hourlabor->Config_value : 0 ?>" class="form-control" type="text" name="hourlabor">
+															<div class="col-lg-8">
+																<div class="form-group">
+																	<div class="form-line">
+																		<input value="<?=(isset($hourlabor))? $hourlabor->Config_value : 0 ?>" class="form-control" type="text" name="hourlabor">
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -320,6 +336,24 @@
 
 	<!-- Jquery Core Js -->
 	<script src="<?php echo base_url() ?>/plugins/jquery/jquery.min.js"></script>
+
+	<!-- Bootstrap Core Js -->
+	<script src="<?php echo base_url() ?>/plugins/bootstrap/js/bootstrap.js"></script>
+
+	<!-- Select Plugin Js -->
+	<script src="<?php echo base_url() ?>/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+
+	<!-- Slimscroll Plugin Js -->
+	<script src="<?php echo base_url() ?>/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+	<!-- Waves Effect Plugin Js -->
+	<script src="<?php echo base_url() ?>/plugins/node-waves/waves.js"></script>
+
+	<!-- Sweet Alert Plugin Js -->
+	<script src="<?php echo base_url() ?>/plugins/sweetalert/sweetalert.min.js"></script>
+
+	<!-- ThaiBath Js -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function (e) {
