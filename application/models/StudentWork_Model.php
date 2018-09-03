@@ -93,7 +93,8 @@ class StudentWork_Model extends CI_Model {
         }
         $this->db->group_by('Student.Student_id, Student.Student_firstname, Student.Student_lastname,
             , Section.Section_day, Section_start_time, Section_end_time, Room_name, Room.Room_id
-            , Section.Section_id, Section.Section_student_quantity'); 
+            , Section.Section_id, Section.Section_student_quantity');
+        $this->db->order_by('Section.Section_id, Student.Student_id');
         $res = $this->db->get('StudentWork');
         return $res->result();
     }

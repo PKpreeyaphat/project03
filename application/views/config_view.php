@@ -231,6 +231,20 @@
 																</div>
 															</div>
 														</div>
+														<div class="col-lg-4">
+															<div class="form-group">
+																<label>
+																	<b>จำนวนชม. :</b>
+																</label>
+															</div>
+														</div>
+														<div class="col-lg-8">
+															<div class="form-group">
+																<div class="form-line">
+																	<input value="<?=(isset($hourlabor))? $hourlabor->Config_value : 0 ?>" class="form-control" type="text" name="hourlabor">
+																</div>
+															</div>
+														</div>
 														<div class="col-xs-12 col-sm-6">
 															<button type="button" name="btnsave_configdoc" class="btn btn-success m-t-15 waves-effect">บันทึก</button>
 														</div>
@@ -317,6 +331,7 @@
 					president: $('input[name=president]').val(),
 					labor1: $('input[name=labor1]').val(),
 					labor2: $('input[name=labor2]').val(),
+					hourlabor: $('input[name=hourlabor]').val(),
 				}
 				$.post('<?php echo base_url();?>index.php/Config/saveConfigDoc', {
 					data: data

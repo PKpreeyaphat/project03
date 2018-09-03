@@ -53,6 +53,10 @@ class Config extends CI_Controller {
         if(count($vice_president) > 0){
             $data['labor2'] = $labor2[0];
         }
+        $hourlabor = $this->Config_Model->getConfig('hourlabor');
+        if(count($vice_president) > 0){
+            $data['hourlabor'] = $hourlabor[0];
+        }
         $data['semester'] = $semester;
         $data['allsemester'] = $this->Semester_Model->getAllSemester();
         $data['year'] = date("Y");
@@ -140,6 +144,10 @@ class Config extends CI_Controller {
         $labor2 = $this->Config_Model->getConfig('labor2');
         if(count($vice_president) > 0){
             $data['labor2'] = $labor2[0];
+        }
+        $hourlabor = $this->Config_Model->getConfig('hourlabor');
+        if(count($hourlabor) > 0){
+            $data['hourlabor'] = $hourlabor[0];
         }
         $data['semester'] = $semester;
         $data['allsemester'] = $this->Semester_Model->getAllSemester();

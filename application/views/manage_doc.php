@@ -45,6 +45,12 @@
 		.table-doc {
 			width: 100%;
 		}
+		@page { 
+				margin-top: 1.5cm;
+				margin-right: 1.5cm;
+				margin-bottom: 1.5cm;
+				margin-left: 2.2cm;
+			}
 
 		@media print {
 			.center {
@@ -719,6 +725,7 @@
 	<script>
 		$(function () {
 			var labor = {1: '<?=$labor1->Config_value?>', 2: '<?=$labor2->Config_value?>'}
+			var hourlabor = '<?=$hourlabor->Config_value?>'
 			var toThainum = function (num) {
 				var thainum = {
 					'1': '๑',
@@ -855,6 +862,7 @@
 				var html = ''
 				var html_r = [], total = 0
 				for (var i in res) {
+					res[i].TotalHour = hourlabor
 					html += '<tr>'
 					html += '<td class="center">'+toThainum(Number(i) + 1)+'</td>'
 					html += '<td class="center">'+res[i].Student_id.toThainum()+'</td>'
