@@ -865,16 +865,6 @@
 					html += '<td class="center">'+labor_cost.toThainum()+'</td>'
 					html += '<td class="center">'+(Number(labor_cost) * Number(res[i].TotalHour)).toLocaleString().toThainum()+'</td>'
 					html += '</tr>'
-					html += '<tr>'
-					html += '<td class="center">'+toThainum(Number(i) + 1)+'</td>'
-					html += '<td class="center">'+res[i].Student_id.toThainum()+'</td>'
-					html += '<td>'+res[i].Student_firstname + ' ' + res[i].Student_lastname +'</td>'
-					html += '<td class="center">'+res[i].Section_id.toThainum()+'</td>'
-					html += '<td class="center">'+res[i].Section_student_quantity.toThainum()+'</td>'
-					html += '<td class="center">'+res[i].TotalHour.toThainum()+'</td>'
-					html += '<td class="center">'+labor_cost.toThainum()+'</td>'
-					html += '<td class="center">'+(Number(labor_cost) * Number(res[i].TotalHour)).toLocaleString().toThainum()+'</td>'
-					html += '</tr>'
 					total += Number(labor_cost) * Number(res[i].TotalHour)
 				}
 				html += '<tr><td class="right" colspan="7">รวมเป็นเงิน '+ArabicNumberToText(total)+'</td><td class="center">'+total.toLocaleString().toThainum()+'</td></tr>'
