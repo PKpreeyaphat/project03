@@ -13,6 +13,8 @@ class AdminRegister extends CI_Controller {
         $data['student'] = $this->Student_Model->getAllStudent();
         $data['subject'] = $this->AllSubject_Model->getSubjectById($id);
         $data['semester'] = $this->CurrentSemester_Model->getSemester();
+        $data['allsubject'] = $this->AllSubject_Model->getSubject();
+        
         $this->load->view('admin_register', $data);
     }
 
