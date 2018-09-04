@@ -62,11 +62,20 @@
 								<div class="row clearfix">
 									<div class="col-lg-6">
 										<?php foreach ($subject as $x) { ?>
-										<a href="<?php echo base_url(); ?>index.php/ImportData/index/<?php echo $x->Subject_id ?>">
-											<button type="button" class="m-t-15 btn bg-indigo btn-lg btn-block waves-effect">
-												<?php echo $x->Subject_id." ".$x->Subject_name?>
-											</button>
-										</a>
+										<div class="row">
+											<div class="col-xs-10 col-lg-10">
+												<a href="<?php echo base_url(); ?>index.php/ImportData/index/<?php echo $x->Subject_id ?>">
+													<button type="button" class="m-t-15 btn bg-indigo btn-lg btn-block waves-effect">
+														<?php echo $x->Subject_id." ".$x->Subject_name?>
+													</button>
+												</a>
+											</div>
+											<div class="col-xs-2 col-lg-2">
+												<a  href="<?=base_url()?>index.php/AdminRegister/index/<?=$x->Subject_id?>" class="m-t-15 btn btn-success btn-lg waves-effect">
+												สมัคร
+												</a>
+											</div>
+										</div>
 										<?php } ?>
 									</div>
 								</div>

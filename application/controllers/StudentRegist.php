@@ -10,7 +10,6 @@ class StudentRegist extends CI_Controller {
         $this->load->model('Student_Model');
         $this->load->model('AllSubject_Model');
         $this->load->model('CurrentSemester_Model');
-        $this->load->model('CurrentSemester_Model');
         $Semester_ID = $this->CurrentSemester_Model->getSemester_ID();
         $Subject_id = $this->session->Subject_id;
         $data["user"] = $this->session->all_userdata();
@@ -48,7 +47,10 @@ class StudentRegist extends CI_Controller {
         $this->load->model('registerSubject_Model');
         $time = json_decode($this->input->post('time'));
         $Subject_id = $this->input->post('Subject_id');
-        $Student_id = $this->session->userdata('user_id');
+        $Student_id = $time['Student_id'];
+        if(!isset($time['Student_id'])){
+            $Student_id = $this->session->userdata('user_id');
+        }
         $Semester_ID = $this->session->Semester_ID;
 
         $Student_grade = $this->input->post('Student_grade');
