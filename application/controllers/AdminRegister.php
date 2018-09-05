@@ -4,14 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdminRegister extends CI_Controller {
 
-    public function index($id)
+    public function index()
     {
         $this->load->model('Student_Model');
         $this->load->model('AllSubject_Model');
         $this->load->model('CurrentSemester_Model');
 
         $data['student'] = $this->Student_Model->getAllStudent();
-        $data['subject'] = $this->AllSubject_Model->getSubjectById($id);
         $data['semester'] = $this->CurrentSemester_Model->getSemester();
         $data['allsubject'] = $this->AllSubject_Model->getSubject();
         

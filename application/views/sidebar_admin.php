@@ -34,6 +34,12 @@
             </a>
         </li>
         <li>
+            <a href="<?php echo base_url(); ?>index.php/AdminRegister">
+                <i class="material-icons">text_format</i>
+                <span>แบบฟอร์มสมัคร TA</span>
+            </a>
+        </li>
+        <li>
             <!-- <a href="javascript:void(0);" class="menu-toggle"> -->
             <a href="<?php echo base_url(); ?>index.php/AllSubject"
                     <i class="material-icons">text_fields</i>

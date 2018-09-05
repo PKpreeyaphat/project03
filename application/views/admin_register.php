@@ -61,6 +61,15 @@
                         <div class="body table-responsive">
                             <form action="<?php echo base_url()."index.php/StudentRegist"?>" method="post">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <select class="form-control show-tick" id="subject">
+                                    <option value=''>———กรุณาเลือกวิชา———</option>
+                                    <?php foreach ($allsubject as $x) { ?>
+                                        <option value="<?=$x->Subject_id?>"><?=$x->Subject_id.' '.$x->Subject_name?></option>
+
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <select class="form-control show-tick" id="student">
                                     <option value=''>———กรุณาเลือกนิสิต———</option>
                                     <?php foreach ($student as $x) { ?>
@@ -100,7 +109,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <h5>ช่วงเวลาที่ต้องการปฏิบัติการ <?=(isset($subject))? $subject->Subject_id.' '.$subject->Subject_name : "" ?></h5>
+                            <h5>ช่วงเวลาที่ต้องการปฏิบัติการ <span id="subject_name"></span></h5>
                             <table id="tb" class="table table-bordered display dataTable with-check">
                                 <thead>
                                     <tr>
@@ -213,7 +222,6 @@
 
     <script type="text/javascript">
     $(function(){
-        var Subject_id = '<?=$subject->Subject_id?>'
         var time = {
                 1:{}, 
                 2:{},
@@ -224,6 +232,9 @@
                 0:{}
             }
         $('#student').select2({
+            matcher: matchCustom
+        })
+        $('#subject').select2({
             matcher: matchCustom
         })
 
@@ -258,7 +269,7 @@
                     Student_grade: $('input[name=Student_grade]').val(),
                     Student_email: $('input[name=Student_email]').val(),
                     Student_tel: $('input[name=Student_tel]').val(),
-                    Subject_id: Subject_id,
+                    Subject_id: $('#subject').val(),
                     Degree: $('select[name=Degree]').val(),
                     time: JSON.stringify( time )
                 }, function(data){
@@ -283,15 +294,10 @@
             }
         });
 
-        $('#student').change(function(){
-            if($('#student').val()){
-                $('button[name=btnsave]').prop('disabled', false)
-            }else{
-                $('button[name=btnsave]').prop('disabled', true)
-            }
+        var load = function(){
             var data = {
                 Student_id: $('#student').val(),
-                Subject_id: Subject_id
+                Subject_id: $('#subject').val()
             }
             $.post("<?=base_url()?>index.php/AdminRegister/getStudent", {data: data}, function(rs){
                 rs = JSON.parse(rs)
@@ -319,6 +325,25 @@
                 }
                 draw();
             })
+        }
+
+        $('#subject').change(function(){
+            if($('#student').val() && $('#subject').val()){
+                $('button[name=btnsave]').prop('disabled', false)
+            }else{
+                $('button[name=btnsave]').prop('disabled', true)
+            }
+            $('#subject_name').html($('#subject option:selected').text())
+            load()
+        })
+
+        $('#student').change(function(){
+            if($('#student').val() && $('#subject').val()){
+                $('button[name=btnsave]').prop('disabled', false)
+            }else{
+                $('button[name=btnsave]').prop('disabled', true)
+            }
+            load()
         })
 
         function matchCustom(params, data) {
