@@ -29,7 +29,7 @@ class AdminRegister extends CI_Controller {
             echo json_encode($student);
         }
     }
-
+    
     public function getRegister()
     {
         $this->load->model('CurrentSemester_Model');

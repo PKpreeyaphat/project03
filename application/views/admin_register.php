@@ -181,7 +181,7 @@
                                 </tbody>
                             </table>
                                 <?php
-                                if(isset($subject) && (isset($semester) && $semester->isOpen)){ ?>
+                                if(isset($semester) && $semester->isOpen){ ?>
                                     <center>
                                         <button type="button" name="btnsave" class="btn btn-primary m-t-15 waves-effect" disabled>ยืนยัน</button>
                                         <button name="btnDelete" type="reset" class="btn btn-danger m-t-15 waves-effect">ยกเลิก</button>
@@ -222,6 +222,7 @@
 
     <script type="text/javascript">
     $(function(){
+        var semeter = '<?=$semester->Semester_ID?>'
         var time = {
                 1:{}, 
                 2:{},
@@ -273,7 +274,9 @@
                     Degree: $('select[name=Degree]').val(),
                     time: JSON.stringify( time )
                 }, function(data){
-                    swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");
+                    $.post('<?=base_url()?>/index.php/HomeAdmin/updateStatus/'+$('#student').val()+'/1', {}, function(){
+                        swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");
+                    })
                     //window.location.href = 'HomeStudent';                 
                 })
             });
