@@ -44,15 +44,22 @@ class StudentRegist extends CI_Controller {
     public function SaveRegister(){ 
         $this->load->model('student_Model');
         $this->load->model('Register_Model');
+        $this->load->model('CurrentSemester_Model');
         $this->load->model('registerSubject_Model');
         $time = json_decode($this->input->post('time'));
         $Subject_id = $this->input->post('Subject_id');
-        $Student_id = $time['Student_id'];
-        if(!isset($time['Student_id'])){
-            $Student_id = $this->session->userdata('user_id');
-        }
-        $Semester_ID = $this->session->Semester_ID;
+        $Student_id = $this->input->post('Student_id');
 
+        $Semester_ID = $this->CurrentSemester_Model->getSemester();
+        if($Semester_ID != null){
+            $Semester_ID = $Semester_ID->Semester_ID;
+        }
+
+        if(!isset($Student_id)) {
+            $Student_id = $this->session->userdata('user_id');
+            $Semester_ID = $this->session->Semester_ID;
+        }
+        
         $Student_grade = $this->input->post('Student_grade');
         $Student_email = $this->input->post('Student_email');
         $Student_tel = $this->input->post('Student_tel');
@@ -68,7 +75,7 @@ class StudentRegist extends CI_Controller {
             unset($student->Subject_id);
             unset($student->Status);
             $this->student_Model->update($Student_id, $student);
-
+            
             $data = array(
                 'Student_id' => $Student_id,
                 'Subject_id' => $Subject_id,
@@ -76,6 +83,7 @@ class StudentRegist extends CI_Controller {
                 'Grade' => $Student_grade,
                 'Degree' => $Degree
             );
+            print_r($data);
             $this->registerSubject_Model->save($data);
         }
 

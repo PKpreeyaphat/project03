@@ -278,6 +278,8 @@
                         swal("บันทึกสำเร็จ!", "รายละเอียดถูกบันทึกเรียบร้อย", "success");
                     })
                     //window.location.href = 'HomeStudent';                 
+                }).fail(function(error){
+                    console.log(error);
                 })
             });
         });
@@ -304,14 +306,13 @@
             }
             $.post("<?=base_url()?>index.php/AdminRegister/getStudent", {data: data}, function(rs){
                 rs = JSON.parse(rs)
-                $('input[name=Student_grade]').val(rs.Student_grade)
+                $('input[name=Student_grade]').val(rs.Grade)
                 $('input[name=Student_email]').val(rs.Student_email)
                 $('input[name=Student_tel]').val(rs.Student_tel)
                 $('select[name=Degree]').val(rs.Degree)
             })
             $.post("<?=base_url()?>index.php/AdminRegister/getRegister", {data: data}, function(rs){
                 rs = JSON.parse(rs)
-                console.log(rs);
                 if(rs.length > 0){
                     time = rs;
                 }
