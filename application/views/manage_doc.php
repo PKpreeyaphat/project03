@@ -524,7 +524,7 @@
 				</div>
 			</div>
 			<div class="row" style="margin-top: 20px;">
-				<p>
+				<p style="font-family: THSarabunPSK";>
 					<strong style="margin-right:1em;">ส่วนงาน</strong> คณะวิทยาการสารสนเทศ สำนักงานจัดการศึกษา โทร ๓๐๙๖</p>
 				<p>
 					<strong>ที่</strong> ศธ ๖๓๑๓.๒/๕๖๖

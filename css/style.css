@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+.font{
+  font-family: 'THSarabunPSK';
+}
+
 .navbar {
   font-family: "Roboto", sans-serif;
   -webkit-border-radius: 0;
