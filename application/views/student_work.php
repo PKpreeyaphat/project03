@@ -328,7 +328,7 @@
     <!-- ThaiBath Js -->
     <script src="<?php echo base_url() ?>/js/thaibath.js"></script>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
@@ -430,8 +430,8 @@
                         res[i].Section_end_time = convertime(res[i].Section_end_time)
                         var time_str = res[i].Section_start_time + '-' + res[i].Section_end_time
                         var sh_time = time[mapDayWeek[res[i].Section_day]][time_str]
-                        if(!sh_time.register[res[i].sw_Student_id]){
-                            sh_time.register[res[i].sw_Student_id] = {
+                        if(!sh_time.register[res[i].Student_id]){
+                            sh_time.register[res[i].Student_id] = {
                                 Name: res[i].Student_firstname + ' ' + res[i].Student_lastname,
                                 subject: res[i].Subject_id,
                                 Section_id: res[i].Section_id,
